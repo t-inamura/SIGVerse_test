@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SIGService", "SIGService\SIGService.vcproj", "{6BCFFD74-BBA8-4BA0-B15D-AE9977C326ED}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_lib", "test_lib\test_lib.vcproj", "{CF12B937-D17F-4457-844D-3442DE6E0B39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BCFFD74-BBA8-4BA0-B15D-AE9977C326ED}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6BCFFD74-BBA8-4BA0-B15D-AE9977C326ED}.Debug|Win32.Build.0 = Debug|Win32
+		{6BCFFD74-BBA8-4BA0-B15D-AE9977C326ED}.Release|Win32.ActiveCfg = Release|Win32
+		{6BCFFD74-BBA8-4BA0-B15D-AE9977C326ED}.Release|Win32.Build.0 = Release|Win32
+		{CF12B937-D17F-4457-844D-3442DE6E0B39}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CF12B937-D17F-4457-844D-3442DE6E0B39}.Debug|Win32.Build.0 = Debug|Win32
+		{CF12B937-D17F-4457-844D-3442DE6E0B39}.Release|Win32.ActiveCfg = Release|Win32
+		{CF12B937-D17F-4457-844D-3442DE6E0B39}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
