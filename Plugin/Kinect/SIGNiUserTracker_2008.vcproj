@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(OPEN_NI_INCLUDE)&quot;;.;&quot;.\SIGService_v2-1-0\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(OPEN_NI_INCLUDE)&quot;;.;..\..\SIGService\vs2008\SIGService"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -67,93 +67,10 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="openNI.lib glut32.lib ws2_32.lib SIGService.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(OPEN_NI_LIB)&quot;;.\Libs;&quot;.\SIGService_v2-1-0\lib\Debug&quot;"
+				AdditionalLibraryDirectories="&quot;$(OPEN_NI_LIB)&quot;;.\Libs;..\..\SIGService\vs2008\Debug"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(TargetDir)$(TargetName).pdb"
 				SubSystem="1"
-				TargetMachine="1"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release|Win32"
-			OutputDirectory="../Bin/$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)$(ConfigurationName)"
-			ConfigurationType="1"
-			CharacterSet="2"
-			WholeProgramOptimization="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				AdditionalOptions="/MP"
-				Optimization="2"
-				EnableIntrinsicFunctions="true"
-				WholeProgramOptimization="false"
-				AdditionalIncludeDirectories="&quot;$(OPEN_NI_INCLUDE)&quot;;.;&quot;./SIGService_v2-1-0\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
-				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				AdditionalIncludeDirectories="$(OPEN_NI_INCLUDE)"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="openNI.lib glut32.lib ws2_32.lib SIGService.lib"
-				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(OPEN_NI_LIB)&quot;;./Libs;&quot;./SIGService_v2-1-0/lib/Release&quot;"
-				IgnoreAllDefaultLibraries="false"
-				IgnoreDefaultLibraryNames="MSVCRTD"
-				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(TargetDir)$(TargetName).pdb"
-				SubSystem="1"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -233,6 +150,89 @@
 				ProgramDatabaseFile="$(TargetDir)$(TargetName).pdb"
 				SubSystem="1"
 				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="../Bin/$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="2"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				WholeProgramOptimization="false"
+				AdditionalIncludeDirectories="&quot;$(OPEN_NI_INCLUDE)&quot;;.;..\..\SIGService\vs2008\SIGService"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(OPEN_NI_INCLUDE)"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="openNI.lib glut32.lib ws2_32.lib SIGService.lib"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(OPEN_NI_LIB)&quot;;./Libs;..\..\SIGService\vs2008\Release"
+				IgnoreAllDefaultLibraries="false"
+				IgnoreDefaultLibraryNames="MSVCRTD"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(TargetDir)$(TargetName).pdb"
+				SubSystem="1"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -364,15 +364,15 @@
 			Name="Res"
 			>
 			<File
-				RelativePath="..\..\Program Files (x86)\OpenNI\Samples\Res\mainicon.ico"
+				RelativePath=".\Res\mainicon.ico"
 				>
 			</File>
 			<File
-				RelativePath="..\..\Program Files (x86)\OpenNI\Samples\Res\OpenNI.rc"
+				RelativePath=".\Res\OpenNI.rc"
 				>
 			</File>
 			<File
-				RelativePath="..\..\Program Files (x86)\OpenNI\Samples\Res\Resource-OpenNI.h"
+				RelativePath=".\Res\Resource-OpenNI.h"
 				>
 			</File>
 		</Filter>
