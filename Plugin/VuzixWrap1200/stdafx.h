@@ -3,7 +3,7 @@
 // but are changed infrequently
 
 #pragma once
-
+#define _AFXDLL
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 #endif

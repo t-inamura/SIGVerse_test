@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SIGNiUserTracker", "Kinect\SIGNiUserTracker_2008.vcproj", "{D199709A-523E-4A12-B928-8DF65487980F}"
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloTracker3", "VuzixWrap1200\HelloTracker2.vcproj", "{FB3B4819-45AD-47E8-9365-659300818E89}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JoyStick", "JoyStick\JoyStick\JoyStick.vcproj", "{9A907C99-FFD7-4F3A-9A53-EC4651CFF8EB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WiiRemote", "WiiRemote\WiiRemote\WiiRemote.vcproj", "{2778B8AF-0DB2-4D3F-A181-DA2AD14B0807}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

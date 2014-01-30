@@ -66,6 +66,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="openNI.lib glut32.lib ws2_32.lib SIGService.lib"
+				OutputFile="$(OutDir)\$(ProjectName).sig"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(OPEN_NI_LIB)&quot;;.\Libs;..\..\SIGService\vs2008\Debug"
 				GenerateDebugInformation="true"
@@ -223,6 +224,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="openNI.lib glut32.lib ws2_32.lib SIGService.lib"
+				OutputFile="$(OutDir)\$(ProjectName).sig"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(OPEN_NI_LIB)&quot;;./Libs;..\..\SIGService\vs2008\Release"
 				IgnoreAllDefaultLibraries="false"
