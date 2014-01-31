@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\boost\boost_1_47"
+				AdditionalIncludeDirectories="..\boost\boost_1_47"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,7 +62,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="ws2_32.lib"
-				AdditionalLibraryDirectories="..\..\boost\boost_1_47\lib"
+				AdditionalLibraryDirectories="..\boost\boost_1_47\lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\boost\boost_1_47"
+				AdditionalIncludeDirectories="..\boost\boost_1_47"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="2"
@@ -128,7 +128,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="ws2_32.lib"
-				AdditionalLibraryDirectories="..\..\boost\boost_1_47\lib"
+				AdditionalLibraryDirectories="..\boost\boost_1_47\lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -155,6 +155,10 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
+			<File
+				RelativePath=".\SgvLog.cpp"
+				>
+			</File>
 			<File
 				RelativePath=".\SgvSocket.cpp"
 				>

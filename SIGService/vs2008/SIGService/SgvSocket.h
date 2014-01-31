@@ -2,7 +2,7 @@
 #define __SGVSOCKET__
 
 #include <winsock2.h>
-//#include "SgvLog.h"
+#include "SgvLog.h"
 
 namespace sigverse
 {
@@ -31,7 +31,7 @@ namespace sigverse
 	private:
 		SOCKET m_sock;
 
-		//Sgv::LogPtr mLog;
+		Sgv::LogPtr mLog;
 
 	};
 }

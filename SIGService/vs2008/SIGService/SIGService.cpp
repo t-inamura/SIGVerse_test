@@ -6,7 +6,7 @@
 #include <string>
 #include <string.h>
 #include <iostream>
-//#include <boost/thread.hpp>
+#include <boost/thread.hpp>
 //#include <boost/bind.hpp>
 
 namespace sigverse
@@ -391,6 +391,163 @@ namespace sigverse
 			} //if (FD_ISSET(mainSock, &fds)) {
 		} // for(int i = 0; i < connectSize; i++){
 		return true;
+	}
+
+	bool SIGService::startService()
+	{
+		boost::thread recvLoop(boost::bind(&SIGService::recvDataLoop, this, m_sgvsock));
+		return true;
+	}
+
+
+	void SIGService::recvDataLoop(SgvSocket *sock)
+	{
+		m_start = true;
+		while(1) {
+
+			char bsize[4];
+			if(!sock->recvData(bsize,4)) return;
+
+			char *p = bsize;
+			unsigned short header = BINARY_GET_DATA_S_INCR(p, unsigned short);
+			unsigned short size = BINARY_GET_DATA_S_INCR(p, unsigned short);
+
+			size -= 4;
+
+			char *recvBuff = new char[size];
+			if(!sock->recvData(recvBuff, size)) return;
+
+			char *nexttoken;
+
+			switch(header) {
+				case 0x0001:
+					{
+						RecvMsgEvent msg;
+						msg.setData(recvBuff, size);
+ 
+						recvMsg(msg);
+						break;
+					}
+				case 0x0002:
+					{
+						std::string name = recvBuff;
+						name[size] = '\0';
+						m_elseServices.push_back(name);
+						break;
+					}
+				case 0x0003:
+					{
+						char *pp = recvBuff;
+						unsigned short port = BINARY_GET_DATA_S_INCR(pp, unsigned short);
+
+						std::string name = strtok_s(pp, ",", &nexttoken);
+						SgvSocket *sock = new SgvSocket();
+						sock->initWinsock();
+
+						int diff = 1;
+
+						bool fail = false;
+						for(int i = 0; i < diff; i++){
+							if(!sock->connectTo(m_host.c_str(), port)){
+								fail = true;
+								break;
+							}
+						}
+						if(fail) break;
+						m_consocks.insert(std::map<std::string, SgvSocket*>::value_type(name, sock));
+						m_entitiesName.push_back(name);
+
+						char tmp[sizeof(unsigned short)*2];
+						char *p = tmp;
+
+						BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0001);
+						BINARY_SET_DATA_S_INCR(p, unsigned short, sizeof(unsigned short));
+
+						sock->sendData(tmp, sizeof(unsigned short)*2);
+
+						boost::thread recvLoop(boost::bind(&SIGService::recvDataLoop, this, sock));
+
+						//char test[32];
+						//sprintf(test, "%s  data = %s",name.c_str(), tmp);
+						//MessageBox( NULL, test, "Error", MB_OK);
+						break;
+					}
+				case 0x0004:
+					{
+						char *pp = recvBuff;
+						std::string ename = strtok_s(pp, ",", &nexttoken);
+
+						disconnectFromController(ename);
+						return;
+					}
+				case 0x0005:
+					{
+						char *pp = recvBuff;
+						std::string name = strtok_s(pp, ",", &nexttoken);
+						int id = atoi(strtok_s(NULL, ",", &nexttoken));
+
+						RecvCptEvent cpt;
+
+						cpt.setSender(name);
+						cpt.setCameraID(id);
+
+						recvCaptureView(cpt);
+						break;
+					}
+				case 0x0006:
+					{
+						char *pp = recvBuff;
+						std::string name = strtok_s(pp, ",", &nexttoken);
+						
+						int type = atoi(strtok_s(NULL, ",", &nexttoken));
+
+						int id = atoi(strtok_s(NULL, ",", &nexttoken));
+
+						float min = (float)atof(strtok_s(NULL, ",", &nexttoken));
+
+						float max = (float)atof(strtok_s(NULL, ",", &nexttoken));
+
+						RecvDstEvent dst;
+
+						dst.setType(type);
+						dst.setMin(min);
+						dst.setMax(max);
+						dst.setSender(name);
+						dst.setCameraID(id);
+
+						recvDistanceSensor(dst);
+						break;
+					}
+				case 0x0007:
+					{
+						char *pp = recvBuff;
+						std::string name = strtok_s(pp, ",", &nexttoken);
+						int id = atoi(strtok_s(NULL, ",", &nexttoken));
+
+						RecvDtcEvent dtc;
+
+						dtc.setSender(name);
+						dtc.setCameraID(id);
+
+						recvDetectEntities(dtc);
+						break;
+					}
+				case 0x0008:
+					{
+						std::string name = recvBuff;
+						name[size] = '\0';
+						m_elseDisconnect = name;
+						std::vector<std::string>::iterator it;
+
+						it = std::find(m_elseServices.begin(), m_elseServices.end(), name);
+						if(it != m_elseServices.end())
+							m_elseServices.erase(it);
+						break;
+					}
+			}
+			delete [] recvBuff;
+		}
+		m_start = false;
 	}
 
 	bool SIGService::connectToViewer()

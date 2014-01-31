@@ -9,10 +9,10 @@ namespace sigverse
 	{
 		m_sock = NULL;
 
-		//Sgv::LogFactory::setLog(1, Sgv::LogPtr(new Sgv::Log(Sgv::Log::DEBUG, "main", 
-		//	Sgv::LogFileWriterAutoPtr(new Sgv::DelayFileWriter<Sgv::FileLock>("SgvSocket.log"))))
-		//	);
-		//mLog = Sgv::LogFactory::getLog(1);
+		Sgv::LogFactory::setLog(1, Sgv::LogPtr(new Sgv::Log(Sgv::Log::DEBUG, "main", 
+			Sgv::LogFileWriterAutoPtr(new Sgv::DelayFileWriter<Sgv::FileLock>("SgvSocket.log"))))
+			);
+		mLog = Sgv::LogFactory::getLog(1);
 	}
 
 	SgvSocket::SgvSocket(SOCKET sock)
@@ -24,7 +24,7 @@ namespace sigverse
 	SgvSocket::~SgvSocket()
 	{
 		closesocket(m_sock);
-		//WSACleanup();
+		WSACleanup();
 	}
 
 	bool SgvSocket::initWinsock()
@@ -38,27 +38,27 @@ namespace sigverse
 			switch (err) {
 				case WSASYSNOTREADY:
 					{
-						//mLog->err("WSASYSNOTREADY\n");
+						mLog->err("WSASYSNOTREADY\n");
 						break;
 					}
 				case WSAVERNOTSUPPORTED:
 					{
-						//mLog->err("WSAVERNOTSUPPORTED\n");
+						mLog->err("WSAVERNOTSUPPORTED\n");
 						break;
 					}
 				case WSAEINPROGRESS:
 					{
-						//mLog->err("WSAEINPROGRESS\n");
+						mLog->err("WSAEINPROGRESS\n");
 						break;
 					}
 				case WSAEPROCLIM:
 					{
-						//mLog->err("WSAEPROCLIM\n");
+						mLog->err("WSAEPROCLIM\n");
 						break;
 					}
 				case WSAEFAULT:
 					{
-						//mLog->err("WSAEFAULT\n");
+						mLog->err("WSAEFAULT\n");
 						break;
 					}
 			}
@@ -91,7 +91,7 @@ namespace sigverse
 			if (host == NULL) {
 				if(WSAGetLastError() == WSAHOST_NOT_FOUND) {
 					MessageBox(NULL, "Could not find host.", "error", MB_OK);
-					//mLog->printf(Sgv::LogBase::ERR,"host not found : %s\n", hostname);
+					mLog->printf(Sgv::LogBase::ERR,"host not found : %s\n", hostname);
 				}
 				return false;
 			}
@@ -111,8 +111,8 @@ namespace sigverse
 			}
 
 			if (*addrptr == NULL) {
-				//MessageBox(NULL, "Could not connect", "error", MB_OK);
-				//mLog->printf(Sgv::LogBase::ERR, "connect failed: %d\n", WSAGetLastError());
+				MessageBox(NULL, "Could not connect", "error", MB_OK);
+				mLog->printf(Sgv::LogBase::ERR, "connect failed: %d\n", WSAGetLastError());
 				return false;
 			}
 		}
@@ -122,9 +122,9 @@ namespace sigverse
 			if (connect(m_sock,
 				(struct sockaddr *)&server,
 				sizeof(server)) != 0) {
-					//MessageBox(NULL, "Could not connect", "error", MB_OK);
-					//mLog->printf(Sgv::LogBase::ERR, "connect : %d\n", WSAGetLastError());
-					//mLog->flush();
+					MessageBox(NULL, "Could not connect", "error", MB_OK);
+					mLog->printf(Sgv::LogBase::ERR, "connect : %d\n", WSAGetLastError());
+					mLog->flush();
 					return false;
 			}
 		}

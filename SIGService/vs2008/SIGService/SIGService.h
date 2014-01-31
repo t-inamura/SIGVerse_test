@@ -23,6 +23,69 @@ namespace sigverse
 		const char *getMsg() { return m_msg.c_str(); }
 	};
 
+	class RecvCptEvent
+	{
+	public:
+		void setSender(std::string name){ m_from = name; }
+
+		std::string getSender(){return m_from;}
+
+		void setCameraID(int id ){m_id = id;}
+
+		int getCameraID(){return m_id;}
+
+	private:
+		std::string   m_from;
+		int        m_id;    
+	};
+
+	class RecvDtcEvent
+	{
+	public:
+		void setSender(std::string name){ m_from = name; }
+
+		std::string getSender(){return m_from;}
+
+		void setCameraID(int id ){m_id = id;}
+
+		int getCameraID(){return m_id;}
+
+	private:
+		std::string   m_from;
+		int        m_id;    
+	};
+
+	class RecvDstEvent
+	{
+	public:
+		void setSender(std::string name){ m_from = name; }
+
+		void setCameraID(int id ){m_id = id;}
+
+		std::string getSender(){return m_from;}
+
+		int getCameraID(){return m_id;}
+
+		void setType(int type ){m_type = type;}
+
+		int getType(){return m_type;}
+
+		void setMin(float min){m_min = min;}
+
+		float getMin(){return m_min;}
+
+		void setMax(float max){m_max = max;}
+
+		float getMax(){return m_max;}
+
+	private:
+		std::string   m_from;
+		int   m_id;  
+		int      m_type;    
+		float   m_min;     
+		float   m_max;     
+	};
+
 	class SIGService
 	{
 	public:
@@ -49,6 +112,8 @@ namespace sigverse
 		void startLoop(double time = -1.0);
 
 		bool checkRecvData(int usec);
+
+		bool startService();
 
 		bool connectToViewer();
 
@@ -101,18 +166,23 @@ namespace sigverse
 			return m_entitiesName;
 		}
 
-		/*
+		
 		std::string getElseServiceName() {
 			int size = (int)m_elseServices.size(); 
 			std::string name = m_elseServices[size - 1];
 			m_elseServices.pop_back();
 			return name;
 		}
-		*/
+		
+		std::string getElseDisconnect() {
+			std::string name = m_elseDisconnect;
+			m_elseDisconnect = "";
+			return name;
+		}
 
-		//void setElseServiceName(std::string name) {
-		//m_elseServices.push_back(name);
-		//}
+		void setElseServiceName(std::string name) {
+			m_elseServices.push_back(name);
+		}
 
 		SgvSocket* getSgvSocket(){
 			return m_sgvsock;
@@ -135,6 +205,14 @@ namespace sigverse
 
 		void setAutoExitProc(bool flag){m_autoExitProc = flag;}
 
+		virtual void recvMsg(RecvMsgEvent &evt) {}
+
+		virtual void recvCaptureView(RecvCptEvent &evt) {}
+
+		virtual void recvDistanceSensor(RecvDstEvent &evt) {}
+
+		virtual void recvDetectEntities(RecvDtcEvent &evt) {}
+
 		virtual void onInit(){}
 
 		virtual void onRecvMsg(RecvMsgEvent &evt) {}
@@ -142,6 +220,8 @@ namespace sigverse
 		virtual double onAction() { return 0.0;}
 
 	private:
+		void recvDataLoop(SgvSocket *sock);
+
 		ViewImage* getDistanceImage(std::string entityName, 
 			double offset, 
 			double range, 
@@ -166,6 +246,8 @@ namespace sigverse
 		std::string m_name;
 
 		std::vector<std::string> m_elseServices;
+
+		std::string m_elseDisconnect;
 
 		std::string m_host;
 

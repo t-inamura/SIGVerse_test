@@ -48,7 +48,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="VuzixSDK\inc;..\..\SIGService\vs2008\SIGService"
+				AdditionalIncludeDirectories="VuzixSDK\inc;..\..\SIGService\vs2008\SIGService;..\..\SIGService\vs2008\boost\boost_1_47"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -76,7 +76,7 @@
 				AdditionalDependencies="iweardrv.lib iwrstdrv.lib SIGService.lib"
 				OutputFile="$(OutDir)\$(ProjectName).sig"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="VuzixSDK\lib;..\..\SIGService\vs2008\Debug;$(NOINHERIT)"
+				AdditionalLibraryDirectories="VuzixSDK\lib;..\..\SIGService\vs2008\Debug;..\..\SIGService\vs2008\boost\boost_1_47\lib;$(NOINHERIT)"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -220,7 +220,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="VuzixSDK\inc;..\..\SIGService\vs2008\SIGService"
+				AdditionalIncludeDirectories="VuzixSDK\inc;..\..\SIGService\vs2008\SIGService;..\..\SIGService\vs2008\boost\boost_1_47"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
 				MinimalRebuild="false"
 				RuntimeLibrary="2"
@@ -247,7 +247,7 @@
 				AdditionalDependencies="iweardrv.lib iwrstdrv.lib SIGService.lib"
 				OutputFile="$(OutDir)\$(ProjectName).sig"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="VuzixSDK\lib;..\..\SIGService\vs2008\Release"
+				AdditionalLibraryDirectories="VuzixSDK\lib;..\..\SIGService\vs2008\Release;..\..\SIGService\vs2008\boost\boost_1_47\lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
