@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange">
+  <Scene>
+    <!--
+    <Transform translation="5 5 5"
+	       rotation="1 0 0 1.57">
+      <Shape >
+	<Cylinder radius="10" height="10"/>
+	<Appearance >
+	  <Material diffuseColor='0.2 0.2 0.8'/>
+	</Appearance>
+      </Shape>
+    </Transform> 
+    <Transform translation="-5 -5 -5">
+      <Shape >
+	<Cylinder radius="10" height="10"/>
+	<Appearance >
+	  <Material diffuseColor='0.2 0.2 0.8'/>
+	</Appearance>
+      </Shape>
+    </Transform>
+    -->
+      <Shape >
+	<Cylinder radius="10" height="10"/>
+	<Appearance >
+	  <Material diffuseColor='0.2 0.2 0.8'/>
+	</Appearance>
+      </Shape>
+  </Scene>
+</X3D>

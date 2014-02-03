@@ -1,0 +1,176 @@
+#VRML V2.0 utf8 CosmoWorlds V1.0
+
+# Need this line to parse this file with Xj3D
+PROFILE Interactive
+
+
+WorldInfo
+{
+ title	"coaster_c01"
+ info	"VRML2.0 created with Version 1.3, from Alias Maya 8.5"
+}
+NavigationInfo
+{
+ type [ "EXAMINE"  "ANY" ]
+ headlight	TRUE
+ speed		1.000000
+}
+Switch
+{
+ whichChoice	-1
+ choice
+ [
+  Shape
+  {
+   appearance Appearance
+   {
+    material DEF coaster_c1_0 Material
+    {
+     diffuseColor	0.000000 0.000000 0.000000
+     specularColor	0.000000 0.000000 0.000000
+     emissiveColor	0.000000 0.000000 0.000000
+     shininess		0.000000
+     transparency	0.000000
+    }
+   }
+  }
+  Shape
+  {
+   geometry DEF Coaster_c01_0Geo IndexedFaceSet
+   {
+    convex FALSE
+    solid FALSE
+    coord DEF Coaster_c01GeoPoints Coordinate
+    {
+     point [
+      -5.000 0.000 -5.000,
+      5.000 0.000 -5.000,
+      5.000 0.000 5.000,
+      -5.000 0.000 5.000,
+      -5.000 0.060 -5.000,
+      5.000 0.060 -5.000,
+      5.000 0.060 5.000,
+      -5.000 0.060 5.000,
+      -5.000 0.000 -5.000,
+      5.000 0.000 -5.000,
+      5.000 0.000 5.000,
+      -5.000 0.000 5.000,
+      -5.000 0.060 -5.000,
+      5.000 0.060 -5.000,
+      5.000 0.060 5.000,
+      -5.000 0.060 5.000
+     ]
+    }
+    coordIndex [
+     0 3 2 1 -1, 
+     4 5 6 7 -1, 
+     12 8 9 13 -1, 
+     13 9 10 14 -1, 
+     14 10 11 15 -1, 
+     15 11 8 12 -1
+    ]
+    normalPerVertex TRUE
+    normal Normal
+    {
+     vector [
+      0.000 1.000 0.000,
+      0.000 1.000 0.000,
+      0.000 1.000 0.000,
+      0.000 1.000 0.000,
+      0.000 -1.000 0.000,
+      0.000 -1.000 0.000,
+      0.000 -1.000 0.000,
+      0.000 -1.000 0.000,
+      0.707 0.000 0.707,
+      0.707 0.000 0.707,
+      -0.707 0.000 0.707,
+      -0.707 0.000 0.707,
+      -0.707 0.000 -0.707,
+      -0.707 0.000 -0.707,
+      0.707 0.000 -0.707,
+      0.707 0.000 -0.707
+     ]
+    }
+    normalIndex [
+     0 1 2 3 -1,
+     4 5 6 7 -1,
+     8 9 10 11 -1,
+     11 10 12 13 -1,
+     13 12 14 15 -1,
+     15 14 9 8 -1
+    ]
+    texCoord TextureCoordinate
+    {
+     point [
+      0.000000 0.000000
+      0.000000 1.000000
+      1.000000 1.000000
+      1.000000 0.000000
+      0.000000 0.000000
+      1.000000 0.000000
+      1.000000 1.000000
+      0.000000 1.000000
+      0.000000 0.000000
+      0.000000 0.000000
+      1.000000 0.000000
+      1.000000 0.000000
+      1.000000 1.000000
+      1.000000 1.000000
+      0.000000 1.000000
+      0.000000 1.000000
+      0.000000 0.000000
+      0.000000 0.000000
+     ]
+    }
+    texCoordIndex [
+     0 1 2 3 -1,
+     4 5 6 7 -1,
+     8 9 10 11 -1,
+     11 10 12 13 -1,
+     13 12 14 15 -1,
+     15 14 16 17 -1
+    ]
+   }
+  }
+ ]
+}
+Group
+{
+ children
+ [
+  DEF persp Viewpoint
+  {
+   position	-1.123015 18.372370 15.292559
+   orientation	-0.996272 -0.078155 -0.036532 0.877371
+   fieldOfView	0.950022
+   description	"persp"
+  }
+  DEF Coaster_c01 Transform
+  {
+   translation		0.000000 0.000000 0.000000
+   rotation		0.000000 0.000000 0.000000 0.000000
+   scale		1.000000 1.000000 1.000000
+   scaleOrientation	0.0  0.0  1.0  0.0
+   children Shape
+   {
+    appearance Appearance
+    {
+     material USE coaster_c1_0
+     texture ImageTexture
+     {
+      url  "coaster_c01.jpg"
+      repeatS TRUE
+      repeatT TRUE
+     }
+     textureTransform TextureTransform
+     {
+      rotation 0.000000
+      scale 1.000000 1.000000
+      translation 0.000000 0.000000
+     }
+    }
+    geometry USE Coaster_c01_0Geo
+   }
+  }
+ ]
+}

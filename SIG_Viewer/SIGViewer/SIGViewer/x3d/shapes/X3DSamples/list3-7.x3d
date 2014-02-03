@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.2//EN"
+  "http://www.web3d.org/specifications/x3d-3.2.dtd">
+
+<X3D profile='Immersive'>
+  <head>
+    <meta name='filename' content='list3-7.x3d'/>
+  </head>
+  <Scene>
+    <Background skyColor='1 1 1'/>
+
+    <Transform translation='-2.0 1.5 0.0'
+               rotation='1 0 0 0.785'
+               scale='0.1 0.1 0.1'>
+      <Shape>
+        <ElevationGrid xDimension='5' 
+                       zDimension='5' 
+                       xSpacing='10' 
+                       zSpacing='10' 
+                       height='0 0 0 0 0 
+                               2 4 2 4 2 
+                               0 0 0 0 0 
+                               0 2 4 2 0 
+                               0 0 0 0 0'
+                       solid='false' 
+                       colorPerVertex='false'>
+          <Color color='1 0 0   1 0 1   1 0 0   1 0 1 
+                        0 1 0   1 1 0   0 1 0   1 1 0 
+                        0 1 1   1 0 0   0 1 1   1 0 0 
+                        1 0 1   0 0 1   1 0 1   0 0 1'/>
+        </ElevationGrid>
+        <Appearance>
+          <Material/>
+        </Appearance>
+      </Shape>
+    </Transform>
+
+  </Scene>
+</X3D>
+

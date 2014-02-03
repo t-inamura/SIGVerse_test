@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Immersive" version="3.0">
+  <Scene> 
+    
+    <ProtoDeclare name='Joint' >
+      <ProtoInterface>
+	<field accessType='inputOutput' type='SFVec3f' name='center'  value='0.0 0.0 0.0' />
+        <field accessType='inputOutput' type='MFNode' name='children'/>
+	<field accessType='inputOutput' type='MFFloat' name='llimit'  />
+	<field accessType='inputOutput' type='SFRotation' name='limitOrientation' value='0.0 0.0 1.0 0.0' />
+	<field accessType='inputOutput' type='SFString' name='name'  value='' />
+	<field accessType='inputOutput' type='SFRotation' name='rotation' value='0.0 0.0 1.0 0.0' />
+	<field accessType='inputOutput' type='SFVec3f' name='scale'  value='1.0 1.0 1.0' />
+	<field accessType='inputOutput' type='SFRotation' name='scaleOrientation' value='0.0 0.0 1.0 0.0' />
+	<field accessType='inputOutput' type='MFFloat' name='stiffness'  value='0.0 ,0.0 ,0.0' />
+	<field accessType='inputOutput' type='SFVec3f' name='translation'   value='0.0 0.0 0.0' />
+	<field accessType='inputOutput' type='MFFloat' name='ulimit'  />
+	<field accessType='inputOutput' type='MFFloat' name='dh'  value='0.0 ,0.0 ,0.0 ,0.0' />
+	<field accessType='inputOutput' type='SFString' name='jointType'  value='' />
+	<field accessType='inputOutput' type='SFFloat' name='jointId'    value='-1.0' />
+	<field accessType='inputOutput' type='SFVec3f' name='jointAxis'  value='1.0 0.0 0.0' />
+      </ProtoInterface>
+      <ProtoBody>
+	<Transform>
+          <IS>
+	    <connect nodeField='children' protoField='children' />
+	    <connect nodeField='center' protoField='center' />
+	    <connect nodeField='rotation' protoField='rotation' />
+	    <connect nodeField='scale' protoField='scale' />
+	    <connect nodeField='scaleOrientation' protoField='scaleOrientation' />
+	    <connect nodeField='translation' protoField='translation' />
+	  </IS>
+	</Transform>
+      </ProtoBody>
+    </ProtoDeclare>
+    <ProtoDeclare name='Segment' >
+      <ProtoInterface>
+	<field accessType='initializeOnly' type='SFVec3f' name='bboxCenter'  value='0.0 0.0 0.0' />
+	<field accessType='initializeOnly' type='SFVec3f' name='bboxSize'   value='-1.0 -1.0 -1.0' />
+        <field accessType='inputOutput' type='SFVec3f' name='centerOfMass'  value='0.0 0.0 0.0' />
+	<field accessType='inputOutput' type='MFNode' name='children'    />
+	<field accessType='inputOutput' type='SFNode' name='coord'     />
+	<field accessType='inputOutput' type='MFNode' name='displacers'  />
+	<field accessType='inputOutput' type='SFFloat' name='mass'     value='0.0' />
+	<field accessType='inputOutput' type='MFFloat' name='momentsOfInertia'  value='0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0' />
+	<field accessType='inputOutput' type='SFString' name='name'  value='' />
+	<field accessType='inputOnly' type='MFNode' name='addChildren'     />
+	<field accessType='inputOnly' type='MFNode' name='removeChildren'    />
+      </ProtoInterface>
+      <ProtoBody>
+	<Group>
+          <IS>
+	    <connect nodeField='children' protoField='children' />
+	    <connect nodeField='addChildren' protoField='addChildren' />
+	    <connect nodeField='removeChildren' protoField='removeChildren' />
+	    <connect nodeField='bboxCenter' protoField='bboxCenter' />
+	    <connect nodeField='bboxSize' protoField='bboxSize' />
+	  </IS>
+	</Group>
+      </ProtoBody>
+    </ProtoDeclare>
+    <ProtoDeclare name='Humanoid' >
+      <ProtoInterface>
+	<field accessType='initializeOnly' type='SFVec3f' name='bboxCenter'  value='0.0 0.0 0.0' />
+	<field accessType='initializeOnly' type='SFVec3f' name='bboxSize'   value='-1.0 -1.0 -1.0' />
+        <field accessType='inputOutput' type='SFVec3f' name='center'  value='0.0 0.0 0.0' />
+	<field accessType='inputOutput' type='MFNode' name='humanoidBody' />
+	<field accessType='inputOutput' type='MFString' name='info'  />
+	<field accessType='inputOutput' type='MFNode' name='joints'  />
+	<field accessType='inputOutput' type='SFString' name='name'  value='' />
+	<field accessType='inputOutput' type='SFRotation' name='rotation'  value='0.0 0.0 1.0 0.0' />
+	<field accessType='inputOutput' type='SFVec3f' name='scale'  value='1.0 1.0 1.0' />
+	<field accessType='inputOutput' type='SFRotation' name='scaleOrientation'  value='0.0 0.0 1.0 0.0' />
+	<field accessType='inputOutput' type='MFNode' name='segments'  />
+	<field accessType='inputOutput' type='MFNode' name='sites'   />
+	<field accessType='inputOutput' type='SFVec3f' name='translation'   value='0.0 0.0 0.0' />
+	<field accessType='inputOutput' type='SFString' name='version'    value='1.0' />
+	<field accessType='inputOutput' type='MFNode' name='viewpoints'  />
+      </ProtoInterface>
+      <ProtoBody>
+	<Transform>
+          <IS>
+	    <connect nodeField='bboxCenter' protoField='bboxCenter' />
+	    <connect nodeField='bboxSize' protoField='bboxSize' />
+	    <connect nodeField='center' protoField='center' />
+	    <connect nodeField='rotation' protoField='rotation' />
+	    <connect nodeField='scale' protoField='scale' />
+	    <connect nodeField='scaleOrientation' protoField='scaleOrientation' />
+	    <connect nodeField='translation' protoField='translation' />
+	  </IS>
+	  <Group>
+	    <IS>
+	      <connect nodeField='children' protoField='viewpoints' />
+	    </IS>
+	  </Group>
+	  <Group>
+	    <IS>
+	      <connect nodeField='children' protoField='humanoidBody' />
+	    </IS>
+	  </Group>
+	</Transform>
+      </ProtoBody>
+    </ProtoDeclare>
+    
+    <ProtoInstance name='Humanoid' DEF="HRP1"     containerField='children'>
+      <fieldValue name='info' value='"Test Joint"' />
+      <fieldValue name='name' value='sample' />
+      <fieldValue name='version' value='1.1' />
+      
+      <ProtoInstance name='Joint' DEF="JOINT0"  containerField='humanoidBody'>
+	<fieldValue name='name' value='JOINT0' />
+	
+	<fieldValue name='jointType' value='free' />
+        <fieldValue name='jointId' value='1.0' />
+	
+	<ProtoInstance name='Joint' DEF="JOINT_CENTER"  containerField='children'>
+          <fieldValue name='name' value='JOINT_CENTER' />
+          <fieldValue name='jointId' value='2.0' />
+	  
+          <fieldValue name='jointType' value='fixed' />
+	  
+          <ProtoInstance name='Segment' DEF="LINK_CENTER"     containerField='children'>
+            <fieldValue name='name' value='LINK_CENTER' />
+            <fieldValue name='mass' value='10.0' />
+            <Transform>
+              <Shape>
+		<Appearance>
+                  <Material diffuseColor='0.2 0.8 0.8'/>
+		</Appearance>
+		<Box size='20.0 8.0 25.0' />
+              </Shape>
+            </Transform>
+          </ProtoInstance>
+	  <ProtoInstance name='Joint' DEF="LWHEEL"  containerField='children'>
+	    <fieldValue name='name' value='LWHEEL' />
+	    <fieldValue name='jointType' value='fixed' />  
+	    <ProtoInstance name='Joint' DEF="JOINT_LWHEEL"  containerField='children'>
+              <fieldValue name='name' value='JOINT_LWHEEL' />
+	      
+              <fieldValue name='translation' value='12.0 0.0 0.0' />
+              <fieldValue name='jointAxis' value='1.0 0.0 0.0' />
+              <fieldValue name='jointId' value='2.0' />
+              <fieldValue name='jointType' value='rotate' />
+	      
+              <ProtoInstance name='Segment' DEF="LINK_LWHEEL"     containerField='children'>
+		<fieldValue name='name' value='LINK_LWHEEL' />
+		<fieldValue name='mass' value='1.0' />
+		<Transform rotation='0.0 0.0 1.0 1.57'>
+		  <Shape>
+		    <Appearance>
+                      <Material diffuseColor='0.5 0.5 0.5'/>
+		    </Appearance>
+		    <Cylinder radius='7.0' height='3.0' />
+		  </Shape>
+		</Transform>
+              </ProtoInstance>
+	    </ProtoInstance>
+	  </ProtoInstance>
+	  <ProtoInstance name='Joint' DEF="RWHEEL"  containerField='children'>
+	    <fieldValue name='name' value='RWHEEL' />
+	    <fieldValue name='jointType' value='fixed' />  
+	    <ProtoInstance name='Joint' DEF="JOINT_RWHEEL"  containerField='children'>
+              <fieldValue name='name' value='JOINT_RWHEEL' />
+	      
+              <fieldValue name='translation' value='-12.0 0.0 0.0' />
+              <fieldValue name='jointAxis' value='1.0 0.0 0.0' />
+              <fieldValue name='jointId' value='2.0' />
+              <fieldValue name='jointType' value='rotate' />
+	      
+              <ProtoInstance name='Segment' DEF="LINK_RWHEEL"     containerField='children'>
+		<fieldValue name='name' value='LINK_RWHEEL' />
+		<fieldValue name='mass' value='1.0' />
+		<Transform rotation='0.0 0.0 1.0 1.57'>
+		  <Shape>
+		    <Appearance>
+                      <Material diffuseColor='0.5 0.5 0.5'/>
+		    </Appearance>
+		    <Cylinder radius='7.0' height='3.0' />
+		  </Shape>
+		</Transform>
+              </ProtoInstance>
+	    </ProtoInstance>
+	  </ProtoInstance>
+	  
+	  <ProtoInstance name='Joint' DEF="FCASTER"  containerField='children'>
+	    <fieldValue name='name' value='FCASTER' />
+	    <fieldValue name='jointType' value='fixed' />  
+	    <ProtoInstance name='Joint' DEF="JOINT_FCASTER"  containerField='children'>
+              <fieldValue name='name' value='JOINT_FCASTER' />
+	      
+              <fieldValue name='translation' value='0.0 -4.0 8.0' />
+              <fieldValue name='jointAxis' value='0.0 0.0 1.0' />
+              <fieldValue name='jointId' value='2.0' />
+              <fieldValue name='jointType' value='sphere' />
+	      
+              <ProtoInstance name='Segment' DEF="LINK_FCASTER"     containerField='children'>
+		<fieldValue name='name' value='LINK_FCASTER' />
+		<fieldValue name='mass' value='1.0' />
+		<Transform>
+		  <Shape>
+		    <Appearance>
+                      <Material diffuseColor='0.5 0.5 0.5'/>
+		    </Appearance>
+		    <Sphere radius='3.0'/>
+		  </Shape>
+		</Transform>
+              </ProtoInstance>
+	    </ProtoInstance>
+	  </ProtoInstance>
+	  <ProtoInstance name='Joint' DEF="BWHEEL"  containerField='children'>
+	    <fieldValue name='name' value='BWHEEL' />
+	    <fieldValue name='jointType' value='fixed' />  
+	    <ProtoInstance name='Joint' DEF="JOINT_BCASTER"  containerField='children'>
+              <fieldValue name='name' value='JOINT_BCASTER' />
+	      
+              <fieldValue name='translation' value='0.0 -4.0 -8.0' />
+              <fieldValue name='jointAxis' value='0.0 0.0 1.0' />
+              <fieldValue name='jointId' value='2.0' />
+              <fieldValue name='jointType' value='sphere' />
+	      
+              <ProtoInstance name='Segment' DEF="LINK_BCASTER"     containerField='children'>
+		<fieldValue name='name' value='LINK_BCASTER' />
+		<fieldValue name='mass' value='1.0' />
+		<Transform>
+		  <Shape>
+		    <Appearance>
+                      <Material diffuseColor='0.5 0.5 0.5'/>
+		    </Appearance>
+		    <Sphere radius='3.0'/>
+		  </Shape>
+		</Transform>
+              </ProtoInstance>
+	    </ProtoInstance>
+	  </ProtoInstance>
+	</ProtoInstance>
+      </ProtoInstance>
+    </ProtoInstance>
+  </Scene>
+</X3D>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D version="3.0" profile="Immersive" xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+	<head>
+		<meta name="filename" content="_rug.x3d" />
+		<meta name="generator" content="Blender 2.61 (sub 0)" />
+	</head>
+		<Scene>
+		<NavigationInfo headlight="false"
+		                visibilityLimit="0.0"
+		                type='"EXAMINE", "ANY"'
+		                avatarSize="0.25, 1.75, 0.75"
+		                />
+		    <Group>
+		        <Transform>
+					<Shape>
+						<Appearance>
+							<ImageTexture DEF="IM_ditan_jpg"
+							              url='"C:/Documents and Settings/iir/Desktop/Interior/vrml/Interior_low/ditan.jpg" "ditan.jpg"' 							              />
+							<TextureTransform 
+							                  translation="0.000000 0.000000"
+							                  scale="1.000000 1.000000"
+							                  rotation="0.000000"
+							                  />
+							<Material DEF="MA_XXX_335"
+							          diffuseColor="0.000 0.000 0.000"
+							          specularColor="0.000 0.000 0.000"
+							          emissiveColor="0.000 0.000 0.000"
+							          ambientIntensity="0.067"
+							          shininess="0.002"
+							          transparency="0.0"
+							          />
+						</Appearance>
+						<IndexedFaceSet solid="true"
+						                texCoordIndex="0 1 2 3 -1 4 5 6 7 -1 8 9 10 11 -1 12 13 14 15 -1 16 17 18 19 -1 "
+						                coordIndex="7 5 6 8 -1 5 1 2 6 -1 6 2 4 8 -1 5 7 3 1 -1 7 8 4 3 -1 "
+						                >
+							<Coordinate DEF="coords_ME_ShapeIndexedFace_686"
+							            point="0.000000 0.000000 0.000000 43.702999 0.006000 108.646004 293.053009 0.006000 108.646004 43.702999 0.006000 -50.611000 293.053009 0.006000 -50.611000 43.702999 0.770000 108.646004 293.053009 0.770000 108.646004 43.702999 0.770000 -50.611000 293.053009 0.770000 -50.611000 "
+							            />
+							<TextureCoordinate point="2.4926 1.9533 0.4723 1.9533 0.4723 -1.2099 2.4926 -1.2099 2.5341 1.9533 2.5244 1.9533 2.5244 -1.2099 2.5341 -1.2099 2.6274 0.8104 2.6177 0.8104 2.6177 -1.2099 2.6274 -1.2099 2.5808 -1.2099 2.5808 0.8104 2.5711 0.8104 2.5711 -1.2099 -1.6274 1.9533 -1.6274 -1.2099 -1.6177 -1.2099 -1.6177 1.9533 " />
+						</IndexedFaceSet>
+					</Shape>
+		        </Transform>
+		    </Group>
+	</Scene>
+</X3D>

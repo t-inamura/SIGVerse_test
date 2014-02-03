@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.2//EN"
+  "http://www.web3d.org/specifications/x3d-3.2.dtd">
+
+<X3D profile='Immersive'>
+  <head>
+    <meta name='filename' content='list3-18a.x3d'/>
+  </head>
+  <Scene>
+
+    <ProtoDeclare name='House'>
+      <ProtoInterface>
+        <field name='position' type='SFVec3f'
+               value='0 0 0' accessType='initializeOnly'/>
+        <field name='turn' type='SFRotation'
+               value='1 1 0 0.5' accessType='initializeOnly'/>
+        <field name='size' type='SFVec3f'
+               value='1 1 1' accessType='initializeOnly'/>
+        <field name='roofColor' type='SFColor'
+               value='1 0 0' accessType='initializeOnly'/>
+        <field name='bodyColor' type='SFColor' 
+               value='0 1 0' accessType='initializeOnly'/>
+      </ProtoInterface>
+
+      <ProtoBody>
+        <Transform>
+          <IS>
+            <connect nodeField='translation'
+                     protoField='position'/>
+            <connect nodeField='rotation'
+                     protoField='turn'/>
+            <connect nodeField='scale'
+                     protoField='size'/>
+          </IS>
+
+          <Shape>
+            <IndexedFaceSet coordIndex=' 0 1 2 -1
+                                         0 2 3 -1
+                                         0 3 4 -1
+                                         0 4 1 -1
+                                         1 2 3 4 -1'
+                            solid='false'>
+              <Coordinate point=' 0  1  0
+                                  1  0  1
+                                  1  0 -1
+                                 -1  0 -1
+                                 -1  0  1'/>
+            </IndexedFaceSet>
+            <Appearance>
+              <Material>
+                <IS>
+                  <connect nodeField='diffuseColor'
+                           protoField='roofColor'/>
+                </IS>
+              </Material>
+            </Appearance>
+          </Shape>
+
+          <Transform translation='0 -0.5 0'>
+            <Shape>
+              <Box size='1.6 1.0 1.6'/>
+              <Appearance>
+                <Material>
+                  <IS>
+                    <connect nodeField='diffuseColor'
+                             protoField='bodyColor'/>
+                  </IS>
+                 </Material>
+               </Appearance>
+            </Shape>
+          </Transform>
+        </Transform>
+
+     </ProtoBody>
+   </ProtoDeclare>
+
+  </Scene>
+</X3D>
+

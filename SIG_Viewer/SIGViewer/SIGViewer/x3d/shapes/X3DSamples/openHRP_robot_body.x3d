@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.2//EN"
+  "http://www.web3d.org/specifications/x3d-3.2.dtd">
+
+<X3D profile='Immersive'>
+  <head>
+	<meta name='filename' content='list3-16.x3d'/>
+  </head>
+  <Scene>
+
+	<ProtoDeclare name='Joint'>
+	  <ProtoInterface>
+		<field
+			name='center'
+			accessType='inputOutput'
+			type='SFVec3f'
+			value='0 0 0'/>
+		<field
+			name='children'
+			accessType='inputOutput'
+			type='MFNode'
+			value='NULL'/>
+		<field
+			name='llimit'
+			accessType='inputOutput'
+			type='MFFloat'
+			value='0'/>
+		<field
+			name='limitOrientation'
+			accessType='inputOutput'
+			type='SFRotation'
+			value='0 0 1 0'/>
+		<field
+			name='name'
+			accessType='inputOutput'
+			type='SFString'
+			value='""'/>
+		<field
+			name='rotation'
+			accessType='inputOutput'
+			type='SFRotation'
+			value='0 0 1 0'/>
+		<field
+			name='scale'
+			accessType='inputOutput'
+			type='SFVec3f'
+			value='1 1 1'/>
+		<field
+			name='scaleOrientation'
+			accessType='inputOutput'
+			type='SFRotation'
+			value='0 0 1 0'/>
+		<field
+			name='stiffness'
+			accessType='inputOutput'
+			type='MFFloat'
+			value='0 0 0'/>
+		<field
+			name='translation'
+			accessType='inputOutput'
+			type='SFVec3f'
+			value='0 0 0'/>
+		<field
+			name='ulimit'
+			accessType='inputOutput'
+			type='MFFloat'
+			value='0'/>
+		<field
+			name='jointType'
+			accessType='inputOutput'
+			type='SFString'
+			value='""'/>
+		<field
+			name='jointId'
+			accessType='inputOutput'
+			type='SFInt32'
+			value='-1'/>
+		<field
+			name='jointAxis'
+			accessType='inputOutput'
+			type='SFVec3f'
+			value='0 0 1'/>
+		<field
+			name='equivalentInertia'
+			accessType='inputOutput'
+			type='SFFloat'
+			value='0'/>
+		<field
+			name='gearRatio'
+			accessType='inputOutput'
+			type='SFFloat'
+			value='1'/>
+		<field
+			name='rotorInertia'
+			accessType='inputOutput'
+			type='SFFloat'
+			value='0'/>
+		<field
+			name='rotorResistor'
+			accessType='inputOutput'
+			type='SFFloat'
+			value='0'/>
+		<field
+			name='torqueConst'
+			accessType='inputOutput'
+			type='SFFloat'
+			value='1'/>
+		<field
+			name='encoderPulse'
+			accessType='inputOutput'
+			type='SFFloat'
+			value='1'/>
+		<field
+			name='gearEfficiency'
+			accessType='inputOutput'
+			type='SFFloat'
+			value='1'/>
+	  </ProtoInterface>
+
+	  <ProtoBody>
+		<Transform>
+		  <IS>
+			<connect nodeField='center' protoField='center'/>
+			<connect nodeField='children' protoField='children'/>
+			<connect nodeField='rotation' protoField='rotation'/>
+			<connect nodeField='scale' protoField='scale'/>
+			<connect nodeField='scaleOrientation' protoField='scaleOrientation'/>
+			<connect nodeField='translation' protoField='translation'/>
+		  </IS>
+		</Transform>
+	  </ProtoBody>
+	</ProtoDeclare>
+
+	<ProtoDeclare name='Segment'>
+	  <ProtoInterface>
+		<field
+			name='bboxCenter'
+			accessType='initializeOnly'
+			type='SFVec3f'
+			value='0 0 0'/>
+		<field
+			name='bboxSize'
+			accessType='initializeOnly'
+			type='SFVec3f'
+			value='-1 -1 -1'/>
+		<field
+			name='centerOfMass'
+			accessType='inputOutput'
+			type='SFVec3f'
+			value='0 0 0'/>
+		<field
+			name='children'
+			accessType='inputOutput'
+			type='MFNode'
+			value='NULL'/>
+		<field
+			name='coord'
+			accessType='inputOutput'
+			type='MFNode'
+			value='NULL'/>
+		<field
+			name='displacers'
+			accessType='inputOutput'
+			type='MFNode'
+			value='NULL'/>
+		<field
+			name='mass'
+			accessType='inputOutput'
+			type='SFFloat'
+			value='0'/>
+		<field
+			name='momentOfInertia'
+			accessType='inputOutput'
+			type='MFFloat'
+			value='0 0 0 0 0 0 0 0 0'/>
+		<field
+			name='name'
+			accessType='inputOutput'
+			type='SFString'
+			value='""'/>
+		<field
+			name='addChildren'
+			accessType='inputOnly'
+			type='MFNode'
+			value='NULL'/>
+		<field
+			name='removeChildren'
+			accessType='inputOnly'
+			type='MFNode'
+			value='NULL'/>
+	  </ProtoInterface>
+
+	  <ProtoBody>
+		<Group>
+		  <IS>
+			<connect nodeField='addChildren' protoField='addChildren'/>
+			<connect nodeField='bboxCenter' protoField='bboxCenter'/>
+			<connect nodeField='bboxSize' protoField='bboxSize'/>
+			<connect nodeField='children' protoField='children'/>
+			<connect nodeField='removeChildren' protoField='removeChildren'/>
+		  </IS>
+		</Group>
+	  </ProtoBody>
+	</ProtoDeclare>
+
+
+	<ProtoDeclare name='Humanoid'>
+	  <ProtoInterface>
+		<field
+			name='bboxCenter'
+			accessType='initializeOnly'
+			type='SFVec3f'
+			value='0 0 0'/>
+		<field
+			name='bboxSize'
+			accessType='initializeOnly'
+			type='SFVec3f'
+			value='-1 -1 -1'/>
+		<field
+			name='center'
+			accessType='inputOutput'
+			type='SFVec3f'
+			value='0 0 0'/>
+		<field
+			name='humanoidBody'
+			accessType='inputOutput'
+			type='MFNode'
+			value='NULL'/>
+		<field
+			name='info'
+			accessType='inputOutput'
+			type='MFString'
+			value='NULL'/>
+		<field
+			name='joints'
+			accessType='inputOutput'
+			type='MFNode'
+			value='NULL'/>
+		<field
+			name='name'
+			accessType='inputOutput'
+			type='SFString'
+			value='""'/>
+		<field
+			name='rotation'
+			accessType='inputOutput'
+			type='SFRotation'
+			value='0 0 1 0'/>
+		<field
+			name='scale'
+			accessType='inputOutput'
+			type='SFVec3f'
+			value='1 1 1'/>
+		<field
+			name='scaleOrientation'
+			accessType='inputOutput'
+			type='SFRotation'
+			value='0 0 1 0'/>
+		<field
+			name='segments'
+			accessType='inputOutput'
+			type='MFNode'
+			value='NULL'/>
+		<field
+			name='sites'
+			accessType='inputOutput'
+			type='MFNode'
+			value='NULL'/>
+		<field
+			name='translation'
+			accessType='inputOutput'
+			type='SFVec3f'
+			value='0 0 0'/>
+		<field
+			name='version'
+			accessType='inputOutput'
+			type='SFString'
+			value='""'/>
+		<field
+			name='viewpoints'
+			accessType='inputOutput'
+			type='MFNode'
+			value='NULL'/>
+	  </ProtoInterface>
+
+	  <ProtoBody>
+		<Transform>
+		  <IS>
+			<connect nodeField='bboxCenter' protoField='bboxCenter'/>
+			<connect nodeField='bboxSize' protoField='bboxSize'/>
+			<connect nodeField='center' protoField='center'/>
+			<connect nodeField='rotation' protoField='rotation'/>
+			<connect nodeField='scale' protoField='scale'/>
+			<connect nodeField='scaleOrientation' protoField='scaleOrientation'/>
+			<connect nodeField='translation' protoField='translation'/>
+		  </IS>
+		</Transform>
+	  </ProtoBody>
+	</ProtoDeclare>
+
+
+
+	<Background skyColor='1 1 1'/>
+
+	<Transform	translation='0 0 0'>
+	  <ProtoInstance name='Humanoid'>
+		<fieldValue name='humanoidBody'>
+
+		  <ProtoInstance name='Joint'>
+			<fieldValue name='name' value='BODY'/>
+			<fieldValue name='jointType' value='free'/>
+			<fieldValue name='translation' value='0 0 0'/>
+			<fieldValue name='children'>
+
+			  <ProtoInstance name='Segment'>
+				<fieldValue name='name' value='body'/>
+				<fieldValue name='translation' value='0 1.5 0'/>
+				<fieldValue name='rotation' value='0 0 1 0'/>
+				<fieldValue name='children'>
+					<Shape>
+					  <Box size='1.0 1.0 0.8'/>
+					</Shape>
+				</fieldValue>
+			  </ProtoInstance>
+
+			  <ProtoInstance name='Joint'>
+				<fieldValue name='name' value='NECK'/>
+				<fieldValue name='jointType' value='fixed'/>
+				<fieldValue name='translation' value='0 0.5 0'/>
+				<fieldValue name='rotation' value='0 0 1 0'/>
+				<fieldValue name='children'>
+
+				  <ProtoInstance name='Segment'>
+					<fieldValue name='name' value='HEAD'/>
+					<fieldValue name='translation' value='0 0.3 0'/>
+					<fieldValue name='rotation' value='0 0 1 0'/>
+					<fieldValue name='children'>
+						<Shape>
+						  <Sphere radius='0.3'/>
+						</Shape>
+					</fieldValue>
+				  </ProtoInstance>
+
+				</fieldValue>
+			  </ProtoInstance>
+
+			  <ProtoInstance name='Joint'>
+				<fieldValue name='name' value='R_SHOULDER'/>
+				<fieldValue name='jointType' value='fixed'/>
+				<fieldValue name='translation' value='-0.5 0.3 0'/>
+				<fieldValue name='rotation' value='0 0 1 0'/>
+				<fieldValue name='limitOrientation' value='0 0 1 0'/>
+				<fieldValue name='children'>
+
+				  <ProtoInstance name='Segment'>
+					<fieldValue name='name' value='RIGHT_U_ARM'/>
+					<fieldValue name='translation' value='0 -0.25 0'/>
+					<fieldValue name='rotation' value='0 0 1 0'/>
+					<fieldValue name='children'>
+						<Shape>
+						  <Box size='0.3 0.4 0.3'/>
+						</Shape>
+					</fieldValue>
+				  </ProtoInstance>
+
+				  <ProtoInstance name='Joint'>
+					<fieldValue name='jointType' value='fixed'/>
+					<fieldValue name='name' value='R_ELBOW'/>
+					<fieldValue name='translation' value='0 -0.5 0'/>
+					<fieldValue name='rotation' value='0 0 1 0'/>
+					<fieldValue name='limitOrientation' value='0 0 1 0'/>
+					<fieldValue name='children'>
+
+					  <ProtoInstance name='Segment'>
+						<fieldValue name='name' value='RIGHT_L_ARM'/>
+						<fieldValue name='translation' value='0 -0.25 0'/>
+						<fieldValue name='rotation' value='0 0 1 0'/>
+						<fieldValue name='children'>
+							<Shape>
+							  <Box size='0.3 0.4 0.3'/>
+							</Shape>
+						</fieldValue>
+					  </ProtoInstance>
+
+					</fieldValue>
+				  </ProtoInstance>
+
+				</fieldValue>
+			  </ProtoInstance>
+
+			  <ProtoInstance name='Joint'>
+				<fieldValue name='jointType' value='fixed'/>
+				<fieldValue name='name' value='L_SHOULDER'/>
+				<fieldValue name='translation' value='0.5 0.3 0'/>
+				<fieldValue name='rotation' value='0 0 1 0'/>
+				<fieldValue name='limitOrientation' value='0 0 1 0'/>
+				<fieldValue name='children'>
+
+				  <ProtoInstance name='Segment'>
+					<fieldValue name='name' value='LEFT_ARM'/>
+					<fieldValue name='translation' value='-3 4 -5'/>
+					<fieldValue name='rotation' value='0 0 1 0'/>
+					<fieldValue name='children'>
+						<Shape>
+						  <Box size='0.4 1.0 0.4'/>
+						</Shape>
+					</fieldValue>
+				  </ProtoInstance>
+
+				</fieldValue>
+			  </ProtoInstance>
+
+			  <ProtoInstance name='Joint'>
+				<fieldValue name='jointType' value='fixed'/>
+				<fieldValue name='name' value='J_LBODY0'/>
+				<fieldValue name='translation' value='0 0 0'/>
+				<fieldValue name='rotation' value='0 0 1 0'/>
+				<fieldValue name='children'>
+
+				  <ProtoInstance name='Segment'>
+					<fieldValue name='name' value='LBODY'/>
+					<fieldValue name='translation' value='0 -0.5 0'/>
+					<fieldValue name='rotation' value='0 0 1 0'/>
+					<fieldValue name='children'>
+						<Shape>
+						  <Box size='0.9 1.0 0.8'/>
+						</Shape>
+					</fieldValue>
+				  </ProtoInstance>
+
+				</fieldValue>
+			  </ProtoInstance>
+			</fieldValue>
+
+		  </ProtoInstance>
+
+		</fieldValue>
+	  </ProtoInstance>
+	</Transform>
+
+  </Scene>
+</X3D>
+
