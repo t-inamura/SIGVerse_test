@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.2//EN"
+  "http://www.web3d.org/specifications/x3d-3.2.dtd">
+
+<X3D profile='Immersive'>
+  <head>
+    <meta name='filename' content='list3-5.x3d'/>
+  </head>
+  <Scene>
+    <Background skyColor='1 1 1'/>
+
+    <Transform translation='0 -2.5 0' scale='0.5 0.5 0.5'>
+      <Shape>
+        <Extrusion crossSection=' 1  1 
+                                  1 -1 
+                                 -1 -1 
+                                 -1  1 
+                                  1  1' 
+                   spine='0  0  0
+                          0  1  0
+                          0  2  0
+                          0  3  0
+                          0  4  0
+                          0  5  0
+                          0  6  0
+                          0  7  0
+                          0  8  0
+                          0  9  0
+                          0 10  0'
+                   scale='0.5  0.5
+                          0.8  0.8
+                          1.0  1.0
+                          1.5  1.5
+                          1.8  1.8
+                          2.0  2.0
+                          1.8  1.8
+                          1.5  1.5
+                          1.0  1.0
+                          0.8  0.8
+                          0.5  0.5'
+                   solid='false'/>
+        <Appearance>
+          <Material diffuseColor='0 1 0'/>
+        </Appearance>
+      </Shape>
+    </Transform>
+
+  </Scene>
+</X3D>
+

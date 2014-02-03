@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange">
+  <Scene>
+    <Transform translation="5 5 5" rotation="1 0 0 0.7">
+      <Shape >
+	<Box size="10 10 10"/>
+	<Appearance >
+	  <Material diffuseColor='0.2 0.2 0.8'/>
+	</Appearance>
+      </Shape>
+    </Transform> 
+    <Transform translation="-5 -5 -5">
+      <Shape >
+	<Box size="10 10 10"/>
+	<Appearance >
+	  <Material diffuseColor='0.2 0.2 0.8'/>
+	</Appearance>
+      </Shape>
+    </Transform>
+
+  </Scene>
+</X3D>

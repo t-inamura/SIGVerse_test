@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.2//EN"
+  "http://www.web3d.org/specifications/x3d-3.2.dtd">
+
+<X3D profile='Immersive'>
+  <head>
+    <meta name='filename' content='list3-2.x3d'/>
+  </head>
+  <Scene>
+    <Background skyColor='1 1 1'/>
+
+    <Transform scale='2 2 2'>
+      <Shape>
+        <IndexedFaceSet coordIndex='0 1 2 -1
+                                    0 2 3 -1
+                                    0 3 4 -1
+                                    0 4 1 -1
+                                    1 2 3 4 -1'
+                        solid='false'
+                        colorPerVertex='false' 
+                        colorIndex='4 3 2 1 0'>
+          <Coordinate point=' 0 1  0
+                              1 0  1
+                              1 0 -1
+                             -1 0 -1
+                             -1 0  1'/>
+          <Color color='1 0 0
+                        0 1 0 
+                        0 0 1 
+                        1 1 0 
+                        0 1 1'/>
+        </IndexedFaceSet>
+        <Appearance>
+          <Material/>
+        </Appearance>
+      </Shape>
+    </Transform>
+
+  </Scene>
+</X3D>
+

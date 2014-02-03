@@ -1,0 +1,209 @@
+#VRML V2.0 utf8 CosmoWorlds V1.0
+
+# Need this line to parse this file with Xj3D
+PROFILE Interactive
+
+
+WorldInfo
+{
+ title	"carpet"
+ info	"VRML2.0 created with Version 1.3, from Alias Maya 8.5"
+}
+NavigationInfo
+{
+ type [ "EXAMINE"  "ANY" ]
+ headlight	TRUE
+ speed		1.000000
+}
+Switch
+{
+ whichChoice	-1
+ choice
+ [
+  Shape
+  {
+   appearance Appearance
+   {
+    material DEF lambert2_0 Material
+    {
+     diffuseColor	0.000000 0.000000 0.000000
+     specularColor	0.000000 0.000000 0.000000
+     emissiveColor	0.000000 0.000000 0.000000
+     shininess		0.000000
+     transparency	0.000000
+    }
+   }
+  }
+  Shape
+  {
+   appearance Appearance
+   {
+    material DEF lambert3_1 Material
+    {
+     diffuseColor	0.000000 0.000000 0.000000
+     specularColor	0.000000 0.000000 0.000000
+     emissiveColor	0.000000 0.000000 0.000000
+     shininess		0.000000
+     transparency	0.000000
+    }
+   }
+  }
+  Shape
+  {
+   geometry DEF carpetA_0Geo IndexedFaceSet
+   {
+    convex FALSE
+    solid FALSE
+    coord DEF carpetAGeoPoints Coordinate
+    {
+     point [
+      -50.000 -0.000 50.000,
+      50.000 -0.000 50.000,
+      -50.000 0.000 -50.000,
+      50.000 0.000 -50.000
+     ]
+    }
+    coordIndex [
+     0 1 3 2 -1
+    ]
+    normalPerVertex TRUE
+    normal Normal
+    {
+     vector [
+      0.000 1.000 0.000,
+      0.000 1.000 0.000,
+      0.000 1.000 0.000,
+      0.000 1.000 0.000
+     ]
+    }
+    normalIndex [
+     0 1 2 3 -1
+    ]
+    texCoord TextureCoordinate
+    {
+     point [
+      0.000000 0.000000
+      2.000000 0.000000
+      2.000000 2.000000
+      0.000000 2.000000
+     ]
+    }
+    texCoordIndex [
+     0 1 2 3 -1
+    ]
+   }
+  }
+  Shape
+  {
+   geometry DEF carpetB_0Geo IndexedFaceSet
+   {
+    convex FALSE
+    solid FALSE
+    coord DEF carpetBGeoPoints Coordinate
+    {
+     point [
+      -50.000 -0.000 50.000,
+      50.000 -0.000 50.000,
+      -50.000 0.000 -50.000,
+      50.000 0.000 -50.000
+     ]
+    }
+    coordIndex [
+     0 1 3 2 -1
+    ]
+    normalPerVertex TRUE
+    normal Normal
+    {
+     vector [
+      0.000 1.000 0.000,
+      0.000 1.000 0.000,
+      0.000 1.000 0.000,
+      0.000 1.000 0.000
+     ]
+    }
+    normalIndex [
+     0 1 2 3 -1
+    ]
+    texCoord TextureCoordinate
+    {
+     point [
+      0.000000 0.000000
+      2.000000 0.000000
+      2.000000 2.000000
+      0.000000 2.000000
+     ]
+    }
+    texCoordIndex [
+     0 1 2 3 -1
+    ]
+   }
+  }
+ ]
+}
+Group
+{
+ children
+ [
+  DEF persp Viewpoint
+  {
+   position	12.162630 226.929550 206.835709
+   orientation	-0.982022 0.172219 0.077287 0.857298
+   fieldOfView	0.950022
+   description	"persp"
+  }
+  DEF carpetA Transform
+  {
+   translation		-60.000000 0.000000 0.000000
+   rotation		0.000000 0.000000 0.000000 0.000000
+   scale		1.000000 1.000000 1.000000
+   scaleOrientation	0.0  0.0  1.0  0.0
+   children Shape
+   {
+    appearance Appearance
+    {
+     material USE lambert2_0
+     texture ImageTexture
+     {
+      url  "carpetA.jpg"
+      repeatS TRUE
+      repeatT TRUE
+     }
+     textureTransform TextureTransform
+     {
+      rotation 0.000000
+      scale 1.000000 1.000000
+      translation 0.000000 0.000000
+     }
+    }
+    geometry USE carpetA_0Geo
+   }
+  }
+  DEF carpetB Transform
+  {
+   translation		60.000000 0.000000 0.000000
+   rotation		0.000000 0.000000 0.000000 0.000000
+   scale		1.000000 1.000000 1.000000
+   scaleOrientation	0.0  0.0  1.0  0.0
+   children Shape
+   {
+    appearance Appearance
+    {
+     material USE lambert3_1
+     texture ImageTexture
+     {
+      url  "carpetB.jpg"
+      repeatS TRUE
+      repeatT TRUE
+     }
+     textureTransform TextureTransform
+     {
+      rotation 0.000000
+      scale 1.000000 1.000000
+      translation 0.000000 0.000000
+     }
+    }
+    geometry USE carpetB_0Geo
+   }
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.2//EN"
+  "http://www.web3d.org/specifications/x3d-3.2.dtd">
+
+<X3D profile='Immersive'>
+  <head>
+    <meta name='filename' content='list2-18.x3d'/>
+  </head>
+  <Scene>
+    <Background skyColor='1 1 1'/>
+
+    <Shape>
+      <Cylinder radius='0.1' height='4'/>
+      <Appearance>
+        <Material diffuseColor='0.7 0.4 0.4'/>
+      </Appearance>
+    </Shape>
+
+    <Transform translation='0 -2.1 0'>
+      <Shape>
+        <Cylinder radius='1' height='0.2'/>
+        <Appearance>
+          <Material diffuseColor='0.7 0.4 0.4'/>
+        </Appearance>
+      </Shape>
+    </Transform>
+
+    <Transform  translation='0 2.15 0'>
+      <Shape>
+        <Box size='0.3 0.3 0.3'/>
+        <Appearance>
+          <Material  diffuseColor='0 1 1'/>
+        </Appearance>
+      </Shape>
+    </Transform>
+
+    <Transform translation='0 2.5 0'>
+      <Shape>
+        <Sphere radius='0.2'/>
+        <Appearance>
+          <Material emissiveColor='1 1 0'/>
+        </Appearance>
+      </Shape>
+    </Transform>
+ 
+    <Transform translation='0 2.5 0'>
+      <Shape>
+        <Cone bottomRadius='1.5' height='1'/>
+        <Appearance>
+          <Material diffuseColor='0 1 0' transparency='0.7'/>
+        </Appearance>
+      </Shape>
+    </Transform>
+
+  </Scene>
+</X3D>
+

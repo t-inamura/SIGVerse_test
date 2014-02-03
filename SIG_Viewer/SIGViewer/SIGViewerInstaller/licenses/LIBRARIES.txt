@@ -1,0 +1,43 @@
+SIGViewer uses following libraries:
+(number described in parentheses is version number of each library)
+
+[1] Ogre3D (1.8.0)
+
+Copyright (c) 2007 by The OGRE Team
+
+http://www.ogre3d.org/
+
+Ogre3D is avairable free under the GNU LGPL v2.1
+
+
+[2] OpenAL (1.0)
+
+http://connect.creativelabs.com/openal/default.aspx
+
+
+[3] Xj3D (1.0)
+
+http://www.xj3d.org/
+
+Xj3D is licensed under the GNU LGPL v2.1
+
+
+[4] zlib (1.2.3)
+
+http://www.zlib.net/
+
+
+[5] DirectX (9.0 -- November 2008)
+
+http://msdn.microsoft.com/ja-jp/directx/default.aspx
+
+
+[6] boost(1.47.0)
+
+http://www.boost.org/
+
+
+[7] libssh2(1.2.7)
+
+http://www.libssh2.org/
+

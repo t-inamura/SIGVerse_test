@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="Sample_Lighting"
+	ProjectGUID="{1083C6CC-AB96-4671-AD87-8C1F5243DFE8}"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="Sample_Lighting.dir\Debug"
+			ConfigurationType="2"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000 /fp:fast"
+				AdditionalIncludeDirectories="..\..\boost;..\..\include\OGRE;..\..\include;..\..\include\OGRE\PlugIns\PCZSceneManager;..\..\include\OGRE\PlugIns\OctreeZone;..\..\include\OIS;..\..\Common\include;..\..\include\OGRE\RTShaderSystem;..\..\include\OGRE\Terrain;..\..\include\OGRE\Paging;include;"
+				BasicRuntimeChecks="3"
+				CompileAs="2"
+				DebugInformationFormat="3"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="0"
+				Optimization="0"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;BOOST_ALL_NO_LIB;USE_RTSHADER_SYSTEM;CMAKE_INTDIR=\&quot;Debug\&quot;;Sample_Lighting_EXPORTS"
+				AssemblerListingLocation="Debug"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="..\..\bin\Debug/Sample_Lighting_d.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..\boost;..\..\include\OGRE;..\..\include;..\..\include\OGRE\PlugIns\PCZSceneManager;..\..\include\OGRE\PlugIns\OctreeZone;..\..\include\OIS;..\..\Common\include;..\..\include\OGRE\RTShaderSystem;..\..\include\OGRE\Terrain;..\..\include\OGRE\Paging;include;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;BOOST_ALL_NO_LIB;USE_RTSHADER_SYSTEM;CMAKE_INTDIR=\&quot;Debug\&quot;;Sample_Lighting_EXPORTS"/>
+			<Tool
+				Name="VCMIDLTool"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86 /debug"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\..\lib\debug\OgreMain_d.lib ..\..\boost\lib\libboost_thread-vc90-mt-gd-1_49.lib ..\..\boost\lib\libboost_date_time-vc90-mt-gd-1_49.lib ..\..\lib\debug\OgreRTShaderSystem_d.lib ..\..\lib\debug\OgreTerrain_d.lib ..\..\lib\debug\OgrePaging_d.lib ..\..\lib\debug\OIS_d.lib "
+				OutputFile="..\..\bin\Debug\Sample_Lighting_d.dll"
+				Version="0.0"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="..\..\bin\Debug\Sample_Lighting_d.pdb"
+				GenerateDebugInformation="TRUE"
+				ImportLibrary="..\..\lib\Debug\Sample_Lighting_d.lib"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="Sample_Lighting.dir\Release"
+			ConfigurationType="2"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000 /fp:fast"
+				AdditionalIncludeDirectories="..\..\boost;..\..\include\OGRE;..\..\include;..\..\include\OGRE\PlugIns\PCZSceneManager;..\..\include\OGRE\PlugIns\OctreeZone;..\..\include\OIS;..\..\Common\include;..\..\include\OGRE\RTShaderSystem;..\..\include\OGRE\Terrain;..\..\include\OGRE\Paging;include;"
+				CompileAs="2"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="2"
+				Optimization="2"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIB;USE_RTSHADER_SYSTEM;CMAKE_INTDIR=\&quot;Release\&quot;;Sample_Lighting_EXPORTS"
+				AssemblerListingLocation="Release"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="..\..\bin\Release/Sample_Lighting.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..\boost;..\..\include\OGRE;..\..\include;..\..\include\OGRE\PlugIns\PCZSceneManager;..\..\include\OGRE\PlugIns\OctreeZone;..\..\include\OIS;..\..\Common\include;..\..\include\OGRE\RTShaderSystem;..\..\include\OGRE\Terrain;..\..\include\OGRE\Paging;include;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIB;USE_RTSHADER_SYSTEM;CMAKE_INTDIR=\&quot;Release\&quot;;Sample_Lighting_EXPORTS"/>
+			<Tool
+				Name="VCMIDLTool"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\..\lib\release\OgreMain.lib ..\..\boost\lib\libboost_thread-vc90-mt-1_49.lib ..\..\boost\lib\libboost_date_time-vc90-mt-1_49.lib ..\..\lib\release\OgreRTShaderSystem.lib ..\..\lib\release\OgreTerrain.lib ..\..\lib\release\OgrePaging.lib ..\..\lib\release\OIS.lib "
+				OutputFile="..\..\bin\Release\Sample_Lighting.dll"
+				Version="0.0"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="..\..\bin\Release\Sample_Lighting.pdb"
+				ImportLibrary="..\..\lib\Release\Sample_Lighting.lib"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="">
+			<File
+				RelativePath="src\Lighting.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="">
+			<File
+				RelativePath="include\Lighting.h">
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>
