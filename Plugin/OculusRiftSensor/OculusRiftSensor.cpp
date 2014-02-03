@@ -31,9 +31,7 @@ public:
 	double onAction();
 	
 	// an utility function for conversion of data type from float to string.
-	std::string DoubleToString(float x);
-	
-	// an utility function for conversion of angle unit from radian to degree.
+	std::string DoubleToString(float x);	
 };
 
 void OculusRiftService::onInit(){
@@ -45,11 +43,11 @@ void OculusRiftService::onInit(){
 	pHMD = *pManager->EnumerateDevices<HMDDevice>().CreateDevice();
 
 	if (!pHMD){
-		printf_s("[ERR]  Could not find Oculus Rift.\n");
+//		printf_s("[ERR]  Could not find Oculus Rift.\n");
 		exit(EXIT_SUCCESS);
 	}
 	else{
-		printf_s("[SYS]  An Oculus Rift is detected.\n");
+//		printf_s("[SYS]  An Oculus Rift is detected.\n");
 	}
 	pSensor = *pHMD->GetSensor();
 
@@ -59,10 +57,10 @@ void OculusRiftService::onInit(){
 
 	if (pSensor){
 		FusionResult.AttachToSensor(pSensor);
-		printf_s("[SYS]  Sensors implemented in Oculus Rift are attached.\n");
+//		printf_s("[SYS]  Sensors implemented in Oculus Rift are attached.\n");
 	}
 	else{
-		printf_s("[ERR]  Could not find the sensors.\n");
+//		printf_s("[ERR]  Could not find the sensors.\n");
 	}
 }
 
@@ -76,32 +74,29 @@ OculusRiftService::~OculusRiftService(){
 
 double OculusRiftService::onAction(){
 	float r_yaw, r_pitch, r_roll;
-	float d_yaw, d_pitch, d_roll;
 
 	Quatf q = FusionResult.GetOrientation();
 	Matrix4f bodyFrameMatrix(q);
 	q.GetEulerAngles<Axis_Y, Axis_X, Axis_Z>(&r_yaw, &r_pitch, &r_roll);
-
-	d_yaw=RadToDegree(r_yaw);
-	d_pitch=RadToDegree(r_pitch);
-	d_roll=RadToDegree(r_roll);
 	
-	//printf("Euler angles[deg.]: Yaw, Ptch, Roll> %f, %f, %f \r", d_yaw, d_pitch, d_roll);
+	//printf_s("Euler angles[deg.]: Yaw, Ptch, Roll> %f, %f, %f \r", d_yaw, d_pitch, d_roll);
+
+	//this->checkRecvData(1);
 
 	std::vector<std::string> names;
 	names = this->getAllConnectedEntitiesName();
 	int entSize = names.size();
 	for(int i = 0; i < entSize; i++) {
-		std::cout<<names[i];
 		std::string msg = "ORS_DATA ";
-		msg += DoubleToString(d_yaw);
-		msg += DoubleToString(d_pitch);
-		msg += DoubleToString(d_roll);
+		msg += DoubleToString(r_yaw);
+		msg += DoubleToString(r_pitch);
+		msg += DoubleToString(r_roll);
 		this->sendMsg(names[i], msg);
 	}
 
-	return 0.01;
-}  
+	//this->checkRecvData(1);
+	return 0.05;
+}
 
 std::string OculusRiftService::DoubleToString(float x){
 	char tmp[32];
@@ -122,7 +117,7 @@ void main(int argc, char* argv[]){
 	unsigned int portnumber;
 	if (argc > 1) {
 		sprintf_s(saddr, 128, "%s", argv[1]);
-		portnumber = atoi(argv[2]);
+		portnumber = (unsigned int)atoi(argv[2]);
 	}
 	else{
 		exit(0);
@@ -132,10 +127,11 @@ void main(int argc, char* argv[]){
 	srv.connect(saddr, portnumber);
 	// connect to SIGViewer
     if(srv.connectToViewer()){
-		srv.checkRecvData(50);
+		//srv.checkRecvData(50);
 		// set exit condition for main-loop automatic
 		// if SIGViewer is disconnected with server, main loop will be broken up
-		srv.setAutoExitLoop(true);
+		//srv.setAutoExitLoop(true);
+		srv.setAutoExitProc(true);
 	}
 
 	// start main loop up
