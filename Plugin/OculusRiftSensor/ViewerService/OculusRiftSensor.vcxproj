@@ -49,13 +49,13 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\src\OculusSDK_VC2010\LibOVR\Include;C:\src\OculusSDK_VC2010\LibOVR\Src;C:\src\SIGService_vs2010\SIGService;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\src\OculusRift\OculusSDK_VC2010\LibOVR\Include;C:\src\OculusRift\OculusSDK_VC2010\LibOVR\Src;C:\src\SIGService_vs2010\SIGService;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\src\OculusSDK_VC2010\LibOVR\Lib\Win32;C:\src\SIGService_vs2010\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\src\OculusRift\OculusSDK_VC2010\LibOVR\Lib\Win32;C:\src\SIGService_vs2010\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libovrd.lib;winmm.lib;SIGService.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

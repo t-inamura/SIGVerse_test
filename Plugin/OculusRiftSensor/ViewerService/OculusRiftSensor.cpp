@@ -124,14 +124,15 @@ void main(int argc, char* argv[]){
 	}
 
 	// connect to server
-	srv.connect(saddr, portnumber);
+	if(srv.connect(saddr, portnumber)){
 	// connect to SIGViewer
-    if(srv.connectToViewer()){
+//    if(srv.connectToViewer()){
 		//srv.checkRecvData(50);
 		// set exit condition for main-loop automatic
 		// if SIGViewer is disconnected with server, main loop will be broken up
 		//srv.setAutoExitLoop(true);
 		srv.setAutoExitProc(true);
+//	}
 	}
 
 	// start main loop up
