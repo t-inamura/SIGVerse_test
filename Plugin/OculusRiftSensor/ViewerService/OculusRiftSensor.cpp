@@ -1,21 +1,23 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<iostream>
 
 #include"SIGService.h"
 
 #include "OVR.h"
-#include "Kernel/OVR_KeyCodes.h"
+#include <iostream>
+#include <conio.h>
 
 using namespace OVR;
 
 #undef new  // reset the redefinition in OVR*.h headers to normal one
 
 class OculusRiftService : public sigverse::SIGService{
-	Ptr<DeviceManager> pManager;
-	Ptr<HMDDevice>     pHMD;
-	Ptr<SensorDevice>  pSensor;
-	SensorFusion       FusionResult;
+	Ptr<DeviceManager>  pManager;
+	Ptr<HMDDevice>      pHMD;
+	Ptr<SensorDevice>   pSensor;
+	SensorFusion*       pFusionResult;
+	HMDInfo             Info;
+	bool                InfoLoaded;
 
 public:
     OculusRiftService(std::string name) : SIGService(name){};
@@ -23,6 +25,9 @@ public:
 
 	// initialization for whole procedure on this service
 	void onInit();
+
+	// get information of Oculus Rift
+	void getInfoOculusRift();
 
 	// function to be called if this service receives messages
 	//void onRecvMsg(sigverse::RecvMsgEvent &evt);
@@ -35,53 +40,87 @@ public:
 };
 
 void OculusRiftService::onInit(){
-	pManager=0;
-	pHMD=0;
-	pSensor=0;
-	
+	// initialization(prepare varibles for data acquisition of OculusRift's sensors)
+	OVR::System::Init();
+
+	pFusionResult = new SensorFusion();
 	pManager = *DeviceManager::Create();
+
 	pHMD = *pManager->EnumerateDevices<HMDDevice>().CreateDevice();
 
-	if (!pHMD){
-//		printf_s("[ERR]  Could not find Oculus Rift.\n");
-		exit(EXIT_SUCCESS);
+	if (pHMD){
+		InfoLoaded = pHMD->GetDeviceInfo(&Info);
+		pSensor = *pHMD->GetSensor();
 	}
 	else{
-//		printf_s("[SYS]  An Oculus Rift is detected.\n");
+	   pSensor = *pManager->EnumerateDevices<SensorDevice>().CreateDevice();
 	}
-	pSensor = *pHMD->GetSensor();
-
-	// Get DisplayDeviceName, ScreenWidth/Height, etc..
-	HMDInfo hmdInfo;
-	pHMD->GetDeviceInfo(&hmdInfo);
 
 	if (pSensor){
-		FusionResult.AttachToSensor(pSensor);
-//		printf_s("[SYS]  Sensors implemented in Oculus Rift are attached.\n");
+	   pFusionResult->AttachToSensor(pSensor);
+	}
+}
+
+void OculusRiftService::getInfoOculusRift(){
+	//display info. of attached Oculus Rift
+	//---------------------------------------------------------------
+	std::cout << "----- Oculus Console -----" << std::endl;
+
+	if (pHMD){
+		std::cout << " [x] HMD Found" << std::endl;
 	}
 	else{
-//		printf_s("[ERR]  Could not find the sensors.\n");
+		std::cout << " [ ] HMD Not Found" << std::endl;
+	}
+
+	if (pSensor){
+		std::cout << " [x] Sensor Found" << std::endl;
+	}
+	else{
+		std::cout << " [ ] Sensor Not Found" << std::endl;
+	}
+
+	std::cout << "--------------------------" << std::endl;
+
+	if (InfoLoaded){
+		std::cout << " DisplayDeviceName: " << Info.DisplayDeviceName << std::endl;
+		std::cout << " ProductName: " << Info.ProductName << std::endl;
+		std::cout << " Manufacturer: " << Info.Manufacturer << std::endl;
+		std::cout << " Version: " << Info.Version << std::endl;
+		std::cout << " HResolution: " << Info.HResolution<< std::endl;
+		std::cout << " VResolution: " << Info.VResolution<< std::endl;
+		std::cout << " HScreenSize: " << Info.HScreenSize<< std::endl;
+		std::cout << " VScreenSize: " << Info.VScreenSize<< std::endl;
+		std::cout << " VScreenCenter: " << Info.VScreenCenter<< std::endl;
+		std::cout << " EyeToScreenDistance: " << Info.EyeToScreenDistance << std::endl;
+		std::cout << " LensSeparationDistance: " << Info.LensSeparationDistance << std::endl;
+		std::cout << " InterpupillaryDistance: " << Info.InterpupillaryDistance << std::endl;
+		std::cout << " DistortionK[0]: " << Info.DistortionK[0] << std::endl;
+		std::cout << " DistortionK[1]: " << Info.DistortionK[1] << std::endl;
+		std::cout << " DistortionK[2]: " << Info.DistortionK[2] << std::endl;
+		std::cout << "--------------------------" << std::endl;
 	}
 }
 
 OculusRiftService::~OculusRiftService(){
+	// shutdown SIGService
     this->disconnect();
 	
+	// finalize Oculus Rift connection
 	pSensor.Clear();
 	pHMD.Clear();
 	pManager.Clear();
+	delete pFusionResult;
+	OVR::System::Destroy();
 }
 
+//periodic procedure for sending messages to the controller
 double OculusRiftService::onAction(){
 	float r_yaw, r_pitch, r_roll;
 
-	Quatf q = FusionResult.GetOrientation();
+	Quatf q = pFusionResult->GetOrientation();
 	Matrix4f bodyFrameMatrix(q);
 	q.GetEulerAngles<Axis_Y, Axis_X, Axis_Z>(&r_yaw, &r_pitch, &r_roll);
-	
-	//printf_s("Euler angles[deg.]: Yaw, Ptch, Roll> %f, %f, %f \r", d_yaw, d_pitch, d_roll);
-
-	//this->checkRecvData(1);
 
 	std::vector<std::string> names;
 	names = this->getAllConnectedEntitiesName();
@@ -91,13 +130,13 @@ double OculusRiftService::onAction(){
 		msg += DoubleToString(r_yaw);
 		msg += DoubleToString(r_pitch);
 		msg += DoubleToString(r_roll);
-		this->sendMsg(names[i], msg);
+		this->sendMsgToCtr(names[i], msg);
 	}
 
-	//this->checkRecvData(1);
-	return 0.05;
+	return 0.1;  //time period
 }
 
+// utility function to convert data type from 'double' to 'string'
 std::string OculusRiftService::DoubleToString(float x){
 	char tmp[32];
 	sprintf_s(tmp, 32, "%.3f", x);
@@ -106,10 +145,8 @@ std::string OculusRiftService::DoubleToString(float x){
 	return str;
 }
 
+//entry point
 void main(int argc, char* argv[]){
-	// start OVR system
-	OVR::System::Init();
-
 	// create instance
 	OculusRiftService srv("SIGORS");
 
@@ -123,22 +160,19 @@ void main(int argc, char* argv[]){
 		exit(0);
 	}
 
-	// connect to server
+	// connect to SIGServer
 	if(srv.connect(saddr, portnumber)){
 	// connect to SIGViewer
-//    if(srv.connectToViewer()){
-		//srv.checkRecvData(50);
-		// set exit condition for main-loop automatic
-		// if SIGViewer is disconnected with server, main loop will be broken up
-		//srv.setAutoExitLoop(true);
-		srv.setAutoExitProc(true);
-//	}
+		if(srv.connectToViewer()){
+		// set exit condition of main-loop automatic
+		// if SIGViewer is disconnected from server, main loop will be broken up
+			srv.setAutoExitLoop(true);
+		}
 	}
 
-	// start main loop up
+	// start main loop
 	srv.startLoop();  
 
 	// finalize this process
-	OVR::System::Destroy();
 	exit(0);
 }
