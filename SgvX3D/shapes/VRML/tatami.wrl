@@ -1,0 +1,123 @@
+#VRML V2.0 utf8 CosmoWorlds V1.0
+
+# Need this line to parse this file with Xj3D
+PROFILE Interactive
+
+
+WorldInfo
+{
+ title	"tatami"
+ info	"VRML2.0 created with Version 1.3, from Alias Maya 8.5"
+}
+NavigationInfo
+{
+ type [ "EXAMINE"  "ANY" ]
+ headlight	TRUE
+ speed		1.000000
+}
+Switch
+{
+ whichChoice	-1
+ choice
+ [
+  Shape
+  {
+   appearance Appearance
+   {
+    material DEF phong1_0 Material
+    {
+     diffuseColor	0.000000 0.000000 0.000000
+     specularColor	0.250000 0.250000 0.250000
+     emissiveColor	0.000000 0.000000 0.000000
+     shininess		1.000000
+     transparency	0.000000
+    }
+   }
+  }
+  Shape
+  {
+   geometry DEF tatami_0Geo IndexedFaceSet
+   {
+    convex FALSE
+    solid FALSE
+    coord DEF tatamiGeoPoints Coordinate
+    {
+     point [
+      -45.500 -0.000 91.000,
+      45.500 -0.000 91.000,
+      -45.500 0.000 -91.000,
+      45.500 0.000 -91.000
+     ]
+    }
+    coordIndex [
+     0 1 3 2 -1
+    ]
+    normalPerVertex TRUE
+    normal Normal
+    {
+     vector [
+      0.000 1.000 0.000,
+      0.000 1.000 0.000,
+      0.000 1.000 0.000,
+      0.000 1.000 0.000
+     ]
+    }
+    normalIndex [
+     0 1 2 3 -1
+    ]
+    texCoord TextureCoordinate
+    {
+     point [
+      0.000000 0.000000
+      1.000000 0.000000
+      1.000000 1.000000
+      0.000000 1.000000
+     ]
+    }
+    texCoordIndex [
+     0 1 2 3 -1
+    ]
+   }
+  }
+ ]
+}
+Group
+{
+ children
+ [
+  DEF persp Viewpoint
+  {
+   position	-220.235672 203.554993 106.387306
+   orientation	-0.497383 -0.812225 -0.304797 1.292714
+   fieldOfView	0.950022
+   description	"persp"
+  }
+  DEF tatami Transform
+  {
+   translation		0.000000 0.000000 0.000000
+   rotation		0.000000 0.000000 0.000000 0.000000
+   scale		1.000000 1.000000 1.000000
+   scaleOrientation	0.0  0.0  1.0  0.0
+   children Shape
+   {
+    appearance Appearance
+    {
+     material USE phong1_0
+     texture ImageTexture
+     {
+      url  "tatami.jpg"
+      repeatS TRUE
+      repeatT TRUE
+     }
+     textureTransform TextureTransform
+     {
+      rotation 0.000000
+      scale 1.000000 1.000000
+      translation 0.000000 0.000000
+     }
+    }
+    geometry USE tatami_0Geo
+   }
+  }
+ ]
+}

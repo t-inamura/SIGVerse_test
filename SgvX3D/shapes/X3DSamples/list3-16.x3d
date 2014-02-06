@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.2//EN"
+  "http://www.web3d.org/specifications/x3d-3.2.dtd">
+
+<X3D profile='Immersive'>
+  <head>
+	<meta name='filename' content='list3-16.x3d'/>
+  </head>
+  <Scene>
+
+	<ProtoDeclare name='ConeDisplay'>
+	  <ProtoInterface>
+		<field name='coneHeight' type='SFFloat'
+			   value='3' accessType='initializeOnly'/>
+		<field name='coneBottomRadius' type='SFFloat'
+			   value='1.5' accessType='initializeOnly'/>
+		<field name='coneColor' type='SFColor'
+			   value='1 0 0' accessType='initializeOnly'/>
+		<field name='konao' type='SFNode'
+			   accessType='initializeOnly'>
+			<Box size='1 2 3'/>
+		</field>
+	  </ProtoInterface>
+
+	  <ProtoBody>
+		<Shape>
+		  <Cone>
+			<IS>
+			  <connect nodeField='height'
+					   protoField='coneHeight'/>
+			  <connect nodeField='bottomRadius'
+					   protoField='coneBottomRadius'/>
+			</IS>
+		  </Cone>
+		  <Appearance>
+			<Material>
+			  <IS>
+				<connect nodeField='diffuseColor'
+						 protoField='coneColor'/>
+			  </IS>
+			</Material>
+		  </Appearance>
+		</Shape>
+	  </ProtoBody>
+	</ProtoDeclare>
+
+	<Background skyColor='1 1 1'/>
+
+	<ProtoInstance name='ConeDisplay'/>
+
+	<Transform	translation='4 0 0' rotation='0 0 1 -0.5236'>
+	  <ProtoInstance name='ConeDisplay'>
+		<fieldValue name='coneColor' value='0 1 0'/>
+		<fieldValue name='coneBottomRadius' value='1'/>
+		<fieldValue name='coneHeight' value='4'/>
+		<fieldValue name='konao'>
+			<Shape>
+				<Box size='10 20 30'/>
+			</Shape>
+		</fieldValue>
+	  </ProtoInstance>
+	</Transform>
+
+  </Scene>
+</X3D>
+

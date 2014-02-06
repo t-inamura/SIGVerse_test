@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libSgvX3D", "libSgvX3D\libSgvX3D.vcxproj", "{2F36F2AD-7374-42D4-B8BA-A1A2671B1F93}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_libsgvx3d", "test_libsgvx3d\test_libsgvx3d.vcxproj", "{A43DA283-342D-40EF-A499-44BFD8E40C07}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2F36F2AD-7374-42D4-B8BA-A1A2671B1F93} = {2F36F2AD-7374-42D4-B8BA-A1A2671B1F93}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F36F2AD-7374-42D4-B8BA-A1A2671B1F93}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2F36F2AD-7374-42D4-B8BA-A1A2671B1F93}.Debug|Win32.Build.0 = Debug|Win32
+		{2F36F2AD-7374-42D4-B8BA-A1A2671B1F93}.Release|Win32.ActiveCfg = Release|Win32
+		{2F36F2AD-7374-42D4-B8BA-A1A2671B1F93}.Release|Win32.Build.0 = Release|Win32
+		{A43DA283-342D-40EF-A499-44BFD8E40C07}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A43DA283-342D-40EF-A499-44BFD8E40C07}.Debug|Win32.Build.0 = Debug|Win32
+		{A43DA283-342D-40EF-A499-44BFD8E40C07}.Release|Win32.ActiveCfg = Release|Win32
+		{A43DA283-342D-40EF-A499-44BFD8E40C07}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

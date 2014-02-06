@@ -1,0 +1,4 @@
+# $ java -Xbootclasspath/p:./bin -Djava.class.path=./X3DParser.jar:/home/yoshi/Xj3D/jars/xj3d-all.jar  X3DParserTest 0 ../../../../shapes/VRML/apple.wrl 
+java.library.path=/usr/lib/jvm/java-6-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+#java.library.path=
+java.class.path=/home/itoh/src/SIGVerse/SIGServer_devel/srcs/libsigx3d/parser/java/X3DParser/src/X3DParser.jar:/home/itoh/src/SIGVerse/SIGServer_devel/jar/xj3d-all.jar

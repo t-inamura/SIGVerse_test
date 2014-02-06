@@ -1,0 +1,10 @@
+WIN:
+Execute the following command within "Visual Studio Command Prompt"
+
+    nmake -f makefile.msc
+
+LIN:
+Execute the following command.
+
+    make
+

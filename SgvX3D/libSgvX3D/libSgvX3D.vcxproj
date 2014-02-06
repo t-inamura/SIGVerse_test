@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2F36F2AD-7374-42D4-B8BA-A1A2671B1F93}</ProjectGuid>
+    <RootNamespace>libSgvX3D</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>C:\src\SIGVWLibs\jdk\1.6\x86\include;C:\src\SIGVWLibs\jdk\1.6\x86\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>jvm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\src\SIGVWLibs\jdk\1.6\x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="CJNIUtil.h" />
+    <ClInclude Include="CSimplifiedShape.h" />
+    <ClInclude Include="CVRMLFieldData.h" />
+    <ClInclude Include="CX3DAppearanceNode.h" />
+    <ClInclude Include="CX3DBoxNode.h" />
+    <ClInclude Include="CX3DColorNode.h" />
+    <ClInclude Include="CX3DConeNode.h" />
+    <ClInclude Include="CX3DCoordinateNode.h" />
+    <ClInclude Include="CX3DCylinderNode.h" />
+    <ClInclude Include="CX3DDirectionalLightNode.h" />
+    <ClInclude Include="CX3DField.h" />
+    <ClInclude Include="CX3DGroupNode.h" />
+    <ClInclude Include="CX3DHAnimDisplacerNode.h" />
+    <ClInclude Include="CX3DHAnimHumanoidNode.h" />
+    <ClInclude Include="CX3DHAnimJointNode.h" />
+    <ClInclude Include="CX3DHAnimSegmentNode.h" />
+    <ClInclude Include="CX3DHAnimSiteNode.h" />
+    <ClInclude Include="CX3DImageTextureNode.h" />
+    <ClInclude Include="CX3DIndexedFaceSetNode.h" />
+    <ClInclude Include="CX3DIndexedLineSetNode.h" />
+    <ClInclude Include="CX3DMaterial.h" />
+    <ClInclude Include="CX3DMaterialNode.h" />
+    <ClInclude Include="CX3DNode.h" />
+    <ClInclude Include="CX3DNodeType.h" />
+    <ClInclude Include="CX3DNormalNode.h" />
+    <ClInclude Include="CX3DOpenHRPHumanoidNode.h" />
+    <ClInclude Include="CX3DOpenHRPJointNode.h" />
+    <ClInclude Include="CX3DOpenHRPSegmentNode.h" />
+    <ClInclude Include="CX3DParser.h" />
+    <ClInclude Include="CX3DParserUtil.h" />
+    <ClInclude Include="CX3DPointLightNode.h" />
+    <ClInclude Include="CX3DShapeNode.h" />
+    <ClInclude Include="CX3DSphereNode.h" />
+    <ClInclude Include="CX3DSpotLightNode.h" />
+    <ClInclude Include="CX3DTextureCoordinateNode.h" />
+    <ClInclude Include="CX3DTextureTransformNode.h" />
+    <ClInclude Include="CX3DTransformNode.h" />
+    <ClInclude Include="CX3DViewpointNode.h" />
+    <ClInclude Include="SgvConfigFile.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CJNIUtil.cpp" />
+    <ClCompile Include="CSimplifiedShape.cpp" />
+    <ClCompile Include="CVRMLFieldData.cpp" />
+    <ClCompile Include="CX3DAppearanceNode.cpp" />
+    <ClCompile Include="CX3DBoxNode.cpp" />
+    <ClCompile Include="CX3DColorNode.cpp" />
+    <ClCompile Include="CX3DConeNode.cpp" />
+    <ClCompile Include="CX3DCoordinateNode.cpp" />
+    <ClCompile Include="CX3DCylinderNode.cpp" />
+    <ClCompile Include="CX3DDirectionalLightNode.cpp" />
+    <ClCompile Include="CX3DField.cpp" />
+    <ClCompile Include="CX3DGroupNode.cpp" />
+    <ClCompile Include="CX3DHAnimDisplacerNode.cpp" />
+    <ClCompile Include="CX3DHAnimHumanoidNode.cpp" />
+    <ClCompile Include="CX3DHAnimJointNode.cpp" />
+    <ClCompile Include="CX3DHAnimSegmentNode.cpp" />
+    <ClCompile Include="CX3DHAnimSiteNode.cpp" />
+    <ClCompile Include="CX3DImageTextureNode.cpp" />
+    <ClCompile Include="CX3DIndexedFaceSetNode.cpp" />
+    <ClCompile Include="CX3DIndexedLineSetNode.cpp" />
+    <ClCompile Include="CX3DMaterialNode.cpp" />
+    <ClCompile Include="CX3DNode.cpp" />
+    <ClCompile Include="CX3DNormalNode.cpp" />
+    <ClCompile Include="CX3DOpenHRPHumanoidNode.cpp" />
+    <ClCompile Include="CX3DOpenHRPJointNode.cpp" />
+    <ClCompile Include="CX3DOpenHRPSegmentNode.cpp" />
+    <ClCompile Include="CX3DParser.cpp" />
+    <ClCompile Include="CX3DParserUtil.cpp" />
+    <ClCompile Include="CX3DPointLightNode.cpp" />
+    <ClCompile Include="CX3DShapeNode.cpp" />
+    <ClCompile Include="CX3DSphereNode.cpp" />
+    <ClCompile Include="CX3DSpotLightNode.cpp" />
+    <ClCompile Include="CX3DTextureCoordinateNode.cpp" />
+    <ClCompile Include="CX3DTextureTransformNode.cpp" />
+    <ClCompile Include="CX3DTransformNode.cpp" />
+    <ClCompile Include="CX3DViewpointNode.cpp" />
+    <ClCompile Include="SgvConfigFile.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
