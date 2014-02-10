@@ -13,7 +13,13 @@ How to build OculusRiftSensor
 * SIGService module
 0. Requirement: SIGService.
 1. Open ViewerService/OculusRiftSensor.sln by VS2010.
-2. Just click Build -> Build Solution.
+2. Open the project's property pages -> C/C++ -> General and make sure
+   that the include path of your Boost Library is specified in
+   Additional Include Directories field, e.g. C:\boost_1_55_0.
+3. Open the project's property pages -> Linker -> General and make sure
+   that the library path of your Boost Library is specified in
+   Additional Library Directories field, e.g. C:\boost_1_55_0\lib.
+4. Click Build -> Build Solution to build the SIG file.
 
 Then you can find the OculusRiftSensor.sig file in ViewerService/Debug
 or ViewerService/Release.
@@ -32,12 +38,14 @@ How to use OculusRiftSensor
    well-examined programs e.g. SDK samples, demo programs distributed
    by Oculus VR, inc.
 1. Login to the server ready to operate SIGServer.
-2. Execute command: sigserver.sh -w ./OculusRiftCtrl.xml
-3. If you confirmed startnig SIGServer, switch to the Windows PC and
+2. Move to where OculusRiftCtrl.so and OculusRiftCtrl.xml are located.
+3. Execute command: sigserver.sh -w ./OculusRiftCtrl.xml
+4. If you confirmed starting SIGServer, switch to the Windows PC and
    start the SIGViewer.
-4. Add SIGService OculusRiftSensor.sig made by the above instruction
-   to running SIGViewer by selecting the Service -> Add pop-up menu.
-5. Click connect button on SIGViewer.
-6. Click Service -> Start -> OculusRiftSensor.sig
-7. Click START button to start simulation
+5. Add the SIGService OculusRiftSensor.sig made by the above
+   instruction to running SIGViewer by selecting the Service -> Add
+   pop-up menu.
+6. Click CONNECT button on SIGViewer.
+7. Click Service -> Start -> OculusRiftSensor.sig
+8. Click START button to start simulation
 
