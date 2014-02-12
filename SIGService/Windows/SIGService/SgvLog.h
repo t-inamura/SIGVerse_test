@@ -82,11 +82,11 @@ inline const int removeDir(const char* file)
 //
 class LogFileWriter;
 //
-typedef shared_ptr<LogFileWriter> LogFileWriterPtr;
+typedef boost::shared_ptr<LogFileWriter> LogFileWriterPtr;
 
 //
 class Log;
-typedef shared_ptr<Log> LogPtr;
+typedef boost::shared_ptr<Log> LogPtr;
 
 
 class FileLock : noncopyable
@@ -413,7 +413,7 @@ private:
 
 class LogFactory
 {
-	typedef std::map<int, shared_ptr<Log> > LogMap;
+	typedef std::map<int, boost::shared_ptr<Log> > LogMap;
 public:
 	static LogPtr getLog(const int id)
 	{
