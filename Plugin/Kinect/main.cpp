@@ -234,10 +234,10 @@ void glutDisplay (void)
 		g_Context.WaitOneUpdateAll(g_UserGenerator);
 	}
 
-		// Process the data
-		g_DepthGenerator.GetMetaData(depthMD);
-		g_UserGenerator.GetUserPixels(0, sceneMD);
-		DrawDepthMap(depthMD, sceneMD, m_srv);
+	// Process the data
+	g_DepthGenerator.GetMetaData(depthMD);
+	g_UserGenerator.GetUserPixels(0, sceneMD);
+	DrawDepthMap(depthMD, sceneMD, m_srv);
 
 #ifndef USE_GLES
 	glutSwapBuffers();
