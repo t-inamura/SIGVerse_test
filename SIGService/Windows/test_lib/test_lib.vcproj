@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\SIGVerse\src\boost_1_55_0\include\boost-1_55&quot;"
+				AdditionalIncludeDirectories="&quot;C:\SIGVerse\src\boost_1_55_0\include\boost-1_55&quot;;..\SIGService"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"

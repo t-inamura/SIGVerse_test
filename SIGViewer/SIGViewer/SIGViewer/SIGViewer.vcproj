@@ -114,7 +114,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\include&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\include\OIS&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\include\OGRE&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\Samples\Common\include&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\boost&quot;;&quot;C:\SIGVerse\src\CEGUI-0.7.6\cegui\include&quot;;C:\SIGVerse\src\jdk\include;C:\SIGVerse\src\jdk\include\win32;.\x3d\parser\cpp\X3DParser;C:\SIGVerse\src\boost_1_47;&quot;C:\SIGVerse\src\libssh2-1.2.7-openssl-x86-win32nt-msvc\include&quot;;C:\SIGVerse\src\zlib\include;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\SIGService"
+				AdditionalIncludeDirectories="&quot;C:\SIGVerse\src\ogre_src_v1-8\include&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8\include\OIS&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8\include\OGRE&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8\Samples\Common\include&quot;;&quot;C:\SIGVerse\src\CEGUI-0.7.6\cegui\include&quot;;C:\SIGVerse\src\jdk\include;C:\SIGVerse\src\jdk\include\win32;.\x3d\parser\cpp\X3DParser;&quot;C:\SIGVerse\src\libssh2-1.2.7-openssl-x86-win32nt-msvc\include&quot;;C:\SIGVerse\src\zlib\include;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\SIGService;&quot;C:\SIGVerse\src\boost_1_55_0\include\boost-1_55&quot;"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -132,7 +132,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="OgreMain.lib OIS.lib OgreTerrain.lib comctl32.lib ws2_32.lib winmm.lib CEGUIBase.lib CEGUIOgreRenderer.lib jvm.lib zdll.lib SIGService.lib"
-				AdditionalLibraryDirectories="&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\lib\$(ConfigurationName)&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\boost\lib&quot;;&quot;C:\SIGVerse\src\CEGUI-0.7.6\lib&quot;;C:\SIGVerse\src\jdk\lib;C:\SIGVerse\src\boost_1_47\lib;&quot;C:\SIGVerse\src\libssh2-1.2.7-openssl-x86-win32nt-msvc\lib&quot;;C:\SIGVerse\src\zlib\lib;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\Release"
+				AdditionalLibraryDirectories="&quot;C:\SIGVerse\src\ogre_src_v1-8\lib\$(ConfigurationName)&quot;;&quot;C:\SIGVerse\src\CEGUI-0.7.6\lib&quot;;C:\SIGVerse\src\jdk\lib;C:\SIGVerse\src\boost_1_55_0\lib\i386;&quot;C:\SIGVerse\src\libssh2-1.2.7-openssl-x86-win32nt-msvc\lib&quot;;C:\SIGVerse\src\zlib\lib;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\Release"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
