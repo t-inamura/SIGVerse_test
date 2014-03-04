@@ -114,7 +114,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;..\..\OgreSDK_vc9_v1-8-0\include&quot;;&quot;..\..\OgreSDK_vc9_v1-8-0\include\OIS&quot;;&quot;..\..\OgreSDK_vc9_v1-8-0\include\OGRE&quot;;&quot;..\..\OgreSDK_vc9_v1-8-0\Samples\Common\include&quot;;&quot;..\..\OgreSDK_vc9_v1-8-0\boost&quot;;&quot;..\..\CEGUI-0.7.6\cegui\include&quot;;..\..\jdk\include;..\..\jdk\include\win32;.\x3d\parser\cpp\X3DParser;..\..\boost\boost_1_47;&quot;..\..\libssh2-1.2.7-openssl-x86-win32nt-msvc\include&quot;;..\..\zlib\include;..\..\..\SIGService\vs2008\SIGService"
+				AdditionalIncludeDirectories="&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\include&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\include\OIS&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\include\OGRE&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\Samples\Common\include&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\boost&quot;;&quot;C:\SIGVerse\src\CEGUI-0.7.6\cegui\include&quot;;C:\SIGVerse\src\jdk\include;C:\SIGVerse\src\jdk\include\win32;.\x3d\parser\cpp\X3DParser;C:\SIGVerse\src\boost_1_47;&quot;C:\SIGVerse\src\libssh2-1.2.7-openssl-x86-win32nt-msvc\include&quot;;C:\SIGVerse\src\zlib\include;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\SIGService"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -132,7 +132,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="OgreMain.lib OIS.lib OgreTerrain.lib comctl32.lib ws2_32.lib winmm.lib CEGUIBase.lib CEGUIOgreRenderer.lib jvm.lib zdll.lib SIGService.lib"
-				AdditionalLibraryDirectories="&quot;..\..\OgreSDK_vc9_v1-8-0\lib\$(ConfigurationName)&quot;;&quot;..\..\OgreSDK_vc9_v1-8-0\boost\lib&quot;;&quot;..\..\CEGUI-0.7.6\lib&quot;;..\..\jdk\lib;..\..\boost\boost_1_47\lib;&quot;..\..\libssh2-1.2.7-openssl-x86-win32nt-msvc\lib&quot;;..\..\zlib\lib;..\..\..\SIGService\vs2008\Release"
+				AdditionalLibraryDirectories="&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\lib\$(ConfigurationName)&quot;;&quot;C:\SIGVerse\src\ogre_src_v1-8_vc9\boost\lib&quot;;&quot;C:\SIGVerse\src\CEGUI-0.7.6\lib&quot;;C:\SIGVerse\src\jdk\lib;C:\SIGVerse\src\boost_1_47\lib;&quot;C:\SIGVerse\src\libssh2-1.2.7-openssl-x86-win32nt-msvc\lib&quot;;C:\SIGVerse\src\zlib\lib;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\Release"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
