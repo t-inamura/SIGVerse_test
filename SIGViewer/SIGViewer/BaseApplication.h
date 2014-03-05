@@ -34,6 +34,8 @@ This source file is part of the
 #include <SdkTrays.h>
 #include <SdkCameraMan.h>
 
+#include "OgreOculus/OgreOculus.h"
+
 class BaseApplication : public Ogre::FrameListener, public Ogre::WindowEventListener, public OIS::KeyListener, public OIS::MouseListener, OgreBites::SdkTrayListener
 {
 public:
@@ -93,6 +95,15 @@ protected:
     OIS::InputManager* mInputManager;
     OIS::Mouse*    mMouse;
     OIS::Keyboard* mKeyboard;
+
+	//mode flag
+	bool OculusMode;	//treate as oculus rift viewing
+	bool FullscreenMode;	//fullscrean mode
+
+	//oculus
+	Oculus oculus;
+	bool OculusCameraFlag;
+
 };
 
 #endif // #ifndef __BaseApplication_h_

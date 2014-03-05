@@ -251,6 +251,8 @@ protected:
 
 	Ogre::Camera  *mDistanceCamera;
 
+	Ogre::Camera  *OculusCamera;
+
 	//Ogre::Camera  *mDetectCamera;
 
 	Ogre::ManualObject* mPlane;

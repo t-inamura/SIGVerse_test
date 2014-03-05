@@ -244,9 +244,9 @@ void SgvMain::createScene(void)
     mHeadNode = mSceneMgr->getRootSceneNode()->createChildSceneNode(Ogre::Vector3(0, 0, 0));
 
     // Position it at 500 in Z direction
-    mCamera->setPosition(Ogre::Vector3(103.4f, 34.3f, 65.9f));
+    //mCamera->setPosition(Ogre::Vector3(103.4f, 34.3f, 65.9f));
     // Look back along -Z
-    mCamera->lookAt(Ogre::Vector3(-0.5f, -0.2f, -0.8f));
+    //mCamera->lookAt(Ogre::Vector3(-0.5f, -0.2f, -0.8f));
 	mCamera->setAutoAspectRatio(true);
 
 	mCamera->setNearClipDistance(Ogre::Real(1.0f));
@@ -1043,6 +1043,14 @@ void SgvMain::createFrameListener(void)
  
 bool SgvMain::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
+	if(OculusMode && OculusCameraFlag){
+		oculus.m_cameras[0]->setPosition(0.0f,0.0f,0.0f);
+		oculus.m_cameras[1]->setPosition(0.0f,0.0f,0.0f);
+		oculus.getCameraNode()->setPosition(OculusCamera->getRealPosition());
+		oculus.m_cameras[0]->setDirection(OculusCamera->getRealDirection());
+		oculus.m_cameras[1]->setDirection(OculusCamera->getRealDirection());
+	}
+
 	//static bool sended;
 
 	if (mWindow->isClosed()){
@@ -1243,25 +1251,42 @@ bool SgvMain::mouseMoved( const OIS::MouseEvent &arg )
 	{
 		if(mShift)
 		{
+			if(OculusMode){
+				Ogre::Vector3 pos = oculus.m_cameras[0]->getPosition();
+				Ogre::Vector3 right = oculus.m_cameras[0]->getRight();
+				Ogre::Vector3 up = oculus.m_cameras[0]->getUp();
+				pos += right* -arg.state.X.rel * mMoveXYSpeed + up * arg.state.Y.rel * mMoveXYSpeed;
+				oculus.m_cameras[0]->setPosition(pos);
+				oculus.m_cameras[1]->setPosition(pos);
+			}
 			Ogre::Vector3 pos = mCamera->getPosition();
-
 			Ogre::Vector3 right = mCamera->getRight();
 			Ogre::Vector3 up = mCamera->getUp();
-
 			pos += right* -arg.state.X.rel * mMoveXYSpeed + up * arg.state.Y.rel * mMoveXYSpeed;
 			mCamera->setPosition(pos);
 		}
 		else if(mCtrl)
 		{
+			if(OculusMode){
+				Ogre::Vector3 pos = oculus.m_cameras[0]->getPosition();
+				Ogre::Vector3 dir = oculus.m_cameras[0]->getDirection();
+				pos += dir * arg.state.Y.rel * mMoveZSpeed;
+				oculus.m_cameras[0]->setPosition(pos);
+				oculus.m_cameras[1]->setPosition(pos);
+			}
 			Ogre::Vector3 pos = mCamera->getPosition();
-
 			Ogre::Vector3 dir = mCamera->getDirection();
-
 			pos += dir * arg.state.Y.rel * mMoveZSpeed;
 			mCamera->setPosition(pos);
 		}
 		else
 		{ 
+			if(OculusMode){
+				oculus.m_cameras[0]->yaw(Ogre::Degree(-arg.state.X.rel * mRotateSpeed));
+				oculus.m_cameras[1]->yaw(Ogre::Degree(-arg.state.X.rel * mRotateSpeed));
+				oculus.m_cameras[0]->pitch(Ogre::Degree(arg.state.Y.rel * mRotateSpeed));
+				oculus.m_cameras[1]->pitch(Ogre::Degree(arg.state.Y.rel * mRotateSpeed));
+			}
 			mCamera->yaw(Ogre::Degree(-arg.state.X.rel * mRotateSpeed));
 			mCamera->pitch(Ogre::Degree(arg.state.Y.rel * mRotateSpeed));
 		}
@@ -1281,9 +1306,9 @@ bool SgvMain::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 
 		mLMouseDown = true;
 
-		Ogre::Vector3 chpos1 = mViewPort->getCamera()->getPosition();
-		Ogre::Vector3 chpos2 = mCamera->getPosition();
-		if(chpos1 == chpos2) {
+		//Ogre::Vector3 chpos1 = mViewPort->getCamera()->getPosition();
+		//Ogre::Vector3 chpos2 = mCamera->getPosition();
+		//if(chpos1 == chpos2) {
 
 			// Set up the ray scene query
 			CEGUI::Point mousePos = CEGUI::MouseCursor::getSingleton().getPosition();
@@ -1560,7 +1585,7 @@ bool SgvMain::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 				}
 				iter++;
 			} //  while(iter != result.end())
-		} //   if(chpos1 == chpos2) {
+		//} //   if(chpos1 == chpos2) {
 	} // if (id == OIS::MB_Left)
  
 	else if (id == OIS::MB_Right)
@@ -2388,37 +2413,61 @@ bool SgvMain::startRequest(const CEGUI::EventArgs &e)
 
 bool SgvMain::agentView1(const CEGUI::EventArgs &e)
 {
-	Ogre::Camera *cam1 = mViews[0]->getCamera();
-	Ogre::Camera *cam2 = mViewPort->getCamera();
-	mViewPort->setCamera(cam1);
-	mViews[0]->setCamera(cam2);
+	if(OculusMode){
+		OculusCamera = mViews[0]->getCamera();
+		OculusCameraFlag = true;
+	}
+	else{
+		Ogre::Camera *cam1 = mViews[0]->getCamera();
+		Ogre::Camera *cam2 = mViewPort->getCamera();
+		mViewPort->setCamera(cam1);
+		mViews[0]->setCamera(cam2);
+	}
 	return true;
 }
 
 bool SgvMain::agentView2(const CEGUI::EventArgs &e)
 {
-	Ogre::Camera *cam1 = mViews[1]->getCamera();
-	Ogre::Camera *cam2 = mViewPort->getCamera();
-	mViewPort->setCamera(cam1);
-	mViews[1]->setCamera(cam2);
+	if(OculusMode){
+		OculusCamera = mViews[1]->getCamera();
+		OculusCameraFlag = true;
+	}
+	else{
+		Ogre::Camera *cam1 = mViews[1]->getCamera();
+		Ogre::Camera *cam2 = mViewPort->getCamera();
+		mViewPort->setCamera(cam1);
+		mViews[1]->setCamera(cam2);
+	}
 	return true;
 }
 
 bool SgvMain::agentView3(const CEGUI::EventArgs &e)
 {
-	Ogre::Camera *cam1 = mViews[2]->getCamera();
-	Ogre::Camera *cam2 = mViewPort->getCamera();
-	mViewPort->setCamera(cam1);
-	mViews[2]->setCamera(cam2);
+	if(OculusMode){
+		OculusCamera = mViews[2]->getCamera();
+		OculusCameraFlag = true;
+	}
+	else{
+		Ogre::Camera *cam1 = mViews[2]->getCamera();
+		Ogre::Camera *cam2 = mViewPort->getCamera();
+		mViewPort->setCamera(cam1);
+		mViews[2]->setCamera(cam2);
+	}
 	return true;
 }
 
 bool SgvMain::agentView4(const CEGUI::EventArgs &e)
 {
-	Ogre::Camera *cam1 = mViews[3]->getCamera();
-	Ogre::Camera *cam2 = mViewPort->getCamera();
-	mViewPort->setCamera(cam1);
-	mViews[3]->setCamera(cam2);
+	if(OculusMode){
+		OculusCamera = mViews[3]->getCamera();
+		OculusCameraFlag = true;
+	}
+	else{
+		Ogre::Camera *cam1 = mViews[3]->getCamera();
+		Ogre::Camera *cam2 = mViewPort->getCamera();
+		mViewPort->setCamera(cam1);
+		mViews[3]->setCamera(cam2);
+	}
 	return true;
 }
 
@@ -3139,6 +3188,7 @@ bool SgvMain::downloadFileRequest(std::string name)
 
 bool SgvMain::disconnect(const CEGUI::EventArgs &e)
 {
+	OculusCameraFlag = false;
 	sendRequest(DISCONNECT);
 
 	std::string tmp_name = mService->getName();
@@ -3175,7 +3225,13 @@ bool SgvMain::disconnect(const CEGUI::EventArgs &e)
 	wmgr.destroyAllWindows();
 
 	if(!mAllEntities.empty()) {
-		mViewPort->setCamera(mCamera);
+		if(OculusMode){
+			oculus.m_viewports[0]->setCamera(mCamera);
+			oculus.m_viewports[1]->setCamera(mCamera);
+		}
+		else{
+			mViewPort->setCamera(mCamera);
+		}
 		std::map<std::string, Sgv::SgvEntity*>::iterator itr = mAllEntities.begin();
 		while(itr != mAllEntities.end()) {
 

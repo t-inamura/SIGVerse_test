@@ -32,7 +32,10 @@ BaseApplication::BaseApplication(void)
     mInputManager(0),
     mMouse(0),
     mKeyboard(0),
-	mBackGroundColor(0.5f,0.5f,0.7f,1.0f)
+	mBackGroundColor(0.5f,0.5f,0.7f,1.0f),
+	OculusMode(false),
+	FullscreenMode(false),
+	OculusCameraFlag(false)
 {
 }
 
@@ -61,8 +64,14 @@ bool BaseApplication::configure(void)
 
 	Ogre::RenderSystem *rs = mRoot->getRenderSystemByName("Direct3D9 Rendering Subsystem");
 	mRoot->setRenderSystem(rs);
-	rs->setConfigOption("Full Screen", "No");
-	rs->setConfigOption("Video Mode", "1024 x 768 @ 32-bit colour");
+	if(FullscreenMode){
+		rs->setConfigOption("Full Screen", "Yes");
+		rs->setConfigOption("Video Mode", "1280 x 720 @ 32-bit colour");
+	}
+	else{
+		rs->setConfigOption("Full Screen", "No");
+		rs->setConfigOption("Video Mode", "1024 x 768 @ 32-bit colour");
+	}
 	rs->setConfigOption("Multi device memory hint", "Auto hardware buffers management");
 	mWindow = mRoot->initialise(true, "SIGViewer");
 
@@ -96,10 +105,10 @@ void BaseApplication::createCamera(void)
     mCamera = mSceneMgr->createCamera("PlayerCam");
 
     // Position it at 500 in Z direction
-    mCamera->setPosition(Ogre::Vector3(103.4f, 34.3f, 65.9f));
+    //mCamera->setPosition(Ogre::Vector3(103.4f, 34.3f, 65.9f));
 
     // Look back along -Z
-    mCamera->lookAt(Ogre::Vector3(-0.5f, -0.2f, -0.8f));
+    //mCamera->lookAt(Ogre::Vector3(-0.5f, -0.2f, -0.8f));
     mCamera->setNearClipDistance(5);
 
     mCameraMan = new OgreBites::SdkCameraMan(mCamera);   // create a default camera controller
@@ -178,8 +187,8 @@ void BaseApplication::createViewports(void)
     mCamera->setAspectRatio(
 		Ogre::Real(mViewPort->getActualWidth()) / Ogre::Real(mViewPort->getActualHeight()));
 
-	mCamera->setDirection(1.0f, -1.0f, 1.0f);
-	mCamera->setPosition(50.0f, 50.0f, 50.0f);
+	//mCamera->setDirection(1.0f, -1.0f, 1.0f);
+	//mCamera->setPosition(50.0f, 50.0f, 50.0f);
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::setupResources(void)
@@ -238,29 +247,51 @@ void BaseApplication::go(void)
 //-------------------------------------------------------------------------------------
 bool BaseApplication::setup(void)
 {
-    mRoot = new Ogre::Root(mPluginsCfg);
+	char dir[128];
+	GetCurrentDirectory(128, dir);
+	std::string inipath = std::string(dir) + "/SIGVerse.ini";
+	TCHAR SettingPath[256];
+	sprintf_s(SettingPath, 128, inipath.c_str());
+	TCHAR pathText[256];
+	GetPrivateProfileString("MODE","OCULUS_MODE",'\0', pathText, 1024, SettingPath);
+	if(strcmp(pathText,"true") == 0)  OculusMode = true;
+	GetPrivateProfileString("MODE","FULLSCREEN_MODE",'\0', pathText, 1024, SettingPath);
+	if(strcmp(pathText,"true") == 0)  FullscreenMode = true;
 
-    setupResources();
 
-    bool carryOn = configure();
-    if (!carryOn) return false;
+	mRoot = new Ogre::Root(mPluginsCfg);
+	setupResources();
+	bool carryOn = configure();
+	if (!carryOn) return false;
+	chooseSceneManager();
 
-    chooseSceneManager();
-    createCamera();
-    createViewports();
+	if(OculusMode){
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/sibenik.zip","Zip");
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media","FileSystem");
+		// Load resources
+		loadResources();
+		oculus.setupOculus();
+		oculus.setupOgre(mSceneMgr, mWindow);
 
-    // Set default mipmap level (NB some APIs ignore this)
-    Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
+		createCamera();
+	}
+	else{
+		createCamera();
+		createViewports();
 
-    // Create any resource listeners (for loading screens)
-    createResourceListener();
-    // Load resources
-    loadResources();
+		// Load resources
+		loadResources();
+	}
+	// Set default mipmap level (NB some APIs ignore this)
+	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
 
-    // Create the scene
-    createScene();
+	// Create any resource listeners (for loading screens)
+	createResourceListener();
 
-    createFrameListener();
+	// Create the scene
+	createScene();
+
+	createFrameListener();
 
     return true;
 };
