@@ -116,7 +116,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;C:\SIGVerse\src\boost_1_55_0\include\boost-1_55&quot;;..\SIGService"
+				AdditionalIncludeDirectories="C:\SIGVerse\src\boost_1_55_0;..\SIGService"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -136,7 +136,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\SIGService\Release;C:\SIGVerse\src\boost_1_55_0\lib\i386"
+				AdditionalLibraryDirectories="..\SIGService\Release;&quot;C:\SIGVerse\src\boost_1_55_0\lib32-msvc-9.0&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
