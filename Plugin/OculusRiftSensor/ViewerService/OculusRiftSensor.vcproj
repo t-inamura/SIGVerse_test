@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="C:\OculusSDK\LibOVR\Include;C:\OculusSDK\LibOVR\Src;..\..\..\SIGService\vs2008\SIGService;..\..\..\SIGService\vs2008\boost\boost_1_47;&quot;%(AdditionalIncludeDirectories)&quot;"
+				AdditionalIncludeDirectories="C:\SIGVerse\src\OculusSDK\LibOVR\Include;C:\SIGVerse\src\OculusSDK\LibOVR\Src;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\SIGService;C:\SIGVerse\src\boost_1_55_0;&quot;%(AdditionalIncludeDirectories)&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -64,7 +64,7 @@
 				AdditionalDependencies="libovrd.lib winmm.lib SIGService.lib dxgi.lib d3d10.lib "
 				OutputFile="$(OutDir)\$(ProjectName).sig"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="C:\OculusSDK\LibOVR\Lib\Win32;..\..\..\SIGService\vs2008\Debug;..\..\..\SIGService\vs2008\boost\boost_1_47\lib"
+				AdditionalLibraryDirectories="C:\SIGVerse\src\OculusSDK\LibOVR\Lib\Win32;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\Debug;&quot;C:\SIGVerse\src\boost_1_55_0\lib32-msvc-9.0&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
