@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\SIGVerse\src\boost_1_55_0\include\boost-1_55&quot;;..\SIGService"
+				AdditionalIncludeDirectories="C:\SIGVerse\src\boost_1_55_0;..\SIGService"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,7 +62,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\SIGService\Debug;C:\SIGVerse\src\boost_1_55_0\lib\i386"
+				AdditionalLibraryDirectories="..\SIGService\Debug;&quot;C:\SIGVerse\src\boost_1_55_0\lib32-msvc-9.0&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
