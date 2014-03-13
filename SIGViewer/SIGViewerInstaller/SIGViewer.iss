@@ -4,12 +4,12 @@ AppId={{C8F411C9-82E4-45D2-A0E9-70E223F73510}}
 // Application name
 AppName=SIGViewer
 // Application name and version number
-AppVerName=SIGViewer 2.2.0
+AppVerName=SIGViewer 2.3.0
 AppPublisher=National Institute of Informatics
 AppPublisherURL=http://inamura.ex.nii.ac.jp/
 AppSupportURL=http://inamura.ex.nii.ac.jp/
 AppUpdatesURL=http://inamura.ex.nii.ac.jp/
-DefaultDirName={pf}\SIGViewer_2.2.0
+DefaultDirName={pf}\SIGViewer_2.3.0
 DefaultGroupName=SIGViewer
 OutputBaseFilename=setup
 OutputDir=SIGViewerSetup
@@ -29,15 +29,29 @@ Name: "{app}\SIGViewer/Release";Permissions: authusers-modify
 Name: "{app}\SIGViewer/Release/shape";Permissions: users-full
 
 [Files]
-Source: "../Release/*" ; DestDir:{app}/SIGViewer/Release;  Flags: recursesubdirs createallsubdirs; permissions:users-full
-Source: "../../OgreSDK_vc9_v1-8-0/media/*" ; DestDir:{app}/SIGViewer/media/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
-Source: "../../CEGUI-0.7.6/datafiles/*" ; DestDir:{app}/SIGViewer/datafiles/;  Flags: recursesubdirs createallsubdirs;permissions:users-full
+Source: "../Release/SIGViewer.exe" ; DestDir:{app}/SIGViewer/Release;  Flags: recursesubdirs createallsubdirs; permissions:users-full
+Source: "C:/SIGVerse/src/OgreSDK_vc9_v1-8-0/media/*" ; DestDir:{app}/SIGViewer/media/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
+Source: "C:/SIGVerse/GitHub/SIGVerse_test/OgreSDK_additions/media/*" ; DestDir:{app}/SIGViewer/media_additions/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
+Source: "C:/SIGVerse/src/OgreSDK_vc9_v1-8-0/bin/Release/*.dll" ; DestDir:{app}/SIGViewer/Release/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
+Source: "C:/SIGVerse/src/CEGUI-0.7.6/datafiles/*" ; DestDir:{app}/SIGViewer/datafiles/;  Flags: recursesubdirs createallsubdirs;permissions:users-full
+Source: "C:/SIGVerse/GitHub/SIGVerse_test/CEGUI_additions/datafiles/*" ; DestDir:{app}/SIGViewer/datafiles_additions/;  Flags: recursesubdirs createallsubdirs;permissions:users-full
+Source: "C:/SIGVerse/src/CEGUI-0.7.6/bin/*.dll" ; DestDir:{app}/SIGViewer/Release/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
+Source: "C:/SIGVerse/src/zlib/bin/*.dll" ; DestDir:{app}/SIGViewer/Release/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
+Source: "C:/SIGVerse/src/libssh2-1.2.7-openssl-x86-win32nt-msvc/bin/*.dll" ; DestDir:{app}/SIGViewer/Release/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
 Source: "./licenses/*" ; DestDir:{app}/SIGViewer/licenses/;  Flags: recursesubdirs createallsubdirs;permissions:users-full
 Source: "resources.cfg" ; DestDir:{app}/SIGViewer/Release; permissions:users-full
+Source: "ogre.cfg" ; DestDir:{app}/SIGViewer/Release; permissions:users-full
+Source: "plugins.cfg" ; DestDir:{app}/SIGViewer/Release; permissions:users-full
+Source: "X3DParser.cfg" ; DestDir:{app}/SIGViewer/Release; permissions:users-full
+Source: "SIGVerse.ini" ; DestDir:{app}/SIGViewer/Release; permissions:users-full
+Source: "C:/SIGVerse/src/OgreOculusDemo1_v0.5.1/media/*" ; DestDir:{app}/SIGViewer/Release/media/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
+Source: "../SIGViewer/shape/*" ; DestDir:{app}/SIGViewer/Release/shape/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
+Source: "../SIGViewer/x3d/*" ; DestDir:{app}/SIGViewer/Release/x3d/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
+Source: "../SIGViewer/Xj3D/*" ; DestDir:{app}/SIGViewer/Release/Xj3D/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
 
 [Icons]
 Name: "{group}\SIGViewer"; Filename: "{app}\SIGViewer\release\SIGViewer.exe"; WorkingDir: "{app}\SIGViewer\Release"
-Name: "{commondesktop}\SIGViewer 2.2.0"; Filename: "{app}\SIGViewer\release\SIGViewer.exe"; WorkingDir: "{app}\SIGViewer\Release"; Tasks: desktopicon
+Name: "{commondesktop}\SIGViewer 2.3.0"; Filename: "{app}\SIGViewer\release\SIGViewer.exe"; WorkingDir: "{app}\SIGViewer\Release"; Tasks: desktopicon
 ; begin(add)(2010/2/24) install SIGWorldEditor.exe
 
 
