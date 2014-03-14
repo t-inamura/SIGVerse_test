@@ -112,7 +112,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="0"
+				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\include&quot;;&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\include\OIS&quot;;&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\include\OGRE&quot;;&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\Samples\Common\include&quot;;&quot;C:\SIGVerse\src\CEGUI-0.7.6\cegui\include&quot;;C:\SIGVerse\src\jdk\include;C:\SIGVerse\src\jdk\include\win32;.\x3d\parser\cpp\X3DParser;&quot;C:\SIGVerse\src\libssh2-1.2.7-openssl-x86-win32nt-msvc\include&quot;;C:\SIGVerse\src\zlib\include;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\SIGService;C:\SIGVerse\src\boost_1_55_0;C:\SIGVerse\src\OculusSDK\LibOVR\Include"
 				RuntimeLibrary="2"
