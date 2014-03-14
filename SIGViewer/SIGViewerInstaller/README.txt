@@ -1,9 +1,10 @@
 ***Making of SIGViewerInstaller***
 
-Download and install Inno Setup.
+Download and install Inno Setup(isetup-5.5.4.exe).
 http://www.jrsoftware.org/isdl.php
 
-Double click SIGViewer.iss
+If you have installed Inno Setup,
+double click SIGViewer.iss
 
 AppVerName is application name and version number.
 DefaultDirName is name of directory made.
