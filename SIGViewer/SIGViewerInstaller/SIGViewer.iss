@@ -1,6 +1,6 @@
 [Setup]
 
-AppId={{C8F411C9-82E4-45D2-A0E9-70E223F73510}}
+AppId={{4D44B5AC-17CB-4514-97D3-732165A5732F}}
 // Application name
 AppName=SIGViewer
 // Application name and version number

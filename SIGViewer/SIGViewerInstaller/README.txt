@@ -10,5 +10,10 @@ AppVerName is application name and version number.
 DefaultDirName is name of directory made.
 In [Files] section, it is designation of copying files.
 
+To correct directory name which will be made,
+select [Tools] -> [Generate GUID],
+so that AppId is generated at first line of editor.
+Insert the ID to AppId.
+
 To make setup.exe, select [Build] -> [Compile].
 
