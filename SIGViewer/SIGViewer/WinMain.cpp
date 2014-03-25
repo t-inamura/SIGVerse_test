@@ -224,7 +224,7 @@ void SgvMain::createScene(void)
 #endif
 
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0.8f, 0.8f, 0.8f));
-    mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+    //mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
     sunlight = mSceneMgr->createLight("sunlight");
     sunlight->setType(Ogre::Light::LT_DIRECTIONAL);
