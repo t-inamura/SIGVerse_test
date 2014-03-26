@@ -266,7 +266,6 @@ bool BaseApplication::setup(void)
 	chooseSceneManager();
 
 	if(OculusMode){
-		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/sibenik.zip","Zip");
 		Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media","FileSystem");
 		// Load resources
 		loadResources();

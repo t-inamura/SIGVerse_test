@@ -44,7 +44,7 @@ Source: "ogre.cfg" ; DestDir:{app}/SIGViewer/bin; permissions:users-full
 Source: "plugins.cfg" ; DestDir:{app}/SIGViewer/bin; permissions:users-full
 Source: "X3DParser.cfg" ; DestDir:{app}/SIGViewer/bin; permissions:users-full
 Source: "SIGVerse.ini" ; DestDir:{app}/SIGViewer/bin; permissions:users-full
-Source: "C:/SIGVerse/src/OgreOculusDemo1_v0.5.1/media/*" ; DestDir:{app}/SIGViewer/bin/media/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
+Source: "C:/SIGVerse/GitHub/SIGVerse_test/SIGViewer/SIGViewer/OculusResources/*" ; DestDir:{app}/SIGViewer/bin/media/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
 Source: "../SIGViewer/shape/*" ; DestDir:{app}/SIGViewer/bin/shape/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
 Source: "../SIGViewer/x3d/*" ; DestDir:{app}/SIGViewer/bin/x3d/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
 Source: "../SIGViewer/Xj3D/*" ; DestDir:{app}/SIGViewer/bin/Xj3D/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
