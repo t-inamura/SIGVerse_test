@@ -31,10 +31,10 @@ Name: "{app}\SIGViewer/bin/shape";Permissions: users-full
 [Files]
 Source: "../Release/SIGViewer.exe" ; DestDir:{app}/SIGViewer/bin;  Flags: recursesubdirs createallsubdirs; permissions:users-full
 Source: "C:/SIGVerse/src/OgreSDK_vc9_v1-8-0/media/*" ; DestDir:{app}/SIGViewer/media/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
-Source: "C:/SIGVerse/GitHub/SIGVerse_test/OgreSDK_additions/media/*" ; DestDir:{app}/SIGViewer/media_additions/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
+Source: "C:/SIGVerse/GitHub/SIGVerse_test/SIGViewer/SIGViewer/OgreSDK_additions/media/*" ; DestDir:{app}/SIGViewer/media_additions/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
 Source: "C:/SIGVerse/src/OgreSDK_vc9_v1-8-0/bin/Release/*.dll" ; DestDir:{app}/SIGViewer/bin/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
 Source: "C:/SIGVerse/src/CEGUI-0.7.6/datafiles/*" ; DestDir:{app}/SIGViewer/datafiles/;  Flags: recursesubdirs createallsubdirs;permissions:users-full
-Source: "C:/SIGVerse/GitHub/SIGVerse_test/CEGUI_additions/datafiles/*" ; DestDir:{app}/SIGViewer/datafiles_additions/;  Flags: recursesubdirs createallsubdirs;permissions:users-full
+Source: "C:/SIGVerse/GitHub/SIGVerse_test/SIGViewer/SIGViewer/CEGUI_additions/datafiles/*" ; DestDir:{app}/SIGViewer/datafiles_additions/;  Flags: recursesubdirs createallsubdirs;permissions:users-full
 Source: "C:/SIGVerse/src/CEGUI-0.7.6/bin/*.dll" ; DestDir:{app}/SIGViewer/bin/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
 Source: "C:/SIGVerse/src/zlib/bin/*.dll" ; DestDir:{app}/SIGViewer/bin/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
 Source: "C:/SIGVerse/src/libssh2-1.2.7-openssl-x86-win32nt-msvc/bin/*.dll" ; DestDir:{app}/SIGViewer/bin/;  Flags: recursesubdirs createallsubdirs; permissions:users-full
