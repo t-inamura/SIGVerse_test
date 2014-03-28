@@ -114,7 +114,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\include&quot;;&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\include\OIS&quot;;&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\include\OGRE&quot;;&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\Samples\Common\include&quot;;&quot;C:\SIGVerse\src\CEGUI-0.7.6\cegui\include&quot;;C:\SIGVerse\src\jdk\include;C:\SIGVerse\src\jdk\include\win32;.\x3d\parser\cpp\X3DParser;&quot;C:\SIGVerse\src\libssh2-1.2.7-openssl-x86-win32nt-msvc\include&quot;;C:\SIGVerse\src\zlib\include;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\SIGService;C:\SIGVerse\src\boost_1_55_0;C:\SIGVerse\src\OculusSDK\LibOVR\Include"
+				AdditionalIncludeDirectories="&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\include&quot;;&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\include\OIS&quot;;&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\include\OGRE&quot;;&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\Samples\Common\include&quot;;&quot;C:\SIGVerse\src\CEGUI-0.7.6\cegui\include&quot;;C:\SIGVerse\src\jdk\include;C:\SIGVerse\src\jdk\include\win32;.\x3d\parser\cpp\X3DParser;&quot;C:\SIGVerse\src\libssh2-1.4.2-openssl-x86-win32nt-msvc\include&quot;;C:\SIGVerse\src\zlib\include;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\SIGService;C:\SIGVerse\src\boost_1_55_0;C:\SIGVerse\src\OculusSDK\LibOVR\Include"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -132,7 +132,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="OgreMain.lib OIS.lib OgreTerrain.lib comctl32.lib ws2_32.lib winmm.lib CEGUIBase.lib CEGUIOgreRenderer.lib jvm.lib zlib.lib SIGService.lib libovr.lib"
-				AdditionalLibraryDirectories="&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\lib\$(ConfigurationName)&quot;;&quot;C:\SIGVerse\src\CEGUI-0.7.6\lib&quot;;C:\SIGVerse\src\jdk\lib;&quot;C:\SIGVerse\src\boost_1_55_0\lib32-msvc-9.0&quot;;&quot;C:\SIGVerse\src\libssh2-1.2.7-openssl-x86-win32nt-msvc\lib&quot;;C:\SIGVerse\src\zlib\lib;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\Release;C:\SIGVerse\src\OculusSDK\LibOVR\Lib\Win32"
+				AdditionalLibraryDirectories="&quot;C:\SIGVerse\src\OgreSDK_vc9_v1-8-0\lib\$(ConfigurationName)&quot;;&quot;C:\SIGVerse\src\CEGUI-0.7.6\lib&quot;;C:\SIGVerse\src\jdk\lib;&quot;C:\SIGVerse\src\boost_1_55_0\lib32-msvc-9.0&quot;;&quot;C:\SIGVerse\src\libssh2-1.4.2-openssl-x86-win32nt-msvc\lib&quot;;C:\SIGVerse\src\zlib\lib;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\Release;C:\SIGVerse\src\OculusSDK\LibOVR\Lib\Win32"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
