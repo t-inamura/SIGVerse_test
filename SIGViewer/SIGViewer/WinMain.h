@@ -101,8 +101,6 @@ protected:
 
     bool startRequest(const CEGUI::EventArgs &e);
 
-    void startSunlight();
-
     bool agentView1(const CEGUI::EventArgs &e);
     bool agentView2(const CEGUI::EventArgs &e);
     bool agentView3(const CEGUI::EventArgs &e);

@@ -59,8 +59,6 @@ static const int MAX_SUBVIEW = 4;
 
 static const int MIN_SIZE = 100;
 
-static Ogre::Light* sunlight;
-
 //-------------------------------------------------------------------------------------
 SgvMain::SgvMain(void)
 : mRenderer(0), 
@@ -215,22 +213,16 @@ void SgvMain::createScene(void)
 	mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(mPlane);
 	mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(mAxis);
 
-#ifdef _RIGHT_VERSION
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0.8f, 0.8f, 0.8f));
-	l->setPosition(1000.0f, 1000.0f, -1000.0f);
-	l->setSpecularColour(0.8f, 0.8f, 0.8f);
-    l->setType( Light::LightTypes::LT_DIRECTIONAL );
+
 	Ogre::Light *l = mSceneMgr->createLight("MainLight");
-#endif
+    l->setType( Light::LightTypes::LT_DIRECTIONAL );
+	l->setPosition(1000.0f, 1000.0f, -1000.0f);
+	l->setDirection(Ogre::Vector3(0, -1, 0));
+	l->setDiffuseColour(Ogre::ColourValue(0.8f, 0.8f, 0.8f));
+	l->setSpecularColour(Ogre::ColourValue(0.8f, 0.8f, 0.8f));
 
-    mSceneMgr->setAmbientLight(Ogre::ColourValue(0.8f, 0.8f, 0.8f));
-    //mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-
-    sunlight = mSceneMgr->createLight("sunlight");
-    sunlight->setType(Ogre::Light::LT_DIRECTIONAL);
-    sunlight->setDiffuseColour(Ogre::ColourValue(.5, .5, .5));
-    sunlight->setSpecularColour(Ogre::ColourValue(10.0, 10.0, 10.0));
-    sunlight->setDirection(Ogre::Vector3(0, -1, 0));  
+   	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_NONE);
 
 	GetPrivateProfileString("SKYPLANE", "SKYPLANE", '\0', pathText, 1024, mSettingPath);
 	if (0 < strlen(pathText)) {
@@ -307,73 +299,6 @@ void SgvMain::createScene(void)
 /*! 
  * @brief
  */
-void SgvMain::startSunlight() {
-
-	const double orange[3] = {255.0, 135.0, 0.0}, white[3] = {255.0, 255.0, 255.0}; 
-	double x = 0.0, xmax = 3, r = 0.0, rgb[3] = {255.0, 255.0, 255.0}; 
-    int tcnt = 0, tmax = 100, scnt = 0, smax = 4;   
-
-	while (true) {
-        tcnt++;
-		switch (scnt) {
-			case 0: {
-				for (int i = 0; i < 3; i++) {
-                    rgb[i] -= ((white[i] - orange[i]) / (double)tmax);
-				}
-				x += (xmax / tmax);
-                r = 1.0 - (x / xmax);
-
-                sunlight->setSpecularColour(Ogre::ColourValue(rgb[0] * r, rgb[1] * r, rgb[2] * r));
-                sunlight->setDirection(Ogre::Vector3(x, -1, 0));  
-
-				if (tcnt >= tmax) {
-                     tcnt = 0;
-                     scnt = 2;
-				}
-
-                break;
-			}
-            /*
-			case 1: {
-				if (tcnt >= tmax) {
-                     tcnt = 0;
-                     scnt+=2;
-				}
-                break;
-			}
-            */
-			case 2: {
-				if (tcnt >= tmax) {
-                     tcnt = 0;
-                     scnt++;
-                     x = -xmax;
-				}
-                break;
-			}
-			case 3: {
-
-				for (int i = 0; i < 3; i++) {
-                    rgb[i] += ((white[i] - orange[i]) / (double)tmax);
-				}
-                x += (xmax / tmax);
-                r = 1.0 - ((-1 * x) / xmax); 
-
-                sunlight->setSpecularColour(Ogre::ColourValue(rgb[0] * r, rgb[1] * r, rgb[2] * r));
-                sunlight->setDirection(Ogre::Vector3(x, -1, 0));  
-
-				if (tcnt >= tmax) {
-                     tcnt = 0;
-                     scnt = 0;
-				}
-                break;
-			}
-		}
-  
-        Sleep(100);
-	}
-
-}
-
 void SgvMain::createInitWindow()
 {
 	CEGUI::WindowManager &wmgr = CEGUI::WindowManager::getSingleton();
@@ -2389,11 +2314,6 @@ bool SgvMain::startRequest(const CEGUI::EventArgs &e)
 			//boost::thread requestThread(boost::bind(&SgvMain::requestLoop, this));
 
 			start->setText("STOP");
-
-           //GetPrivateProfileString("SUNLIGHT", "TimeSpeed", '\0', pathText, 1024, mSettingPath);
-	       //if (0 < strlen(pathText)) {
-           //    boost::thread(boost::bind(&SgvMain::startSunlight, this));
-	       //}
 
 		}
 	}
