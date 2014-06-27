@@ -33,10 +33,9 @@ std::vector<MoveData> buildMoveData (std::string msg) {
   std::vector<MoveData> moves;
   size_t found = parsedMessage.find_first_of("/");
   while (found != std::string::npos) {
-    // std::cout << "parsedMessage : " << parsedMessage << std::endl;
-    // std::cout << "found : " << found << std::endl;
+
     std::string moveString = parsedMessage.substr(0, found);
-    // std::cout << "moveString : " << moveString << std::endl;
+
     MoveData moveData;
     for (int i = 0; i < NBDATA; ++i) {
       int dataFound = moveString.find_first_of(":");
@@ -107,9 +106,8 @@ std::vector<MoveData> buildMoveData (std::string msg) {
     // next move string
     parsedMessage = parsedMessage.substr(found+1);
     found = parsedMessage.find_first_of("/");
-    // sleep(1);
+
   }
 
-  // std::cout << "Finally parsed !" << std::endl;
   return moves;
 }

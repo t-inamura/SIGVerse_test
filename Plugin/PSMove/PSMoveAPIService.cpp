@@ -20,9 +20,6 @@
 #include "SIGService.h"
 
 
-//template <typename T> string tostr(const T& t) { ostringstream os; os << t; return os.str(); } // template to convert double variables to string
-
-
 
 class PSMoveAPIService : public sigverse::SIGService
 {
@@ -133,30 +130,10 @@ PSMoveAPIService::PSMoveAPIService(std::string name,
       break;
     }
 
-    // for (int i = 0; i<10; i++) {
-    //   psmove_set_leds(*move, 0, 255 * (i % 3 == 0), 0);
-    //   psmove_set_rumble(*move, 255 * (i % 2));
-    //   psmove_update_leds(*move);
-    //   usleep(10 * (i % 10));
-    // }
-
-    // for (int i = 250; i >= 0; i -= 5) {
-    //   psmove_set_leds(*move, i, i, 0);
-    //   psmove_set_rumble(*move, 0);
-    //   psmove_update_leds(*move);
-    //   usleep(100);
-    // }
-
-    // psmove_set_leds(*move, 0, 0, 255);
-    // psmove_update_leds(*move);
-    // usleep(10000);
 
     // Enable rate limiting for LED updates
     psmove_set_rate_limiting(*move, PSMove_True);
 
-    // psmove_set_leds(*move, 0, 0, 0);
-    // psmove_set_rumble(*move, 0);
-    // psmove_update_leds(*move);
   }
   
 
@@ -190,7 +167,6 @@ double PSMoveAPIService::onAction()
   std::vector<PSMove*>::iterator move;
   std::stringstream msgStream;
 
-  // std::cout << "moves.size() : " << moves.size() << std::endl;
   for (move = moves.begin(); move != moves.end(); ++move) {
   
 
@@ -198,7 +174,6 @@ double PSMoveAPIService::onAction()
 
     if (ctype != Conn_USB && !((pressed_buttons = psmove_get_buttons(*move)) & Btn_PS)) {
       int res = psmove_poll(*move);
-      // std::cout << "psmove_poll : " << res << std::endl;
       if (res) {
 
 
@@ -230,40 +205,25 @@ double PSMoveAPIService::onAction()
 
 	// Magnetometer
 	psmove_get_magnetometer(*move, &x, &y, &z);
-	// root["magnetX"] = x;
-	// root["magnetY"] = y;
-	// root["magnetZ"] = z;
-	//printf("magnetometer: %5d %5d %5d\n", x, y, z);
 	msgStream << x << ":" << y << ":" << z << ":";
 	std::cout << "Magnetometer : " << x << ":" << y << ":" << z << ":" << std::endl;
 			
 	// Accelerometer
 	psmove_get_accelerometer(*move, &x, &y, &z);
-	// root["accelX"] = x;
-	// root["accelY"] = y;
-	// root["accelZ"] = z;
-	//printf("accel: %5d %5d %5d\n", x, y, z);
 	msgStream << x << ":" << y << ":" << z << ":";
 	std::cout << "Accelerometer : " << x << ":" << y << ":" << z << ":" << std::endl;
 			
 	// Gyroscope
 	psmove_get_gyroscope(*move, &x, &y, &z);
-	// root["gyroX"] = x;
-	// root["gyroY"] = y;
-	// root["gyroZ"] = z;
-	//printf("gyro: %5d %5d %5d\n", x, y, z);
 	msgStream << x << ":" << y << ":" << z << ":";
 	std::cout << "Gyroscope : " << x << ":" << y << ":" << z << ":" << std::endl; 
 						
 	// Buttons
-	// root["buttons"] = psmove_get_buttons(*move);
-	//printf("buttons: %x\n", psmove_get_buttons(*move));
 	unsigned int buttons = psmove_get_buttons(*move); 
 	msgStream << buttons << ":";
 	std::cout << "buttons : " << buttons << std::endl;
 
 	int battery = psmove_get_battery(*move);
-	// root["battery"] = battery;
 	msgStream << battery << ":";
 	std::cout << "battery : " << battery << std::endl;
 
@@ -282,7 +242,6 @@ double PSMoveAPIService::onAction()
 	  }
 	*/
 
-	// root["temp"] = psmove_get_temperature_in_celsius(*move);
 	float celsius_temp = psmove_get_temperature_in_celsius(*move);
 	msgStream << celsius_temp << ":";
 	std::cout << "celsius_temp : " << celsius_temp << std::endl;
@@ -319,21 +278,17 @@ double PSMoveAPIService::onAction()
 
 	  msgStream << x << ":" << y << ":" << z << ":" << r << ":";
 	  std::cout << "Tracker : " << x << ":" << y << ":" << z << ":" << r << ":" << std::endl;
-	  // }
+
 	} // trackerEnabled
 	else {
 	  msgStream << 0 << ":" << 0 << ":" << 0 << ":" << 0 << ":";
 	  std::cout << "Tracker disabled !!! ------------------" << std::endl;
-	  // close service
 	}
 	
 	msgStream << move - moves.begin() << ":";
 	std::cout << "Move ID : " << move - moves.begin() << std::endl;
 	// add move separator
 	msgStream << "/";
-
-
-	// usleep(100000);
 
 
 	psmove_update_leds(*move);
@@ -356,9 +311,6 @@ double PSMoveAPIService::onAction()
     for (target = targets.begin(); target != targets.end(); ++target) {
       sendMsg(*target, msgStream.str()); 
     }
-  }
-  else {
-    // std::cout << "Empty message !" << std::endl;
   }
 
   return 0.0001;
