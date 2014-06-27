@@ -1,7 +1,7 @@
 #include <sstream>
 #include <vector>
 
-#define NBDATA 17
+#define NBDATA 18
 
 
 template <typename T>
@@ -21,6 +21,7 @@ struct MoveData {
   int battery;
   int celsius_temp;
   float trackerRadius;
+  int id;
 };
 
 
@@ -93,6 +94,9 @@ std::vector<MoveData> buildMoveData (std::string msg) {
 	  break;
 	case 16:
 	  convert >> moveData.trackerRadius;
+	  break;
+	case 17:
+	  convert >> moveData.id;
 	  break;
 	}
 	moveString = moveString.substr(dataFound+1);

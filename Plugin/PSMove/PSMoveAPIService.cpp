@@ -326,7 +326,9 @@ double PSMoveAPIService::onAction()
 	  std::cout << "Tracker disabled !!! ------------------" << std::endl;
 	  // close service
 	}
-
+	
+	msgStream << move - moves.begin() << ":";
+	std::cout << "Move ID : " << move - moves.begin() << std::endl;
 	// add move separator
 	msgStream << "/";
 
@@ -359,7 +361,7 @@ double PSMoveAPIService::onAction()
     // std::cout << "Empty message !" << std::endl;
   }
 
-  return 0.00001;
+  return 0.0001;
 
 }
 
