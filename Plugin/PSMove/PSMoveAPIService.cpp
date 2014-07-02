@@ -171,139 +171,91 @@ double PSMoveAPIService::onAction()
   std::vector<PSMove*>::iterator move;
   std::stringstream msgStream;
 
+  // get data from all connected move controllers
   for (move = moves.begin(); move != moves.end(); ++move) {
 
 
     int pressed_buttons;
 
     if (ctype != Conn_USB && !((pressed_buttons = psmove_get_buttons(*move)) & Btn_PS)) {
-      // int res = psmove_poll(*move);
+      // wait for new data
       while(psmove_poll(*move));
-      // if (res) {
 
-	/*
-	  if (pressed_buttons & Btn_SQUARE) {
-	  printf("Btn_SQUARE pressed, with trigger value: %d\n",
-	  psmove_get_trigger(*move));
-	  psmove_set_rumble(*move, psmove_get_trigger(*move));
-	  }
-	  else {
-	  psmove_set_rumble(*move, 0x00);
-	  }
+      // 3D data values
+      int x, y, z;
 
+      // Magnetometer
+      psmove_get_magnetometer(*move, &x, &y, &z);
+      msgStream << x << ":" << y << ":" << z << ":";
+      std::cout << "Magnetometer : " << x << ":" << y << ":" << z << ":" << std::endl;
 
-	  //psmove_set_leds(*move, 0, 0, psmove_get_trigger(*move));
-	  if (pressed_buttons & Btn_CIRCLE) {
-	  psmove_set_leds(*move, 100, 0, 0);
-	  }
-	  else if (pressed_buttons & Btn_TRIANGLE) {
-	  psmove_set_leds(*move, 0, 100, 0);
-	  }
-	  else if (pressed_buttons & Btn_CROSS) {
-	  psmove_set_leds(*move, 0, 0, 100);
-	  }
-	*/
+      // Accelerometer
+      psmove_get_accelerometer(*move, &x, &y, &z);
+      msgStream << x << ":" << y << ":" << z << ":";
+      std::cout << "Accelerometer : " << x << ":" << y << ":" << z << ":" << std::endl;
 
-	int x, y, z;
+      // Gyroscope
+      psmove_get_gyroscope(*move, &x, &y, &z);
+      msgStream << x << ":" << y << ":" << z << ":";
+      std::cout << "Gyroscope : " << x << ":" << y << ":" << z << ":" << std::endl;
 
-	// Magnetometer
-	psmove_get_magnetometer(*move, &x, &y, &z);
-	msgStream << x << ":" << y << ":" << z << ":";
-	std::cout << "Magnetometer : " << x << ":" << y << ":" << z << ":" << std::endl;
+      // Buttons
+      unsigned int buttons = psmove_get_buttons(*move);
+      msgStream << buttons << ":";
+      std::cout << "buttons : " << buttons << std::endl;
 
-	// Accelerometer
-	psmove_get_accelerometer(*move, &x, &y, &z);
-	msgStream << x << ":" << y << ":" << z << ":";
-	std::cout << "Accelerometer : " << x << ":" << y << ":" << z << ":" << std::endl;
-
-	// Gyroscope
-	psmove_get_gyroscope(*move, &x, &y, &z);
-	msgStream << x << ":" << y << ":" << z << ":";
-	std::cout << "Gyroscope : " << x << ":" << y << ":" << z << ":" << std::endl;
-
-	// Buttons
-	unsigned int buttons = psmove_get_buttons(*move);
-	msgStream << buttons << ":";
-	std::cout << "buttons : " << buttons << std::endl;
-
-	int battery = psmove_get_battery(*move);
-	msgStream << battery << ":";
-	std::cout << "battery : " << battery << std::endl;
-
-	/*
-	  if (battery == Batt_CHARGING) {
-	  printf("battery charging\n");
-	  }
-	  else if (battery == Batt_CHARGING_DONE) {
-	  printf("battery fully charged (on charger)\n");
-	  }
-	  else if (battery >= Batt_MIN && battery <= Batt_MAX) {
-	  printf("battery level: %d / %d\n", battery, Batt_MAX);
-	  }
-	  else {
-	  printf("battery level: unknown (%x)\n", battery);
-	  }
-	*/
-
-	float celsius_temp = psmove_get_temperature_in_celsius(*move);
-	msgStream << celsius_temp << ":";
-	std::cout << "celsius_temp : " << celsius_temp << std::endl;
-
-	int trigger = psmove_get_trigger(*move);
-	msgStream << trigger << ":";
-	std::cout << "trigger : " << trigger << std::endl;
-
-	// psmove_update_leds(*move);
+      int battery = psmove_get_battery(*move);
+      msgStream << battery << ":";
+      std::cout << "battery : " << battery << std::endl;
 
 
-	// Tracker data
+      float celsius_temp = psmove_get_temperature_in_celsius(*move);
+      msgStream << celsius_temp << ":";
+      std::cout << "celsius_temp : " << celsius_temp << std::endl;
 
-	if (trackerEnabled) {
-	  float tX, tY, tZ, r = 0;
-	  psmove_tracker_get_position(tracker, *move, &tX, &tY, &r);
-	  psmove_fusion_get_position(fusionTracker, *move, &tX, &tY, &tZ);
+      int trigger = psmove_get_trigger(*move);
+      msgStream << trigger << ":";
+      std::cout << "trigger : " << trigger << std::endl;
 
-	  // need to call update functions on tracker after collecting data
-	  psmove_tracker_update_image(tracker);
-	  psmove_tracker_update(tracker, NULL);
-	  psmove_tracker_annotate(tracker);
 
-	  frame = psmove_tracker_get_frame(tracker);
-	  if (frame) {
-            cvShowImage("live camera feed", frame);
-	  }
 
-            /* Optional and not required by default (see auto_update_leds above)
-	       unsigned char r, g, b;
-	       psmove_tracker_get_color(tracker, controllers[i], &r, &g, &b);
-	       psmove_set_leds(controllers[i], r, g, b);
-	       psmove_update_leds(controllers[i]);
-            */
+      // Tracker data
 
-	  // float x, y, r, z = 0;
-	  // psmove_tracker_get_position(tracker, *move, &x, &y, &r);
-	  // z = psmove_tracker_distance_from_radius(tracker, r);
+      if (trackerEnabled) {
+	float tX, tY, tZ, r = 0;
+	psmove_tracker_get_position(tracker, *move, &tX, &tY, &r);
+	psmove_fusion_get_position(fusionTracker, *move, &tX, &tY, &tZ);
 
-	  // msgStream << x << ":" << y << ":" << z << ":" << r << ":";
-	  msgStream << tX << ":" << tY << ":" << tZ << ":" << r << ":";
-	  // std::cout << "Tracker : " << x << ":" << y << ":" << z << ":" << r << ":" << std::endl;
-	  std::cout << "Tracker : " << tX << ":" << tY << ":" << tZ << ":" << r << ":" << std::endl;
+	// need to call update functions on tracker after collecting data
+	psmove_tracker_update_image(tracker);
+	psmove_tracker_update(tracker, NULL);
+	psmove_tracker_annotate(tracker);
 
-	} // trackerEnabled
-	else {
-	  msgStream << 0 << ":" << 0 << ":" << 0 << ":" << 0 << ":";
-	  std::cout << "Tracker disabled !!! ------------------" << std::endl;
+	frame = psmove_tracker_get_frame(tracker);
+	if (frame) {
+	  cvShowImage("live camera feed", frame);
 	}
 
-	msgStream << move - moves.begin() << ":";
-	std::cout << "Move ID : " << move - moves.begin() << std::endl;
-	// add move separator
-	msgStream << "/";
+	// z = psmove_tracker_distance_from_radius(tracker, r);
+
+	msgStream << tX << ":" << tY << ":" << tZ << ":" << r << ":";
+	std::cout << "Tracker : " << tX << ":" << tY << ":" << tZ << ":" << r << ":" << std::endl;
+
+      } // if(trackerEnabled)
+
+      else {
+	msgStream << 0 << ":" << 0 << ":" << 0 << ":" << 0 << ":";
+	std::cout << "Tracker disabled !!! ------------------" << std::endl;
+      }
+
+      // get move ID with iterator position
+      msgStream << move - moves.begin() << ":";
+      std::cout << "Move ID : " << move - moves.begin() << std::endl;
+      // add move separator
+      msgStream << "/";
 
 
-	psmove_update_leds(*move);
-
-      // } // psmove_poll
+      psmove_update_leds(*move);
 
 
     } // connection type
@@ -314,6 +266,7 @@ double PSMoveAPIService::onAction()
 
 
 
+  // send msg to each target
   std::vector<std::string>::iterator target;
   std::string msg = msgStream.str();
   if (! msg.empty()) {
@@ -321,6 +274,11 @@ double PSMoveAPIService::onAction()
     for (target = targets.begin(); target != targets.end(); ++target) {
       sendMsg(*target, msgStream.str());
     }
+  }
+
+  // refresh faster if trackerEnabled
+  if (trackerEnabled) {
+    return 0.0001;
   }
 
   return 0.001;
