@@ -15,6 +15,7 @@
 // PSMoveAPI
 #include <psmoveapi/psmove.h>
 #include <psmoveapi/psmove_tracker.h>
+#include <psmoveapi/psmove_fusion.h>
 
 //SIGVerse
 #include "SIGService.h"
@@ -37,6 +38,7 @@ private:
   // tracker
   bool trackerEnabled;
   PSMoveTracker* tracker;
+  PSMoveFusion* fusionTracker;
 
   // opencv frame
   void* frame;
@@ -44,12 +46,11 @@ private:
 
 
 PSMoveAPIService::PSMoveAPIService(std::string name,
-				   std::vector<std::string> messageTargets, 
-				   bool enableTracker) : 
-  SIGService(name), 
+				   std::vector<std::string> messageTargets,
+				   bool enableTracker) :
+  SIGService(name),
   targets(messageTargets),
   trackerEnabled(enableTracker)
-
 {
 
 
@@ -64,9 +65,11 @@ PSMoveAPIService::PSMoveAPIService(std::string name,
 
   // init psmove tracker
   if (trackerEnabled) {
-    
+
     tracker = psmove_tracker_new();
     psmove_tracker_set_mirror(tracker, PSMove_True);
+    fusionTracker = psmove_fusion_new(tracker, 1., 1000.);
+
 
     std::cout << "Tracker ... OK" << std::endl;
   }
@@ -81,12 +84,12 @@ PSMoveAPIService::PSMoveAPIService(std::string name,
     while (trackerEnabled) {
       std::cout << "Calibrating controller " << i << "..." << std::endl;
       int result = psmove_tracker_enable(tracker, moves[i]);
-      
+
       if (result == Tracker_CALIBRATED) {
 	enum PSMove_Bool auto_update_leds =
 	  psmove_tracker_get_auto_update_leds(tracker,
 					      moves[i]);
-	std::cout << "OK, auto_update_leds is " 
+	std::cout << "OK, auto_update_leds is "
 		  << ((auto_update_leds == PSMove_True)?"enabled":"disabled")
 		  << std::endl;
 	break;
@@ -94,7 +97,7 @@ PSMoveAPIService::PSMoveAPIService(std::string name,
 	std::cout << "ERROR - retrying" << std::endl;
       }
     }
-    
+
   }
 
 
@@ -112,7 +115,7 @@ PSMoveAPIService::PSMoveAPIService(std::string name,
   std::vector<PSMove*>::iterator move;
 
   for (move = moves.begin(); move != moves.end(); ++move) {
-      
+
     char *serial = psmove_get_serial(*move);
     std::cout << "Serial : " << serial << std::endl;
     free(serial);
@@ -135,7 +138,7 @@ PSMoveAPIService::PSMoveAPIService(std::string name,
     psmove_set_rate_limiting(*move, PSMove_True);
 
   }
-  
+
 
   std::cout << "End init PSMove" << std::endl;
 
@@ -147,10 +150,11 @@ PSMoveAPIService::~PSMoveAPIService()
 {
   std::vector<PSMove*>::iterator move;
   for (move = moves.begin(); move != moves.end(); ++move) {
-    psmove_disconnect(*move);      
+    psmove_disconnect(*move);
   }
   disconnect();
   psmove_tracker_free(tracker);
+  psmove_fusion_free(fusionTracker);
 }
 
 
@@ -168,14 +172,14 @@ double PSMoveAPIService::onAction()
   std::stringstream msgStream;
 
   for (move = moves.begin(); move != moves.end(); ++move) {
-  
+
 
     int pressed_buttons;
 
     if (ctype != Conn_USB && !((pressed_buttons = psmove_get_buttons(*move)) & Btn_PS)) {
-      int res = psmove_poll(*move);
-      if (res) {
-
+      // int res = psmove_poll(*move);
+      while(psmove_poll(*move));
+      // if (res) {
 
 	/*
 	  if (pressed_buttons & Btn_SQUARE) {
@@ -202,24 +206,23 @@ double PSMoveAPIService::onAction()
 
 	int x, y, z;
 
-
 	// Magnetometer
 	psmove_get_magnetometer(*move, &x, &y, &z);
 	msgStream << x << ":" << y << ":" << z << ":";
 	std::cout << "Magnetometer : " << x << ":" << y << ":" << z << ":" << std::endl;
-			
+
 	// Accelerometer
 	psmove_get_accelerometer(*move, &x, &y, &z);
 	msgStream << x << ":" << y << ":" << z << ":";
 	std::cout << "Accelerometer : " << x << ":" << y << ":" << z << ":" << std::endl;
-			
+
 	// Gyroscope
 	psmove_get_gyroscope(*move, &x, &y, &z);
 	msgStream << x << ":" << y << ":" << z << ":";
-	std::cout << "Gyroscope : " << x << ":" << y << ":" << z << ":" << std::endl; 
-						
+	std::cout << "Gyroscope : " << x << ":" << y << ":" << z << ":" << std::endl;
+
 	// Buttons
-	unsigned int buttons = psmove_get_buttons(*move); 
+	unsigned int buttons = psmove_get_buttons(*move);
 	msgStream << buttons << ":";
 	std::cout << "buttons : " << buttons << std::endl;
 
@@ -256,6 +259,11 @@ double PSMoveAPIService::onAction()
 	// Tracker data
 
 	if (trackerEnabled) {
+	  float tX, tY, tZ, r = 0;
+	  psmove_tracker_get_position(tracker, *move, &tX, &tY, &r);
+	  psmove_fusion_get_position(fusionTracker, *move, &tX, &tY, &tZ);
+
+	  // need to call update functions on tracker after collecting data
 	  psmove_tracker_update_image(tracker);
 	  psmove_tracker_update(tracker, NULL);
 	  psmove_tracker_annotate(tracker);
@@ -272,19 +280,21 @@ double PSMoveAPIService::onAction()
 	       psmove_update_leds(controllers[i]);
             */
 
-	  float x, y, r, z;
-	  psmove_tracker_get_position(tracker, *move, &x, &y, &r);
-	  z = psmove_tracker_distance_from_radius(tracker, r);
+	  // float x, y, r, z = 0;
+	  // psmove_tracker_get_position(tracker, *move, &x, &y, &r);
+	  // z = psmove_tracker_distance_from_radius(tracker, r);
 
-	  msgStream << x << ":" << y << ":" << z << ":" << r << ":";
-	  std::cout << "Tracker : " << x << ":" << y << ":" << z << ":" << r << ":" << std::endl;
+	  // msgStream << x << ":" << y << ":" << z << ":" << r << ":";
+	  msgStream << tX << ":" << tY << ":" << tZ << ":" << r << ":";
+	  // std::cout << "Tracker : " << x << ":" << y << ":" << z << ":" << r << ":" << std::endl;
+	  std::cout << "Tracker : " << tX << ":" << tY << ":" << tZ << ":" << r << ":" << std::endl;
 
 	} // trackerEnabled
 	else {
 	  msgStream << 0 << ":" << 0 << ":" << 0 << ":" << 0 << ":";
 	  std::cout << "Tracker disabled !!! ------------------" << std::endl;
 	}
-	
+
 	msgStream << move - moves.begin() << ":";
 	std::cout << "Move ID : " << move - moves.begin() << std::endl;
 	// add move separator
@@ -292,10 +302,10 @@ double PSMoveAPIService::onAction()
 
 
 	psmove_update_leds(*move);
-      
-      } // psmove_poll
 
-    
+      // } // psmove_poll
+
+
     } // connection type
 
 
@@ -309,7 +319,7 @@ double PSMoveAPIService::onAction()
   if (! msg.empty()) {
     std::cout << "[" << msgStream.str() << "]" << std::endl;
     for (target = targets.begin(); target != targets.end(); ++target) {
-      sendMsg(*target, msgStream.str()); 
+      sendMsg(*target, msgStream.str());
     }
   }
 
@@ -331,7 +341,7 @@ int main(int argc, char** argv)
 
   std::vector<std::string> targets;
   for (int i = 3; i < argc; ++i) {
-    // options 
+    // options
     if (std::string(argv[i]) == "--enable-tracker") {
       enableTracker = true;
       std::cout << "Tracker enabled." << std::cout;
