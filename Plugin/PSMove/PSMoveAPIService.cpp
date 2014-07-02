@@ -323,7 +323,7 @@ double PSMoveAPIService::onAction()
     }
   }
 
-  return 0.0001;
+  return 0.001;
 
 }
 
