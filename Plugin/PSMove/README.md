@@ -23,8 +23,12 @@ Run the service
 ---------------
 
 
->> With the tracker data
-% ./PSMoveAPIService.sig localhost 9000 man_001 --enable-tracker
+- With the tracker data
 
->> Without tracker
-% ./PSMoveAPIService.sig localhost 9000 man_001
+> $ ./PSMoveAPIService.sig localhost 9000 man_001 --enable-tracker
+
+
+
+- Without tracker
+
+> $ ./PSMoveAPIService.sig localhost 9000 man_001
