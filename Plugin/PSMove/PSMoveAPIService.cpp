@@ -79,6 +79,9 @@ PSMoveAPIService::PSMoveAPIService(std::string name,
     moves.push_back(psmove_connect_by_id(i));
     assert((moves[i]) != NULL);
 
+    // get orientation data
+    psmove_enable_orientation(moves[i], PSMove_True);
+    assert(psmove_has_orientation(moves[i]));
 
 
     while (trackerEnabled) {
@@ -251,6 +254,14 @@ double PSMoveAPIService::onAction()
       // get move ID with iterator position
       msgStream << move - moves.begin() << ":";
       std::cout << "Move ID : " << move - moves.begin() << std::endl;
+
+
+      // get move orientation
+      float qw, qx, qy, qz = 0;
+      psmove_get_orientation(*move, &qw, &qx, &qy, &qz);
+      msgStream << qw << ":" << qx << ":" << qy << ":" << qz << ":";
+      std::cout << "Quaternion : " << qw << ":" << qx << ":" << qy << ":" << qz << ":" << std::endl;
+
       // add move separator
       msgStream << "/";
 

@@ -1,7 +1,7 @@
 #include <sstream>
 #include <vector>
 
-#define NBDATA 18
+#define NBDATA 22
 
 
 template <typename T>
@@ -9,6 +9,11 @@ struct Data3D {
   T x;
   T y;
   T z;
+};
+
+template <typename T>
+struct Data4D : public Data3D<T> {
+  T w;
 };
 
 struct MoveData {
@@ -22,6 +27,7 @@ struct MoveData {
   int celsius_temp;
   float trackerRadius;
   int id;
+  Data4D<float> q; // orientation quaternion
 };
 
 
@@ -47,7 +53,7 @@ std::vector<MoveData> buildMoveData (std::string msg) {
 	  convert >> moveData.m.x;
 	  break;
 	case 1:
-	  convert >> moveData.m.y; 
+	  convert >> moveData.m.y;
 	  break;
 	case 2:
 	  convert >> moveData.m.z;
@@ -96,6 +102,18 @@ std::vector<MoveData> buildMoveData (std::string msg) {
 	  break;
 	case 17:
 	  convert >> moveData.id;
+	  break;
+	case 18:
+	  convert >> moveData.q.w;
+	  break;
+	case 19:
+	  convert >> moveData.q.x;
+	  break;
+	case 20:
+	  convert >> moveData.q.y;
+	  break;
+	case 21:
+	  convert >> moveData.q.z;
 	  break;
 	}
 	moveString = moveString.substr(dataFound+1);
