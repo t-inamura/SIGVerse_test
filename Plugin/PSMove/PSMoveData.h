@@ -129,3 +129,13 @@ std::vector<MoveData> buildMoveData (std::string msg) {
 
   return moves;
 }
+
+
+struct psmove_arm_calibration {
+  bool shoulderCalibrated;
+  bool handExtensionCalibrated;
+  Data3D<float> shoulder;
+  Data3D<float> handExtension;
+
+  float armLength;
+}
