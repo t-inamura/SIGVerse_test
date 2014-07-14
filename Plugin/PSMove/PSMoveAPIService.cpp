@@ -262,6 +262,12 @@ double PSMoveAPIService::onAction()
       msgStream << qw << ":" << qx << ":" << qy << ":" << qz << ":";
       std::cout << "Quaternion : " << qw << ":" << qx << ":" << qy << ":" << qz << ":" << std::endl;
 
+
+      // button events
+      unsigned int pressed, released;
+      psmove_get_button_events(*move, &pressed, &released);
+      msgStream << pressed << ":" << released << ":";
+
       // add move separator
       msgStream << "/";
 

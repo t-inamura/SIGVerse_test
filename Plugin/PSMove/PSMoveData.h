@@ -1,7 +1,11 @@
+#ifndef _PSMOVEDATA_H_
+#define _PSMOVEDATA_H_
+
+
 #include <sstream>
 #include <vector>
 
-#define NBDATA 22
+#define NBDATA 24
 
 
 template <typename T>
@@ -21,13 +25,17 @@ struct MoveData {
   Data3D<int> a; // accelerometer
   Data3D<int> g; // gyroscope
   Data3D<float> tracker; // tracker data
-  int buttons;
+  int buttonsDown;
   int trigger;
   int battery;
   int celsius_temp;
   float trackerRadius;
   int id;
   Data4D<float> q; // orientation quaternion
+
+  // button events
+  unsigned int pressedButtons;
+  unsigned int releasedButtons;
 };
 
 
@@ -77,7 +85,7 @@ std::vector<MoveData> buildMoveData (std::string msg) {
 	  convert >> moveData.g.z;
 	  break;
 	case 9:
-	  convert >> moveData.buttons;
+	  convert >> moveData.buttonsDown;
 	  break;
 	case 10:
 	  convert >> moveData.battery;
@@ -115,6 +123,12 @@ std::vector<MoveData> buildMoveData (std::string msg) {
 	case 21:
 	  convert >> moveData.q.z;
 	  break;
+	case 22:
+	  convert >> moveData.pressedButtons;
+	  break;
+	case 23:
+	  convert >> moveData.releasedButtons;
+	  break;
 	}
 	moveString = moveString.substr(dataFound+1);
       }
@@ -131,11 +145,15 @@ std::vector<MoveData> buildMoveData (std::string msg) {
 }
 
 
-struct psmove_arm_calibration {
+struct PSMoveArmCalibration {
   bool shoulderCalibrated;
   bool handExtensionCalibrated;
   Data3D<float> shoulder;
   Data3D<float> handExtension;
 
   float armLength;
-}
+};
+
+
+
+#endif /* _PSMOVEDATA_H_ */
