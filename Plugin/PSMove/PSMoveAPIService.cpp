@@ -190,35 +190,35 @@ double PSMoveAPIService::onAction()
       // Magnetometer
       psmove_get_magnetometer(*move, &x, &y, &z);
       msgStream << x << ":" << y << ":" << z << ":";
-      std::cout << "Magnetometer : " << x << ":" << y << ":" << z << ":" << std::endl;
+      // std::cout << "Magnetometer : " << x << ":" << y << ":" << z << ":" << std::endl;
 
       // Accelerometer
       psmove_get_accelerometer(*move, &x, &y, &z);
       msgStream << x << ":" << y << ":" << z << ":";
-      std::cout << "Accelerometer : " << x << ":" << y << ":" << z << ":" << std::endl;
+      // std::cout << "Accelerometer : " << x << ":" << y << ":" << z << ":" << std::endl;
 
       // Gyroscope
       psmove_get_gyroscope(*move, &x, &y, &z);
       msgStream << x << ":" << y << ":" << z << ":";
-      std::cout << "Gyroscope : " << x << ":" << y << ":" << z << ":" << std::endl;
+      // std::cout << "Gyroscope : " << x << ":" << y << ":" << z << ":" << std::endl;
 
       // Buttons
       unsigned int buttons = psmove_get_buttons(*move);
       msgStream << buttons << ":";
-      std::cout << "buttons : " << buttons << std::endl;
+      // std::cout << "buttons : " << buttons << std::endl;
 
       int battery = psmove_get_battery(*move);
       msgStream << battery << ":";
-      std::cout << "battery : " << battery << std::endl;
+      // std::cout << "battery : " << battery << std::endl;
 
 
       float celsius_temp = psmove_get_temperature_in_celsius(*move);
       msgStream << celsius_temp << ":";
-      std::cout << "celsius_temp : " << celsius_temp << std::endl;
+      // std::cout << "celsius_temp : " << celsius_temp << std::endl;
 
       int trigger = psmove_get_trigger(*move);
       msgStream << trigger << ":";
-      std::cout << "trigger : " << trigger << std::endl;
+      // std::cout << "trigger : " << trigger << std::endl;
 
 
 
@@ -242,31 +242,35 @@ double PSMoveAPIService::onAction()
 	// z = psmove_tracker_distance_from_radius(tracker, r);
 
 	msgStream << tX << ":" << tY << ":" << tZ << ":" << r << ":";
-	std::cout << "Tracker : " << tX << ":" << tY << ":" << tZ << ":" << r << ":" << std::endl;
+	// std::cout << "Tracker : " << tX << ":" << tY << ":" << tZ << ":" << r << ":" << std::endl;
 
       } // if(trackerEnabled)
 
       else {
 	msgStream << 0 << ":" << 0 << ":" << 0 << ":" << 0 << ":";
-	std::cout << "Tracker disabled !!! ------------------" << std::endl;
+	// std::cout << "Tracker disabled !!! ------------------" << std::endl;
       }
 
       // get move ID with iterator position
       msgStream << move - moves.begin() << ":";
-      std::cout << "Move ID : " << move - moves.begin() << std::endl;
+      // std::cout << "Move ID : " << move - moves.begin() << std::endl;
 
 
       // get move orientation
       float qw, qx, qy, qz = 0;
       psmove_get_orientation(*move, &qw, &qx, &qy, &qz);
       msgStream << qw << ":" << qx << ":" << qy << ":" << qz << ":";
-      std::cout << "Quaternion : " << qw << ":" << qx << ":" << qy << ":" << qz << ":" << std::endl;
+      // std::cout << "Quaternion : " << qw << ":" << qx << ":" << qy << ":" << qz << ":" << std::endl;
 
 
       // button events
       unsigned int pressed, released;
       psmove_get_button_events(*move, &pressed, &released);
       msgStream << pressed << ":" << released << ":";
+      if (released & Btn_MOVE) {
+	std::cout << "DEBUG-1-PSMoveAPIService.cpp" << std::endl;
+      }
+
 
       // add move separator
       msgStream << "/";
@@ -287,7 +291,7 @@ double PSMoveAPIService::onAction()
   std::vector<std::string>::iterator target;
   std::string msg = msgStream.str();
   if (! msg.empty()) {
-    std::cout << "[" << msgStream.str() << "]" << std::endl;
+    // std::cout << "[" << msgStream.str() << "]" << std::endl;
     for (target = targets.begin(); target != targets.end(); ++target) {
       sendMsg(*target, msgStream.str());
     }
@@ -295,10 +299,10 @@ double PSMoveAPIService::onAction()
 
   // refresh faster if trackerEnabled
   if (trackerEnabled) {
-    return 0.0001;
+    return 0.0015*moves.size();
   }
 
-  return 0.001;
+  return 0.001*moves.size();
 
 }
 
@@ -331,9 +335,13 @@ int main(int argc, char** argv)
   PSMoveAPIService srv("PSMoveAPIService", targets, enableTracker);
   std::string host = argv[1];
   unsigned short port = (unsigned short)(atoi(argv[2]));
-  srv.connect(host, port);
-  srv.startLoop();
-
+  if (srv.connect(host, port)) {
+    srv.startLoop();
+  }
+  else {
+    std::cerr << "Impossible to connect to server" << std::endl;
+    return -1;
+  }
   return 0;
 }
 
