@@ -164,6 +164,20 @@ PSMoveAPIService::~PSMoveAPIService()
 
 void PSMoveAPIService::onRecvMsg(sigverse::RecvMsgEvent &evt)
 {
+  // std::string msg = evt.getMsg();
+  // std::cout << "PSMove incomming message : " << msg << std::endl;
+  // int idPos = msg.find_first_of(":");
+  // std::string msgID = msg.substr(0, idPos);
+  // if (msgID == "PSMOVE") {
+  //   int callPos = msg.find(":", idPos+1);
+  //   std::string remoteCall = msg.substr(idPos+1, callPos);
+  //   if (remoteCall == "psmove_reset_orientation") {
+  //     std::stringstream s_moveID(msg.substr(callPos+1));
+  //     int moveID;
+  //     s_moveID >> moveID;
+  //     psmove_reset_orientation(moves[moveID]);
+  //   }
+  // }
 }
 
 
@@ -267,8 +281,10 @@ double PSMoveAPIService::onAction()
       unsigned int pressed, released;
       psmove_get_button_events(*move, &pressed, &released);
       msgStream << pressed << ":" << released << ":";
-      if (released & Btn_MOVE) {
-	std::cout << "DEBUG-1-PSMoveAPIService.cpp" << std::endl;
+
+      // reset orientation of the PSMove when pressing CROSS
+      if (pressed & Btn_CROSS) {
+	psmove_reset_orientation(*move);
       }
 
 
@@ -312,7 +328,7 @@ int main(int argc, char** argv)
 {
   // Create an instance of the service class with the specified service name
   if (argc < 4) {
-    std::cerr << "Usage : \"PSMoveAPIService.sig host port [message targets]" << std::endl;
+    std::cerr << "Usage : $ PSMoveAPIService.sig host port [message targets]" << std::endl;
     return -1;
   }
 
