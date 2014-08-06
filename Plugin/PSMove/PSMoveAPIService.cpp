@@ -164,6 +164,7 @@ PSMoveAPIService::~PSMoveAPIService()
 
 void PSMoveAPIService::onRecvMsg(sigverse::RecvMsgEvent &evt)
 {
+  std::cout << "incomming message" << std::endl;
   // std::string msg = evt.getMsg();
   // std::cout << "PSMove incomming message : " << msg << std::endl;
   // int idPos = msg.find_first_of(":");
@@ -313,6 +314,8 @@ double PSMoveAPIService::onAction()
     }
   }
 
+
+  // std::cout << "return statement reached" << std::endl;
   // refresh faster if trackerEnabled
   if (trackerEnabled) {
     return 0.0015*moves.size();
