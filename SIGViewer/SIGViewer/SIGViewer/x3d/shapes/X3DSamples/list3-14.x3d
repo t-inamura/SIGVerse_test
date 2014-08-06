@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.2//EN"
+  "http://www.web3d.org/specifications/x3d-3.2.dtd">
+
+<X3D profile='Immersive'>
+  <head>
+    <meta name='filename' content='list3-14.x3d'/>
+  </head>
+  <Scene>
+    <Background skyColor='1 1 1'/>
+
+    <Inline url='"list3-1.x3d"'/>
+
+    <Transform  translation='0 -1 0'>
+      <Shape>
+        <Box size='3.2 2 3.2'/>
+        <Appearance>
+          <Material  diffuseColor='0.6 0.8 0.2'/>
+        </Appearance>
+      </Shape>
+    </Transform>
+  
+  </Scene>
+</X3D>
+

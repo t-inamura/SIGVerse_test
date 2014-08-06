@@ -1,0 +1,161 @@
+#VRML V2.0 utf8 CosmoWorlds V1.0
+
+# Need this line to parse this file with Xj3D
+PROFILE Interactive
+
+
+WorldInfo
+{
+ title	"recipeA_c01"
+ info	"VRML2.0 created with Version 1.3, from Alias Maya 8.5"
+}
+NavigationInfo
+{
+ type [ "EXAMINE"  "ANY" ]
+ headlight	TRUE
+ speed		1.000000
+}
+Switch
+{
+ whichChoice	-1
+ choice
+ [
+  Shape
+  {
+   appearance Appearance
+   {
+    material DEF recipeA_c1_0 Material
+    {
+     diffuseColor	0.000000 0.000000 0.000000
+     specularColor	0.250000 0.250000 0.250000
+     emissiveColor	0.000000 0.000000 0.000000
+     shininess		1.000000
+     transparency	0.000000
+    }
+   }
+  }
+  Shape
+  {
+   geometry DEF recipeA_c01_0Geo IndexedFaceSet
+   {
+    convex FALSE
+    solid FALSE
+    coord DEF recipeA_c01GeoPoints Coordinate
+    {
+     point [
+      -10.500 -0.350 -13.500,
+      -10.500 0.350 -13.500,
+      10.500 0.350 -13.500,
+      10.500 -0.350 -13.500,
+      -10.500 -0.350 13.500,
+      -10.500 0.350 13.500,
+      10.500 0.350 13.500,
+      10.500 -0.350 13.500
+     ]
+    }
+    coordIndex [
+     0 3 2 1 -1, 
+     4 0 1 5 -1, 
+     5 1 2 6 -1, 
+     6 2 3 7 -1, 
+     7 3 0 4 -1, 
+     4 5 6 7 -1
+    ]
+    normalPerVertex TRUE
+    normal Normal
+    {
+     vector [
+      0.577 0.577 0.577,
+      -0.577 0.577 0.577,
+      -0.577 -0.577 0.577,
+      0.577 -0.577 0.577,
+      0.577 0.577 -0.577,
+      0.577 -0.577 -0.577,
+      -0.577 -0.577 -0.577,
+      -0.577 0.577 -0.577
+     ]
+    }
+    normalIndex [
+     0 1 2 3 -1,
+     4 0 3 5 -1,
+     5 3 2 6 -1,
+     6 2 1 7 -1,
+     7 1 0 4 -1,
+     4 5 6 7 -1
+    ]
+    texCoord TextureCoordinate
+    {
+     point [
+      0.984388 0.849817
+      0.663676 0.849817
+      0.663676 0.978467
+      0.984388 0.978467
+      0.479194 0.029690
+      0.479194 0.829935
+      0.520806 0.829935
+      0.520806 0.029690
+      0.520806 0.829935
+      0.996699 0.829935
+      0.996699 0.029690
+      0.342964 0.978467
+      0.342964 0.849817
+      0.006925 0.029690
+      0.006925 0.829935
+      0.479194 0.829935
+      0.022252 0.849817
+      0.022252 0.978467
+      0.342964 0.978467
+     ]
+    }
+    texCoordIndex [
+     0 1 2 3 -1,
+     4 5 6 7 -1,
+     7 8 9 10 -1,
+     11 2 1 12 -1,
+     13 14 15 4 -1,
+     16 17 18 12 -1
+    ]
+   }
+  }
+ ]
+}
+Group
+{
+ children
+ [
+  DEF persp Viewpoint
+  {
+   position	-10.290759 50.610722 30.578373
+   orientation	-0.946335 -0.283612 -0.154968 1.047266
+   fieldOfView	0.950022
+   description	"persp"
+  }
+  DEF recipeA_c01 Transform
+  {
+   translation		0.000000 0.344916 0.000000
+   rotation		0.000000 0.000000 0.000000 0.000000
+   scale		1.000000 1.000000 1.000000
+   scaleOrientation	0.0  0.0  1.0  0.0
+   children Shape
+   {
+    appearance Appearance
+    {
+     material USE recipeA_c1_0
+     texture ImageTexture
+     {
+      url  "recipeA_c01.jpg"
+      repeatS TRUE
+      repeatT TRUE
+     }
+     textureTransform TextureTransform
+     {
+      rotation 0.000000
+      scale 1.000000 1.000000
+      translation 0.000000 0.000000
+     }
+    }
+    geometry USE recipeA_c01_0Geo
+   }
+  }
+ ]
+}

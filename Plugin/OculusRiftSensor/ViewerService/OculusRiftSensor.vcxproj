@@ -49,13 +49,13 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\SIGVerse\src\OculusSDK\LibOVR\Include;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\SIGService;C:\SIGVerse\src\boost_1_47;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\src\OculusRift\OculusSDK_VS2010\LibOVR\Include;..\..\..\SIGService\Windows\SIGService;..\..\..\SIGService\Windows\boost\boost_1_55_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SIGVerse\src\OculusSDK\LibOVR\Lib\Win32;C:\SIGVerse\src\boost_1_47\lib;C:\SIGVerse\GitHub\SIGVerse_test\SIGService\Windows\Debug_2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\src\OculusRift\OculusSDK_VS2010\LibOVR\Lib\Win32;..\..\..\SIGService\Windows\Debug_2010;..\..\..\SIGService\Windows\boost\boost_1_55_0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libovrd.lib;winmm.lib;SIGService.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/verbose:lib %(AdditionalOptions)</AdditionalOptions>
     </Link>

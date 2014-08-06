@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.2//EN"
+  "http://www.web3d.org/specifications/x3d-3.2.dtd">
+
+<X3D profile='Immersive'>
+  <head>
+    <meta name='filename' content='list3-17.x3d'/>
+  </head>
+  <Scene>
+
+    <ProtoDeclare name='Building'>
+      <ProtoInterface>
+        <field name='lineColor' type='SFNode' value='NULL'
+               accessType='initializeOnly'/>
+      </ProtoInterface>
+
+      <ProtoBody>
+        <Shape>
+          <IndexedLineSet coordIndex='0 1 2 3 0 -1
+                                      4 5 6 7 4 -1 
+                                      0 4 -1
+                                      1 5 -1
+                                      2 6 -1 
+                                      3 7 -1' 
+                          colorPerVertex='false'
+                          colorIndex='0 0 0 0 0 0'>
+            <Coordinate point=' 0  0  0
+                               20  0  0
+                               20  0 10
+                                0  0 10
+                                0 30  0
+                               20 30  0
+                               20 30 10
+                                0 30 10'/>
+            <IS>
+              <connect nodeField='color'
+                       protoField='lineColor'/>
+            </IS>
+          </IndexedLineSet>
+        </Shape>
+      </ProtoBody>
+    </ProtoDeclare>
+
+    <Background skyColor='1 1 1'/>
+
+    <Transform translation='1 -3 -9' scale='0.2 0.2 0.2'>
+      <ProtoInstance name='Building'>
+        <fieldValue name='lineColor'>
+          <Color color='1 0 0'/>
+        </fieldValue>
+      </ProtoInstance>
+    </Transform>
+    
+    <Transform translation='1 -3 -5' scale='0.1 0.17 0.5'>
+      <ProtoInstance name='Building'>
+        <fieldValue name='lineColor'>
+          <Color color='0 1 0'/>
+        </fieldValue>
+      </ProtoInstance>
+    </Transform>
+
+    <Transform  translation='-6 -3 -5' scale='0.25 0.15 0.3'>
+      <ProtoInstance name='Building'>
+        <fieldValue name='lineColor'>
+          <Color  color='0 0 1'/>
+        </fieldValue>
+      </ProtoInstance>
+    </Transform>
+
+    <Transform translation='-4 -3 -9' scale='0.15 0.3 0.2'>
+      <ProtoInstance name='Building'>
+        <fieldValue name='lineColor'>
+          <Color color='1 0 1'/>
+        </fieldValue>
+      </ProtoInstance>
+    </Transform>
+
+    <Transform translation='0 -3 -6' scale='1 1 1'>
+      <Shape>
+        <IndexedLineSet coordIndex=' 0 1 2 -1
+                                     3 4 5 -1
+                                     6 7 8 -1
+                                     9 10 11 -1' 
+                        colorPerVertex='false' 
+                        colorIndex='0 0 0 0'>
+          <Color color='0 0 0'/>
+          <Coordinate point=' 20  0   1
+                               1  0   1
+                               1  0  20
+                              -1  0  20
+                              -1  0   1
+                             -20  0   1
+                             -20  0  -1
+                              -1  0  -1
+                              -1  0 -20
+                               1  0 -20
+                               1  0  -1
+                              20  0  -1'/>
+        </IndexedLineSet>
+      </Shape>
+    </Transform>
+
+  </Scene>
+</X3D>
+

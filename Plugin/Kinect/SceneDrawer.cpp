@@ -105,10 +105,10 @@ unsigned int getClosestPowerOfTwo(unsigned int n)
 
 	return m;
 }
-
-
 GLuint initTexture(void** buf, int& width, int& height)
 {
+
+
 	GLuint texID = 0;
 	glGenTextures(1,&texID);
 
@@ -123,13 +123,13 @@ GLuint initTexture(void** buf, int& width, int& height)
 	return texID;
 }
 
-
 GLfloat texcoords[8];
 void DrawRectangle(float topLeftX, float topLeftY, float bottomRightX, float bottomRightY)
 {
-	GLfloat verts[8] = {
-		topLeftX,     topLeftY,
-		topLeftX,     bottomRightY,
+
+
+	GLfloat verts[8] = {	topLeftX, topLeftY,
+		topLeftX, bottomRightY,
 		bottomRightX, bottomRightY,
 		bottomRightX, topLeftY
 	};
@@ -139,8 +139,6 @@ void DrawRectangle(float topLeftX, float topLeftY, float bottomRightX, float bot
 	//TODO: Maybe glFinish needed here instead - if there's some bad graphics crap
 	glFlush();
 }
-
-
 void DrawTexture(float topLeftX, float topLeftY, float bottomRightX, float bottomRightY)
 {
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -150,7 +148,6 @@ void DrawTexture(float topLeftX, float topLeftY, float bottomRightX, float botto
 
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
-
 
 XnFloat Colors[][3] =
 {
@@ -213,6 +210,7 @@ void DrawLimb(XnUserID player, XnSkeletonJoint eJoint1, XnSkeletonJoint eJoint2)
 
 bool DiffVec(XnPoint3D &rvec, XnSkeletonJointPosition jvec, XnSkeletonJointPosition kvec)
 {
+
 	if(jvec.fConfidence < 0.5 || kvec.fConfidence < 0.5)
 	{
 		return false;
@@ -237,6 +235,7 @@ Quaternion CalcQuaternion(XnPoint3D kvec, XnPoint3D svec)
 		q.qw = 1; q.qx = 0; q.qy = 0; q.qz = 0;
 		return q;
 	}
+
 
 	double x = kvec.Y*svec.Z - kvec.Z*svec.Y;
 	double y = kvec.Z*svec.X - kvec.X*svec.Z;
@@ -435,7 +434,7 @@ void DrawDepthMap(const xn::DepthMetaData& dmd, const xn::SceneMetaData& smd, si
 		texXpos =(float)dmd.XRes()/texWidth;
 		texYpos  =(float)dmd.YRes()/texHeight;
 
-		memset(texcoords, 0, 8*sizeof(float)); //TODO: Magic number
+		memset(texcoords, 0, 8*sizeof(float));
 		texcoords[0] = texXpos, texcoords[1] = texYpos, texcoords[2] = texXpos, texcoords[7] = texYpos;
 	}
 
@@ -591,28 +590,28 @@ void DrawDepthMap(const xn::DepthMetaData& dmd, const xn::SceneMetaData& smd, si
 #endif
 
 			glColor4f(1-Colors[aUsers[i]%nColors][0], 1-Colors[aUsers[i]%nColors][1], 1-Colors[aUsers[i]%nColors][2], 1);
-			DrawLimb(aUsers[i], XN_SKEL_HEAD,           XN_SKEL_NECK);
+			DrawLimb(aUsers[i], XN_SKEL_HEAD, XN_SKEL_NECK);
 
-			DrawLimb(aUsers[i], XN_SKEL_NECK,           XN_SKEL_LEFT_SHOULDER);
-			DrawLimb(aUsers[i], XN_SKEL_LEFT_SHOULDER,  XN_SKEL_LEFT_ELBOW);
-			DrawLimb(aUsers[i], XN_SKEL_LEFT_ELBOW,     XN_SKEL_LEFT_HAND);
+			DrawLimb(aUsers[i], XN_SKEL_NECK, XN_SKEL_LEFT_SHOULDER);
+			DrawLimb(aUsers[i], XN_SKEL_LEFT_SHOULDER, XN_SKEL_LEFT_ELBOW);
+			DrawLimb(aUsers[i], XN_SKEL_LEFT_ELBOW, XN_SKEL_LEFT_HAND);
 
-			DrawLimb(aUsers[i], XN_SKEL_NECK,           XN_SKEL_RIGHT_SHOULDER);
+			DrawLimb(aUsers[i], XN_SKEL_NECK, XN_SKEL_RIGHT_SHOULDER);
 			DrawLimb(aUsers[i], XN_SKEL_RIGHT_SHOULDER, XN_SKEL_RIGHT_ELBOW);
-			DrawLimb(aUsers[i], XN_SKEL_RIGHT_ELBOW,    XN_SKEL_RIGHT_HAND);
+			DrawLimb(aUsers[i], XN_SKEL_RIGHT_ELBOW, XN_SKEL_RIGHT_HAND);
 
-			DrawLimb(aUsers[i], XN_SKEL_LEFT_SHOULDER,  XN_SKEL_TORSO);
+			DrawLimb(aUsers[i], XN_SKEL_LEFT_SHOULDER, XN_SKEL_TORSO);
 			DrawLimb(aUsers[i], XN_SKEL_RIGHT_SHOULDER, XN_SKEL_TORSO);
 
-			DrawLimb(aUsers[i], XN_SKEL_TORSO,          XN_SKEL_LEFT_HIP);
-			DrawLimb(aUsers[i], XN_SKEL_LEFT_HIP,       XN_SKEL_LEFT_KNEE);
-			DrawLimb(aUsers[i], XN_SKEL_LEFT_KNEE,      XN_SKEL_LEFT_FOOT);
+			DrawLimb(aUsers[i], XN_SKEL_TORSO, XN_SKEL_LEFT_HIP);
+			DrawLimb(aUsers[i], XN_SKEL_LEFT_HIP, XN_SKEL_LEFT_KNEE);
+			DrawLimb(aUsers[i], XN_SKEL_LEFT_KNEE, XN_SKEL_LEFT_FOOT);
 
-			DrawLimb(aUsers[i], XN_SKEL_TORSO,          XN_SKEL_RIGHT_HIP);
-			DrawLimb(aUsers[i], XN_SKEL_RIGHT_HIP,      XN_SKEL_RIGHT_KNEE);
-			DrawLimb(aUsers[i], XN_SKEL_RIGHT_KNEE,     XN_SKEL_RIGHT_FOOT);
+			DrawLimb(aUsers[i], XN_SKEL_TORSO, XN_SKEL_RIGHT_HIP);
+			DrawLimb(aUsers[i], XN_SKEL_RIGHT_HIP, XN_SKEL_RIGHT_KNEE);
+			DrawLimb(aUsers[i], XN_SKEL_RIGHT_KNEE, XN_SKEL_RIGHT_FOOT);
 
-			DrawLimb(aUsers[i], XN_SKEL_LEFT_HIP,       XN_SKEL_RIGHT_HIP);
+			DrawLimb(aUsers[i], XN_SKEL_LEFT_HIP, XN_SKEL_RIGHT_HIP);
 
 
 			if(i == 0){

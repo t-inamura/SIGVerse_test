@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="C:\SIGVerse\src\boost_1_55_0"
+				AdditionalIncludeDirectories="..\boost\boost_1_47"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,7 +62,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="ws2_32.lib"
-				AdditionalLibraryDirectories="&quot;C:\SIGVerse\src\boost_1_55_0\lib32-msvc-9.0&quot;"
+				AdditionalLibraryDirectories="..\boost\boost_1_47\lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="C:\SIGVerse\src\boost_1_55_0"
+				AdditionalIncludeDirectories="..\boost\boost_1_47"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="2"
@@ -128,7 +128,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="ws2_32.lib"
-				AdditionalLibraryDirectories="&quot;C:\SIGVerse\src\boost_1_55_0\lib32-msvc-9.0&quot;"
+				AdditionalLibraryDirectories="..\boost\boost_1_47\lib"
 			/>
 			<Tool
 				Name="VCALinkTool"

@@ -53,6 +53,7 @@ double JoyStick_Service::onAction()
 		}
 	
 		float dataArray[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+		float buttonArray[3]={0,0};
 		std::string msgFromJoy("");
 		char tmp[1024];
 
@@ -61,10 +62,10 @@ double JoyStick_Service::onAction()
 	    int lenList=len((listOfPos));
 
 		if (lenList==16){
-			for(int i=0; i<lenList; i++){
-				dataArray[i] = static_cast<float>(py::extract<double>((listOfPos)[i]));	
+			for(unsigned int i=0; i<lenList; i++){
+				dataArray[i] = py::extract<double>((listOfPos)[i]);	
 			}
-			sprintf_s(tmp,  "JOYSTICK_DATA,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f", dataArray[0], dataArray[1], dataArray[2], dataArray[3], dataArray[4], dataArray[5], dataArray[6], dataArray[7], dataArray[8], dataArray[9], dataArray[10], dataArray[11], dataArray[12], dataArray[13], dataArray[14], dataArray[15]);
+			sprintf(tmp,  "JOYSTICK_DATA,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f", dataArray[0], dataArray[1], dataArray[2], dataArray[3], dataArray[4], dataArray[5], dataArray[6], dataArray[7], dataArray[8], dataArray[9], dataArray[10], dataArray[11], dataArray[12], dataArray[13], dataArray[14], dataArray[15]);
 			msgFromJoy = std::string(tmp);
 
 			this->sendMsgToCtr("man_000", msgFromJoy);

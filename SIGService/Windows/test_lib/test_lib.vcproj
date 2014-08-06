@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="C:\SIGVerse\src\boost_1_55_0;..\SIGService"
+				AdditionalIncludeDirectories="..\SIGService;..\boost\boost_1_47"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,7 +62,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\SIGService\Debug;&quot;C:\SIGVerse\src\boost_1_55_0\lib32-msvc-9.0&quot;"
+				AdditionalLibraryDirectories="..\SIGService\Debug;..\boost\boost_1_47\lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -116,7 +116,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="C:\SIGVerse\src\boost_1_55_0;..\SIGService"
+				AdditionalIncludeDirectories="..\SIGService;..\boost\boost_1_47"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -136,7 +136,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\SIGService\Release;&quot;C:\SIGVerse\src\boost_1_55_0\lib32-msvc-9.0&quot;"
+				AdditionalLibraryDirectories="..\SIGService\Release;..\boost\boost_1_47\lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"

@@ -72,13 +72,13 @@ namespace sigverse
 	{
 		delete m_sgvsock;
 
-		if (m_viewsock != NULL)
+		if(m_viewsock != NULL)
 			delete m_viewsock;
 	}
 
 	bool SIGService::connect(std::string host, int port)
 	{
-		if (m_sgvsock->connectTo(host.c_str(), port)) {
+		if(m_sgvsock->connectTo(host.c_str(), port)) {
 
 			std::string tmp = "SIGMESSAGE," + m_name + ",";
 			m_sgvsock->sendData(tmp.c_str(), tmp.size());
@@ -90,15 +90,15 @@ namespace sigverse
 		char tmp[8];
 		memset(tmp, 0, sizeof(tmp));
 
-		if (recv(m_sgvsock->getSocket(), tmp, sizeof(tmp), 0) < 0) {
+		if(recv(m_sgvsock->getSocket(), tmp, sizeof(tmp), 0) < 0) {
 			MessageBox( NULL, "Service: Failed to connect server", "Error", MB_OK);
 		}
 
-		if (strcmp(tmp,"SUCC") == 0) {
+		if(strcmp(tmp,"SUCC") == 0) {
 			m_host = host;
 			return true;
 		}
-		else if (strcmp(tmp,"FAIL") == 0) {
+		else if(strcmp(tmp,"FAIL") == 0){
 			char tmp[128];
 			sprintf_s(tmp, 128, "Service name \"%s\" is already exist.", m_name.c_str());
 			MessageBox( NULL, tmp, "Error", MB_OK);
@@ -110,8 +110,7 @@ namespace sigverse
 
 	bool SIGService::disconnect()
 	{
-		if (!m_sgvsock->sendData("00004", 5))  // TODO: Magic number
-			return false;
+		if(!m_sgvsock->sendData("00004", 5)) return false;
 		return true;
 	}
 
@@ -120,7 +119,7 @@ namespace sigverse
 		std::map<std::string, SgvSocket*>::iterator it;
 		it = m_consocks.find(to);
 
-		if (it != m_consocks.end()) {
+		if(it != m_consocks.end()) {
 			int msgSize = msg.size();
 			std::string ssize = IntToString(msgSize);
 			//msg[msgSize] = '\0';
@@ -132,10 +131,10 @@ namespace sigverse
 			char *sendBuff = new char[sendSize];
 			char *p = sendBuff;
 
-			BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0002);  // TODO: Magic number
+			BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0002);
 			BINARY_SET_DATA_S_INCR(p, unsigned short, sendSize);
 			memcpy(p, sendMsg.c_str(), sendMsg.size());
-			if (!sock->sendData(sendBuff, sendSize)) {
+			if(!sock->sendData(sendBuff, sendSize)) {
 				delete [] sendBuff;			
 				return false; 
 			}
@@ -162,7 +161,7 @@ namespace sigverse
 		sprintf_s(bsize, 6,"%.5d", nbyte);
 		std::string tmp_size = std::string(bsize);
 		tmp_data = tmp_size + tmp_data;
-		if (!m_sgvsock->sendData(tmp_data.c_str(), tmp_data.size())) return false;
+		if(!m_sgvsock->sendData(tmp_data.c_str(), tmp_data.size())) return false;
 
 		return true;
 	}
@@ -184,7 +183,7 @@ namespace sigverse
 		std::string num = std::string(tmp);
 
 		tmp_data += num + ","; // + to + "," + msg;
-		for (int i = 0; i < size; i++) {
+		for(int i = 0; i < size; i++) {
 			tmp_data += to[i] + ",";
 		}
 
@@ -194,7 +193,7 @@ namespace sigverse
 		std::string tmp_size = std::string(bsize);
 		tmp_data = tmp_size + tmp_data;
 
-		if (!m_sgvsock->sendData(tmp_data.c_str(), tmp_data.size())) return false;
+		if(!m_sgvsock->sendData(tmp_data.c_str(), tmp_data.size())) return false;
 		return true;
 	}
 
@@ -206,18 +205,18 @@ namespace sigverse
 		start = clock();
 
 		m_onLoop = true;
-		while (1) {
+		while(1){
 
-			if (m_onLoop) {
-				if (ltime > 0) {
+			if(m_onLoop){
+				if(ltime > 0){
 					now = clock();
 					double tmp =(double)(now - start)/CLOCKS_PER_SEC;
-					if (tmp > ltime) {
+					if(tmp > ltime) {
 						m_onLoop = false;
 						break;
 					}
 				}
-				if (!checkRecvData(100)) {
+				if(!checkRecvData(100)) {
 					m_onLoop = false;
 					break;
 				}
@@ -237,13 +236,13 @@ namespace sigverse
 		tv.tv_usec = usec;
 
 		SOCKET mainSock = m_sgvsock->getSocket();
-		if (mainSock == NULL) return false;
+		if(mainSock == NULL) return false;
 
 		static double timewidth;
 		static clock_t start;
 		clock_t now;
 
-		if (m_start && !init) {
+		if(m_start && !init) {
 			onInit();
 			timewidth = onAction();
 			start = clock();
@@ -253,7 +252,7 @@ namespace sigverse
 			now = clock();
 			double tmp =(double)(now - start)/CLOCKS_PER_SEC;
 
-			if (tmp > timewidth) {
+			if(tmp > timewidth) {
 				timewidth = onAction();
 				start = clock();
 			}
@@ -269,7 +268,7 @@ namespace sigverse
 
 		FD_SET(mainSock,&readfds);
 
-		if (m_connectedView) {
+		if(m_connectedView){
 			SOCKET viewSock = m_viewsock->getSocket();
 			tmp_socks.push_back(m_viewsock);
 			FD_SET(viewSock,&readfds);
@@ -278,7 +277,7 @@ namespace sigverse
 		std::map<std::string, SgvSocket*>::iterator it;
 		it = m_consocks.begin();
 
-		while (it != m_consocks.end()) {
+		while(it != m_consocks.end()) {
 			SOCKET sock = (*it).second->getSocket();
 			FD_SET(sock,&readfds);
 			tmp_socks.push_back((*it).second);
@@ -292,18 +291,18 @@ namespace sigverse
 		if (n == 0) {
 			return true;
 		}
-		else if (n < 0) {
+		else if(n < 0) {
 			return false;
 		}
 
 		int connectSize = tmp_socks.size();
-		for (int i = 0; i < connectSize; i++) {
+		for(int i = 0; i < connectSize; i++) {
 			SOCKET nowsock = tmp_socks[i]->getSocket();
 
 			if (FD_ISSET(nowsock, &fds)) {
 
 				char bsize[4];
-				if (!tmp_socks[i]->recvData(bsize,4)) return true;
+				if(!tmp_socks[i]->recvData(bsize,4)) return true;
 
 				char *p = bsize;
 				unsigned short header = BINARY_GET_DATA_S_INCR(p, unsigned short);
@@ -312,14 +311,13 @@ namespace sigverse
 				size -= 4;
 
 				char *recvBuff = new char[size];
-				if (size > 0)
-					if (!tmp_socks[i]->recvData(recvBuff, size))
-						return true;
+				if(size > 0)
+					if(!tmp_socks[i]->recvData(recvBuff, size)) return true;
 
 				char *nexttoken;
 
 				switch(header) {
-					case 0x0001:// TODO: Magic number
+					case 0x0001:
 						{
 							RecvMsgEvent msg;
 							msg.setData(recvBuff, size);
@@ -327,14 +325,14 @@ namespace sigverse
 							onRecvMsg(msg);
 							break;
 						}
-					case 0x0002:// TODO: Magic number
+					case 0x0002:
 						{
 							std::string name = recvBuff;
 							name[size] = '\0';
 							m_elseServices.push_back(name);
 							break;
 						}
-					case 0x0003:// TODO: Magic number
+					case 0x0003:
 						{
 							char *pp = recvBuff;
 							unsigned short port = BINARY_GET_DATA_S_INCR(pp, unsigned short);
@@ -344,7 +342,7 @@ namespace sigverse
 							SgvSocket *sock = new SgvSocket();
 							sock->initWinsock();
 
-							if (sock->connectTo(m_host.c_str(), port)) {
+							if(sock->connectTo(m_host.c_str(), port)) {
 								m_consocks.insert(std::map<std::string, SgvSocket*>::value_type(name, sock));
 								m_entitiesName.push_back(name);
 							}
@@ -352,14 +350,14 @@ namespace sigverse
 							char tmp[sizeof(unsigned short)*2];
 							char *p = tmp;
 
-							BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0001);// TODO: Magic number
+							BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0001);
 							BINARY_SET_DATA_S_INCR(p, unsigned short, sizeof(unsigned short));
 
 							sock->sendData(tmp, sizeof(unsigned short)*2);
 
 							break;
 						}
-					case 0x0004:// TODO: Magic number
+					case 0x0004:
 						{
 							char *pp = recvBuff;
 							std::string ename = strtok_s(pp, ",", &nexttoken);
@@ -368,21 +366,21 @@ namespace sigverse
 
 							std::map<std::string, SgvSocket*>::iterator sockit;
 							sockit = m_consocks.find(ename);
-							if (sockit != m_consocks.end()) {
+							if(sockit != m_consocks.end()) {
 								m_consocks.erase(sockit);
 							}
 							return false;
 						}
-					case 0x0005:// TODO: Magic number
+					case 0x0005:
 						{
 							delete m_viewsock;
 							m_viewsock = NULL;
 							m_connectedView = false;
 
-							if (m_autoExitProc) {
+							if(m_autoExitProc){
 								exit(0);
 							}
-							else if (m_autoExitLoop) {
+							else if(m_autoExitLoop){
 								m_onLoop = false;
 							}
 
@@ -391,7 +389,7 @@ namespace sigverse
 				}
 				delete [] recvBuff;
 			} //if (FD_ISSET(mainSock, &fds)) {
-		} // for (int i = 0; i < connectSize; i++) {
+		} // for(int i = 0; i < connectSize; i++){
 		return true;
 	}
 
@@ -405,10 +403,10 @@ namespace sigverse
 	void SIGService::recvDataLoop(SgvSocket *sock)
 	{
 		m_start = true;
-		while (1) {
+		while(1) {
 
 			char bsize[4];
-			if (!sock->recvData(bsize,4)) return;
+			if(!sock->recvData(bsize,4)) return;
 
 			char *p = bsize;
 			unsigned short header = BINARY_GET_DATA_S_INCR(p, unsigned short);
@@ -417,12 +415,12 @@ namespace sigverse
 			size -= 4;
 
 			char *recvBuff = new char[size];
-			if (!sock->recvData(recvBuff, size)) return;
+			if(!sock->recvData(recvBuff, size)) return;
 
 			char *nexttoken;
 
 			switch(header) {
-				case 0x0001:// TODO: Magic number
+				case 0x0001:
 					{
 						RecvMsgEvent msg;
 						msg.setData(recvBuff, size);
@@ -430,14 +428,14 @@ namespace sigverse
 						recvMsg(msg);
 						break;
 					}
-				case 0x0002:// TODO: Magic number
+				case 0x0002:
 					{
 						std::string name = recvBuff;
 						name[size] = '\0';
 						m_elseServices.push_back(name);
 						break;
 					}
-				case 0x0003:// TODO: Magic number
+				case 0x0003:
 					{
 						char *pp = recvBuff;
 						unsigned short port = BINARY_GET_DATA_S_INCR(pp, unsigned short);
@@ -449,20 +447,20 @@ namespace sigverse
 						int diff = 1;
 
 						bool fail = false;
-						for (int i = 0; i < diff; i++) {
-							if (!sock->connectTo(m_host.c_str(), port)) {
+						for(int i = 0; i < diff; i++){
+							if(!sock->connectTo(m_host.c_str(), port)){
 								fail = true;
 								break;
 							}
 						}
-						if (fail) break;
+						if(fail) break;
 						m_consocks.insert(std::map<std::string, SgvSocket*>::value_type(name, sock));
 						m_entitiesName.push_back(name);
 
 						char tmp[sizeof(unsigned short)*2];
 						char *p = tmp;
 
-						BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0001);// TODO: Magic number
+						BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0001);
 						BINARY_SET_DATA_S_INCR(p, unsigned short, sizeof(unsigned short));
 
 						sock->sendData(tmp, sizeof(unsigned short)*2);
@@ -474,7 +472,7 @@ namespace sigverse
 						//MessageBox( NULL, test, "Error", MB_OK);
 						break;
 					}
-				case 0x0004:// TODO: Magic number
+				case 0x0004:
 					{
 						char *pp = recvBuff;
 						std::string ename = strtok_s(pp, ",", &nexttoken);
@@ -482,7 +480,7 @@ namespace sigverse
 						disconnectFromController(ename);
 						return;
 					}
-				case 0x0005:// TODO: Magic number
+				case 0x0005:
 					{
 						char *pp = recvBuff;
 						std::string name = strtok_s(pp, ",", &nexttoken);
@@ -496,7 +494,7 @@ namespace sigverse
 						recvCaptureView(cpt);
 						break;
 					}
-				case 0x0006:// TODO: Magic number
+				case 0x0006:
 					{
 						char *pp = recvBuff;
 						std::string name = strtok_s(pp, ",", &nexttoken);
@@ -520,7 +518,7 @@ namespace sigverse
 						recvDistanceSensor(dst);
 						break;
 					}
-				case 0x0007:// TODO: Magic number
+				case 0x0007:
 					{
 						char *pp = recvBuff;
 						std::string name = strtok_s(pp, ",", &nexttoken);
@@ -534,7 +532,7 @@ namespace sigverse
 						recvDetectEntities(dtc);
 						break;
 					}
-				case 0x0008:// TODO: Magic number
+				case 0x0008:
 					{
 						std::string name = recvBuff;
 						name[size] = '\0';
@@ -542,7 +540,7 @@ namespace sigverse
 						std::vector<std::string>::iterator it;
 
 						it = std::find(m_elseServices.begin(), m_elseServices.end(), name);
-						if (it != m_elseServices.end())
+						if(it != m_elseServices.end())
 							m_elseServices.erase(it);
 						break;
 					}
@@ -557,7 +555,7 @@ namespace sigverse
 		m_viewsock = new SgvSocket();
 		//m_viewsock->initWinsock();
 
-		if (!m_viewsock->connectTo("localhost", 11000)) {// TODO: Magic number
+		if(!m_viewsock->connectTo("localhost", 11000)) {
 			MessageBox( NULL, "Could not connect to viewer", "Error", MB_OK);
 			return false;
 		}
@@ -567,11 +565,11 @@ namespace sigverse
 			char *sendBuff = new char[sendSize];
 			char *p = sendBuff;
 
-			BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0000);  // TODO: Magic number
+			BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0000);
 			BINARY_SET_DATA_S_INCR(p, unsigned short, sendSize);
 
 			memcpy(p, m_name.c_str(), m_name.size());
-			if (!m_viewsock->sendData(sendBuff, sendSize)) {
+			if(!m_viewsock->sendData(sendBuff, sendSize)) {
 				delete [] sendBuff;
 			}
 			delete [] sendBuff;
@@ -585,13 +583,13 @@ namespace sigverse
 		std::map<std::string, SgvSocket*>::iterator it;
 		it = m_consocks.find(entityName);
 
-		if (it != m_consocks.end()) {
+		if(it != m_consocks.end()) {
 			SgvSocket *sock = (*it).second;
 
 			char tmp[sizeof(unsigned short)*2];
 			char *p = tmp;
 
-			BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0004);// TODO: Magic number
+			BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0004);
 			BINARY_SET_DATA_S_INCR(p, unsigned short, sizeof(unsigned short));
 
 			sock->sendData(tmp, sizeof(unsigned short)*2);
@@ -610,13 +608,13 @@ namespace sigverse
 		std::map<std::string, SgvSocket*>::iterator it;
 		it = m_consocks.begin();
 
-		while (it != m_consocks.end()) {
+		while(it != m_consocks.end()) {
 			SgvSocket *sock = (*it).second;
 
 			char tmp[sizeof(unsigned short)*2];
 			char *p = tmp;
 
-			BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0004);// TODO: Magic number
+			BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0004);
 			BINARY_SET_DATA_S_INCR(p, unsigned short, sizeof(unsigned short));
 
 			sock->sendData(tmp, sizeof(unsigned short)*2);
@@ -629,12 +627,12 @@ namespace sigverse
 
 	void SIGService::disconnectFromViewer()
 	{
-		if (!m_connectedView || m_viewsock == NULL) return;
+		if(!m_connectedView || m_viewsock == NULL) return;
 
 		char buf[4];
 		char *p = buf;
-		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0003);// TODO: Magic number
-		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0004);// TODO: Magic number
+		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0003);
+		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0004);
 
 		m_viewsock->sendData(buf, 4);
 
@@ -644,7 +642,7 @@ namespace sigverse
 
 	ViewImage* SIGService::captureView(std::string entityName, int camID, ColorBitType ctype,ImageDataSize size)
 	{
-		if (!m_connectedView) {
+		if(!m_connectedView){
 			MessageBox( NULL, "captureView: Service is not connected to viewer", "Error", MB_OK);
 			return NULL;
 		}
@@ -657,11 +655,11 @@ namespace sigverse
 		char *sendBuff = new char[sendSize];
 		char *p = sendBuff;
 
-		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0001);// TODO: Magic number
+		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0001);
 		BINARY_SET_DATA_S_INCR(p, unsigned short, sendSize);
 		memcpy(p, sendMsg.c_str(), sendMsg.size());
 
-		if (!m_viewsock->sendData(sendBuff, sendSize)) {
+		if(!m_viewsock->sendData(sendBuff, sendSize)) {
 			delete [] sendBuff;			
 			return NULL; 
 		}
@@ -674,7 +672,7 @@ namespace sigverse
 
 		char *headerBuff = new char[headerSize];
 
-		if (!m_viewsock->recvData(headerBuff, headerSize)) {
+		if(!m_viewsock->recvData(headerBuff, headerSize)) {
 			delete [] headerBuff;
 			return NULL; 
 		}
@@ -683,14 +681,14 @@ namespace sigverse
 		double fov;
 		double ar;
 		unsigned short result = BINARY_GET_DATA_S_INCR(p, unsigned short);
-		if (result == 2) {
+		if(result == 2){
 			char tmp[64];
 			sprintf_s(tmp, 64,"captureView: cannot find entity [%s]", entityName.c_str());
 			MessageBox( NULL, tmp, "Error", MB_OK);
 			delete [] headerBuff;
 			return NULL;
 		}
-		else if (result == 3) {
+		else if (result == 3){
 			char tmp[64];
 			sprintf_s(tmp, 64,"captureView: %s doesn't have camera id %d", entityName.c_str(), camID);
 			MessageBox( NULL, tmp, "Error", MB_OK);
@@ -699,7 +697,7 @@ namespace sigverse
 		}
 		else{
 			fov = BINARY_GET_DOUBLE_INCR(p);
-			ar  = BINARY_GET_DOUBLE_INCR(p);
+			ar = BINARY_GET_DOUBLE_INCR(p);
 			view->setFOVy(fov);
 			view->setAspectRatio(ar);
 		}
@@ -707,7 +705,7 @@ namespace sigverse
 		delete [] headerBuff;
 
 		char *imageBuff = new char[imageSize];
-		if (!m_viewsock->recvData(imageBuff, imageSize)) {
+		if(!m_viewsock->recvData(imageBuff, imageSize)) {
 			delete [] imageBuff;
 			return NULL; 
 		}
@@ -718,9 +716,9 @@ namespace sigverse
 
 	unsigned char SIGService::distanceSensor(std::string entityName, double offset, double range, int camID)
 	{
-		if (!m_connectedView) {
+		if(!m_connectedView){
 			MessageBox( NULL, "distanceSensor: Service is not connected to viewer", "Error", MB_OK);
-			return 255;// TODO: Magic number
+			return 255;
 		}
 
 		std::string cameraID = IntToString(camID);
@@ -732,13 +730,13 @@ namespace sigverse
 		char *sendBuff = new char[sendSize];
 		char *p = sendBuff;
 
-		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0002);// TODO: Magic number
+		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0002);
 		BINARY_SET_DATA_S_INCR(p, unsigned short, sendSize);
 		BINARY_SET_DOUBLE_INCR(p, offset);
 		BINARY_SET_DOUBLE_INCR(p, range);
 		memcpy(p, sendMsg.c_str(), sendMsg.size());
 
-		if (!m_viewsock->sendData(sendBuff, sendSize)) {
+		if(!m_viewsock->sendData(sendBuff, sendSize)) {
 			delete [] sendBuff;			
 			return 255; 
 		}
@@ -747,21 +745,21 @@ namespace sigverse
 		int recvSize = sizeof(unsigned short) + 1;
 
 		char *recvBuff = new char[recvSize];
-		if (!m_viewsock->recvData(recvBuff, recvSize)) {
+		if(!m_viewsock->recvData(recvBuff, recvSize)) {
 			delete [] recvBuff;
 			return 255; 
 		}
 		p = recvBuff;
 
 		unsigned short result = BINARY_GET_DATA_S_INCR(p, unsigned short);
-		if (result == 2) {
+		if(result == 2){
 			char tmp[128];
 			sprintf_s(tmp, 128,"distanceSensor: cannot find entity [%s]", entityName.c_str());
 			MessageBox( NULL, tmp, "Error", MB_OK);
 			delete [] recvBuff;
 			return 255;
 		}
-		else if (result == 3) {
+		else if (result == 3){
 			char tmp[128];
 			sprintf_s(tmp, 128,"distanceSensor: %s doesn't have camera [id: %d]", entityName.c_str(), camID);
 			MessageBox( NULL, tmp, "Error", MB_OK);
@@ -775,7 +773,7 @@ namespace sigverse
 
 	ViewImage* SIGService::distanceSensor1D(std::string entityName, double offset, double range, int camID, ColorBitType ctype, ImageDataSize size)
 	{
-		if (!m_connectedView) {
+		if(!m_connectedView){
 			MessageBox( NULL, "distanceSensor1D: Service is not connected to viewer", "Error", MB_OK);
 			return NULL;
 		}
@@ -784,7 +782,7 @@ namespace sigverse
 
 	ViewImage* SIGService::distanceSensor2D(std::string entityName, double offset, double range, int camID, ColorBitType ctype, ImageDataSize size)
 	{
-		if (!m_connectedView) {
+		if(!m_connectedView){
 			MessageBox( NULL, "distanceSensor2D: Service is not connected to viewer", "Error", MB_OK);
 			return NULL;
 		}
@@ -804,13 +802,13 @@ namespace sigverse
 		char *sendBuff = new char[sendSize];
 		char *p = sendBuff;
 
-		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0004);// TODO: Magic number
+		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0004);
 		BINARY_SET_DATA_S_INCR(p, unsigned short, sendSize);
 		BINARY_SET_DOUBLE_INCR(p, offset);
 		BINARY_SET_DOUBLE_INCR(p, range);
 		memcpy(p, sendMsg.c_str(), sendMsg.size());
 
-		if (!m_viewsock->sendData(sendBuff, sendSize)) {
+		if(!m_viewsock->sendData(sendBuff, sendSize)){
 			delete [] sendBuff;
 			return NULL;
 		}
@@ -819,15 +817,15 @@ namespace sigverse
 
 		int headerSize = sizeof(unsigned short) + sizeof(double)*2;
 		char *header = new char[headerSize];
-		if (!m_viewsock->recvData(header, headerSize)) {
+		if(!m_viewsock->recvData(header, headerSize)){
 			return NULL;
 		}
 		p = header;
 		unsigned short result = BINARY_GET_DATA_S_INCR(p, unsigned short);
 
-		if (result == 2) { //TODO: Magic number
+		if(result == 2){
 			char tmp[128];
-			if (dimension == 1)
+			if(dimension == 1)
 				sprintf_s(tmp, 128,"distanceSensor1D: cannot find entity [%s]", entityName.c_str());
 			else
 				sprintf_s(tmp, 128,"distanceSensor2D: cannot find entity [%s]", entityName.c_str());
@@ -835,9 +833,9 @@ namespace sigverse
 			delete [] header;
 			return NULL;
 		}
-		else if (result == 3) { //TODO: Magic number
+		else if (result == 3){
 			char tmp[128];
-			if (dimension == 1)
+			if(dimension == 1)
 				sprintf_s(tmp, 128,"distanceSensor1D: %s doesn't have camera [id: %d]", entityName.c_str(), camID);
 			else
 				sprintf_s(tmp, 128,"distanceSensor2D: %s doesn't have camera [id: %d]", entityName.c_str(), camID);
@@ -852,25 +850,25 @@ namespace sigverse
 		delete [] header;
 
 		int recvSize;
-		if (dimension == 1) {
+		if(dimension == 1){
 			recvSize = 320;
 		}
-		else if (dimension == 2) {
+		else if(dimension == 2){
 			recvSize = 320*240;
 		}
 		char *recvBuff = new char[recvSize];
-		if (!m_viewsock->recvData(recvBuff, recvSize)) {
+		if(!m_viewsock->recvData(recvBuff, recvSize)) {
 			delete [] recvBuff;
 			return NULL; 
 		}
 
 		ViewImage *img;
-		if (dimension == 1) {
+		if(dimension == 1){
 			ViewImageInfo info(IMAGE_DATA_WINDOWS_BMP, DEPTHBIT_8, IMAGE_320X1);
 			img = new ViewImage(info);
 		}
 
-		else if (dimension == 2) {
+		else if(dimension == 2){
 			ViewImageInfo info(IMAGE_DATA_WINDOWS_BMP, DEPTHBIT_8, IMAGE_320X240);
 			img = new ViewImage(info);
 		}
@@ -884,7 +882,7 @@ namespace sigverse
 
 	ViewImage* SIGService::getDepthImage(std::string entityName, double offset, double range, int camID, ColorBitType ctype, ImageDataSize size)
 	{
-		if (!m_connectedView) {
+		if(!m_connectedView){
 			MessageBox( NULL, "getDepthImage: Service is not connected to viewer", "Error", MB_OK);
 			return NULL;
 		}
@@ -899,13 +897,13 @@ namespace sigverse
 		char *sendBuff = new char[sendSize];
 		char *p = sendBuff;
 
-		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0005);// TODO: Magic number
+		BINARY_SET_DATA_S_INCR(p, unsigned short, 0x0005);
 		BINARY_SET_DATA_S_INCR(p, unsigned short, sendSize);
 		BINARY_SET_DOUBLE_INCR(p, offset);
 		BINARY_SET_DOUBLE_INCR(p, range);
 		memcpy(p, sendMsg.c_str(), sendMsg.size());
 
-		if (!m_viewsock->sendData(sendBuff, sendSize)) {
+		if(!m_viewsock->sendData(sendBuff, sendSize)){
 			delete [] sendBuff;
 			return NULL;
 		}
@@ -914,20 +912,20 @@ namespace sigverse
 
 		int headerSize = sizeof(unsigned short) + sizeof(double)*2;
 		char *header = new char[headerSize];
-		if (!m_viewsock->recvData(header, headerSize)) {
+		if(!m_viewsock->recvData(header, headerSize)){
 			return NULL;
 		}
 		p = header;
 		unsigned short result = BINARY_GET_DATA_S(p, unsigned short);
 
-		if (result == 2) {//TODO: Magic number
+		if(result == 2){
 			char tmp[128];
 			sprintf_s(tmp, 128,"getDepthImage: cannot find entity [%s]", entityName.c_str());
 			MessageBox( NULL, tmp, "Error", MB_OK);
 			delete [] header;
 			return NULL;
 		}
-		else if (result == 3) {//TODO: Magic number
+		else if (result == 3){
 			char tmp[128];
 			sprintf_s(tmp, 128,"getDepthImage: %s doesn't have camera [id: %d]", entityName.c_str(), camID);
 			MessageBox( NULL, tmp, "Error", MB_OK);
@@ -936,14 +934,14 @@ namespace sigverse
 		}
 
 		double fov = BINARY_GET_DOUBLE_INCR(p);
-		double ar  = BINARY_GET_DOUBLE_INCR(p);
+		double ar = BINARY_GET_DOUBLE_INCR(p);
 
 		delete [] header;
 
-		int recvSize = 320*240;// TODO: Magic number
+		int recvSize = 320*240;
 
 		char *recvBuff = new char[recvSize];
-		if (!m_viewsock->recvData(recvBuff, recvSize)) {
+		if(!m_viewsock->recvData(recvBuff, recvSize)) {
 			delete [] recvBuff;
 			return NULL; 
 		}
@@ -960,5 +958,6 @@ namespace sigverse
 		return img;
 		return NULL;
 	}
+
 };
 
