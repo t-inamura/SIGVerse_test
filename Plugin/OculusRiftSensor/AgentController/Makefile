@@ -1,14 +1,14 @@
-#SIGVerseヘッダファイルの場所指定
+#SIGVerse header file
 SIG_SRC  = $(SIGVERSE_PATH)/include/sigverse
 
-#オブジェクトファイルの指定
+#Target
 OBJS     = OculusRiftCtrl.so
 
 all: $(OBJS)
 
-#コンパイルを行います
+#Compile
 ./%.so: ./%.cpp
-	g++ -DCONTROLLER -DNDEBUG -DUSE_ODE -DdDOUBLE -I$(SIG_SRC) -I$(SIG_SRC)/comm/controller  -fPIC -shared -o $@   $<
+	g++ -Wall -DCONTROLLER -DNDEBUG -DUSE_ODE -DdDOUBLE -I$(SIG_SRC) -I$(SIG_SRC)/comm/controller  -fPIC -shared -o $@   $<
 
 clean:
 	rm $(OBJS)

@@ -9,8 +9,7 @@
 
     <set-attr-value name="language" value="c++"/>
 
-    <set-attr-value name="implementation"
-		    value="./OculusRiftCtrl.so"/>
+    <set-attr-value name="implementation" value="./OculusRiftCtrl.so"/>
 
     <set-attr-value name="dynamics" value="false"/>
 
@@ -18,11 +17,11 @@
     <set-attr-value name="y" value="60.0"/>
     <set-attr-value name="z" value="0.0"/>
 
-    <camera id="1"  
-	    link="HEAD_LINK"  
-	    direction="0 0 1"  
-	    position="0.0 0.0 5.0"/>  
-    
+    <camera id="1"
+	    link="HEAD_LINK"
+	    direction="0 0 1"
+	    position="0.0 0.0 5.0"/>
+
   </instanciate>
 </world>
 
