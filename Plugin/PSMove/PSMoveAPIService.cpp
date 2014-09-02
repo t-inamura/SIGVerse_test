@@ -315,7 +315,6 @@ double PSMoveAPIService::onAction()
   }
 
 
-  // std::cout << "return statement reached" << std::endl;
   // refresh faster if trackerEnabled
   if (trackerEnabled) {
     return 0.0015*moves.size();
