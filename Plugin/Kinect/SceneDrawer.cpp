@@ -17,14 +17,7 @@
 *                                                                           *
 *  You should have received a copy of the GNU Lesser General Public License *
 *  along with OpenNI. If not, see <http://www.gnu.org/licenses/>.           *
-*                                   
-
-
-
-
-
-
-                                        *
+*                                                                           *
 ****************************************************************************/
 //---------------------------------------------------------------------------
 // Includes
@@ -402,7 +395,7 @@ void DrawDepthMap(const xn::DepthMetaData& dmd, const xn::SceneMetaData& smd, si
 	{
 		start = false;
 
-		TCHAR spd[8];
+		TCHAR spd[256];
 		GetPrivateProfileString(_T("SETTING"),_T("SEND_SPEED"),'\0', spd, 256, _T("./SIGNiUserTracker.ini"));
 		if(spd[0] == '\0') {
 			speed = 1;
@@ -435,7 +428,7 @@ void DrawDepthMap(const xn::DepthMetaData& dmd, const xn::SceneMetaData& smd, si
 		texXpos =(float)dmd.XRes()/texWidth;
 		texYpos  =(float)dmd.YRes()/texHeight;
 
-		memset(texcoords, 0, 8*sizeof(float)); //TODO: Magic number
+		memset(texcoords, 0, 8*sizeof(float)); //TODO: magic number
 		texcoords[0] = texXpos, texcoords[1] = texYpos, texcoords[2] = texXpos, texcoords[7] = texYpos;
 	}
 
